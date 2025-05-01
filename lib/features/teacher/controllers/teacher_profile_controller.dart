@@ -1,16 +1,17 @@
 import 'dart:io';
 
-import 'package:attedance__/features/teacher/screens/profile_image_view_screen.dart';
-import 'package:attedance__/models/user_model.dart';
-import 'package:attedance__/app/routes/app_routes.dart';
-import 'package:attedance__/services/attendance_service.dart';
-import 'package:attedance__/services/class_service.dart';
-import 'package:attedance__/common/utils/helpers/snackbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart' as path;
 import 'package:supabase_flutter/supabase_flutter.dart';
+
+import '../../../app/routes/app_routes.dart';
+import '../../../common/utils/helpers/snackbar_helper.dart';
+import '../../../models/user_model.dart';
+import '../../../services/attendance_service.dart';
+import '../../../services/class_service.dart';
+import '../screens/profile_image_view_screen.dart';
 
 // Consolidated TeacherProfileController
 class TeacherProfileController extends GetxController {
@@ -451,9 +452,7 @@ class TeacherProfileController extends GetxController {
     if (user.value?.profileImageUrl != null &&
         user.value!.profileImageUrl!.isNotEmpty) {
       Get.to(
-        () => ProfileImageViewScreen(
-          imageUrl: user.value!.profileImageUrl!,
-        ),
+        () => ProfileImageViewScreen(imageUrl: user.value!.profileImageUrl!),
         transition: Transition.fadeIn,
       );
     } else {

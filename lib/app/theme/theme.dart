@@ -1,4 +1,3 @@
-import 'package:attedance__/common/utils/constants/colors.dart';
 
 import '../../app/theme/custom_themes/appbar_theme.dart';
 import '../../app/theme/custom_themes/bottom_sheet_theme.dart';
@@ -9,6 +8,8 @@ import '../../app/theme/custom_themes/searchbar_theme.dart';
 import '../../app/theme/custom_themes/text_field_theme.dart';
 import '../../app/theme/custom_themes/text_theme.dart';
 import 'package:flutter/material.dart';
+
+import '../../common/utils/constants/colors.dart';
 
 class TAppTheme {
   TAppTheme._() {

@@ -1,15 +1,16 @@
-import 'package:attedance__/features/authentication/controllers/signup_controller.dart';
-import 'package:attedance__/features/authentication/screens/signup/singup_widgets/textfields.dart';
-import 'package:attedance__/app/routes/app_routes.dart';
-import 'package:attedance__/common/utils/constants/colors.dart';
-import 'package:attedance__/common/utils/constants/sized.dart';
-import 'package:attedance__/common/utils/constants/text_strings.dart';
-import 'package:attedance__/common/utils/helpers/helper_function.dart';
-import 'package:attedance__/common/utils/helpers/snackbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+
+import '../../../../../app/routes/app_routes.dart';
+import '../../../../../common/utils/constants/colors.dart';
+import '../../../../../common/utils/constants/sized.dart';
+import '../../../../../common/utils/constants/text_strings.dart';
+import '../../../../../common/utils/helpers/helper_function.dart';
+import '../../../../../common/utils/helpers/snackbar_helper.dart';
+import '../../../controllers/signup_controller.dart';
+import 'textfields.dart';
 
 class SignupForm extends StatelessWidget {
   SignupForm({super.key});

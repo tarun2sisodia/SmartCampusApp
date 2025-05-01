@@ -1,14 +1,14 @@
-import 'package:attedance__/common/widgets/student_avatar.dart';
-import 'package:attedance__/features/teacher/controllers/student_controller.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:image_picker/image_picker.dart';
+import '../../../common/widgets/student_avatar.dart';
 import '../../../models/class_model.dart';
 import '../../../common/utils/constants/colors.dart';
 import '../../../common/utils/constants/sized.dart';
 import '../../../common/utils/helpers/helper_function.dart';
+import '../controllers/student_controller.dart';
 
 class AddStudentScreen extends StatelessWidget {
   final ClassModel classModel;

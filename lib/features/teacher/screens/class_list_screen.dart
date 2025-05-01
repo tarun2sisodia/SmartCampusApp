@@ -1,11 +1,11 @@
-import 'package:attedance__/app/routes/app_routes.dart';
-import 'package:attedance__/models/class_model.dart';
-import 'package:attedance__/models/course_model.dart';
-import 'package:attedance__/models/subject_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import '../../../app/routes/app_routes.dart';
+import '../../../models/class_model.dart';
+import '../../../models/course_model.dart';
+import '../../../models/subject_model.dart';
 import '../controllers/class_controller.dart';
 import '../../../common/utils/constants/colors.dart';
 import '../../../common/utils/constants/sized.dart';

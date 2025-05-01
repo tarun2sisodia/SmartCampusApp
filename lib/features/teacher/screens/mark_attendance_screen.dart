@@ -1,9 +1,9 @@
-import 'package:attedance__/app/routes/app_routes.dart';
-import 'package:attedance__/common/utils/device/device_utility.dart';
-import 'package:attedance__/common/widgets/student_avatar.dart'; // Add this import
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import '../../../app/routes/app_routes.dart';
+import '../../../common/utils/device/device_utility.dart';
+import '../../../common/widgets/student_avatar.dart';
 import '../controllers/attendance_controller.dart';
 import '../../../common/utils/constants/colors.dart';
 import '../../../common/utils/constants/sized.dart';

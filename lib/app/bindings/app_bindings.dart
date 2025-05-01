@@ -1,8 +1,6 @@
-import 'package:attedance__/features/teacher/controllers/all_sessions_controller.dart';
-import 'package:attedance__/features/teacher/controllers/feedback_controller.dart';
-import 'package:attedance__/features/teacher/controllers/teacher_profile_controller.dart';
-import 'package:attedance__/navigation_menu.dart';
-import 'package:attedance__/services/storage_service.dart';
+import '../../features/teacher/controllers/all_sessions_controller.dart';
+import '../../features/teacher/controllers/feedback_controller.dart';
+import '../../features/teacher/controllers/teacher_profile_controller.dart';
 
 import '../../features/authentication/controllers/change_password_controller.dart';
 import '../../features/authentication/controllers/controllers_onboarding/onboarding_controller.dart';
@@ -18,6 +16,9 @@ import '../../features/teacher/controllers/dashboard_controller.dart';
 import '../../features/teacher/controllers/student_detail_controller.dart';
 import 'package:get/get.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+
+import '../../navigation_menu.dart';
+import '../../services/storage_service.dart';
 
 /// A class that manages all controller bindings for the app
 /// This centralizes dependency injection and improves performance

@@ -1,9 +1,10 @@
-import 'package:attedance__/app/routes/app_routes.dart';
-import 'package:attedance__/app/theme/custom_themes/text_field_theme.dart';
-import 'package:attedance__/common/translations/app_translations.dart';
-import 'package:attedance__/services/language_service.dart';
+import '../../services/language_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import 'app/routes/app_routes.dart';
+import 'app/theme/custom_themes/text_field_theme.dart';
+import 'common/translations/app_translations.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

@@ -1,15 +1,17 @@
-import 'package:attedance__/features/teacher/controllers/teacher_profile_controller.dart';
-import 'package:attedance__/features/teacher/screens/teacher_profile_screen.dart';
-import 'package:attedance__/app/routes/app_routes.dart';
-import 'package:attedance__/services/language_service.dart';
-import 'package:attedance__/services/storage_service.dart';
-import 'package:attedance__/common/utils/constants/colors.dart';
-import 'package:attedance__/common/utils/constants/sized.dart';
-import 'package:attedance__/common/utils/helpers/helper_function.dart';
-import 'package:attedance__/common/utils/helpers/snackbar_helper.dart';
+import '../../../common/utils/constants/colors.dart';
+import '../../../common/utils/constants/sized.dart';
+import '../../../common/utils/helpers/helper_function.dart';
+import '../../../common/utils/helpers/snackbar_helper.dart';
+import './../controllers/teacher_profile_controller.dart';
+import '../../../app/routes/app_routes.dart';
+import '/../services/language_service.dart';
+import '/../services/storage_service.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+
+import 'teacher_profile_screen.dart';
 
 class TeacherSettingsScreen extends StatelessWidget {
   const TeacherSettingsScreen({super.key});
@@ -62,16 +64,14 @@ class TeacherSettingsScreen extends StatelessWidget {
                   title: 'Email Notifications',
                   icon: Iconsax.notification,
                   dark: dark,
-                  trailing: Obx(
-                    () {
-                      //print('Email Notifications switch updated');
-                      return Switch(
-                        value: controller.emailNotifications.value,
-                        onChanged: controller.toggleEmailNotifications,
-                        activeColor: dark ? TColors.yellow : TColors.deepPurple,
-                      );
-                    },
-                  ),
+                  trailing: Obx(() {
+                    //print('Email Notifications switch updated');
+                    return Switch(
+                      value: controller.emailNotifications.value,
+                      onChanged: controller.toggleEmailNotifications,
+                      activeColor: dark ? TColors.yellow : TColors.deepPurple,
+                    );
+                  }),
                 ),
               ],
             ),
@@ -100,12 +100,10 @@ class TeacherSettingsScreen extends StatelessWidget {
                   title: 'language'.tr,
                   icon: Iconsax.language_square,
                   dark: dark,
-                  trailing: Obx(
-                    () {
-                      //print('Language updated');
-                      return Text(languageService.getCurrentLanguageName());
-                    },
-                  ),
+                  trailing: Obx(() {
+                    //print('Language updated');
+                    return Text(languageService.getCurrentLanguageName());
+                  }),
                   onTap: () {
                     //print('Opening Language Selection Dialog');
                     _showLanguageSelectionDialog(context, languageService);
@@ -212,7 +210,7 @@ class TeacherSettingsScreen extends StatelessWidget {
                                               );
                                             } catch (e) {
                                               //print(
-                                                  // 'Failed to clear cache: ${e.toString()}');
+                                              // 'Failed to clear cache: ${e.toString()}');
                                               // Dismiss loading dialog
                                               Get.back();
 
@@ -266,7 +264,7 @@ class TeacherSettingsScreen extends StatelessWidget {
                                         onPressed: () async {
                                           try {
                                             //print(
-                                                // 'Clearing All Data Confirmed');
+                                            // 'Clearing All Data Confirmed');
                                             // Show loading indicator
                                             Get.back();
                                             Get.dialog(
@@ -295,7 +293,7 @@ class TeacherSettingsScreen extends StatelessWidget {
                                             );
                                           } catch (e) {
                                             //print(
-                                                // 'Failed to clear all data: ${e.toString()}');
+                                            // 'Failed to clear all data: ${e.toString()}');
                                             // Dismiss loading dialog
                                             Get.back();
 
@@ -350,7 +348,7 @@ class TeacherSettingsScreen extends StatelessWidget {
                                   );
                                 } catch (e) {
                                   //print(
-                                      // 'Failed to export data: ${e.toString()}');
+                                  // 'Failed to export data: ${e.toString()}');
                                   // Dismiss loading dialog
                                   Get.back();
 

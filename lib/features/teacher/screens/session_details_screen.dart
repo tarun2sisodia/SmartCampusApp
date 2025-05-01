@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:attedance__/common/utils/constants/constants.dart';
+import '../../../common/utils/constants/constants.dart';
 import '../controllers/session_details_controller.dart';
 
 class SessionDetailsScreen extends StatelessWidget {

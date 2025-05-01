@@ -1,14 +1,15 @@
-import 'package:attedance__/features/authentication/controllers/forgot_password_controller.dart';
-import 'package:attedance__/features/authentication/screens/signup/singup_widgets/textfields.dart';
-import 'package:attedance__/app/routes/app_routes.dart';
-import 'package:attedance__/common/utils/constants/colors.dart';
-import 'package:attedance__/common/utils/constants/image_strings.dart';
-import 'package:attedance__/common/utils/constants/sized.dart';
-import 'package:attedance__/common/utils/constants/text_strings.dart';
-import 'package:attedance__/common/utils/helpers/helper_function.dart';
+import '../../../../app/routes/app_routes.dart';
+import '../../../../common/utils/constants/colors.dart';
+import '../../../../common/utils/constants/image_strings.dart';
+import '../../../../common/utils/constants/sized.dart';
+import '../../../../common/utils/constants/text_strings.dart';
+import '../../../../common/utils/helpers/helper_function.dart';
+import '/../features/authentication/controllers/forgot_password_controller.dart';
+import '/../features/authentication/screens/signup/singup_widgets/textfields.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+
 
 class ForgotPasswordScreen extends StatelessWidget {
   const ForgotPasswordScreen({super.key});

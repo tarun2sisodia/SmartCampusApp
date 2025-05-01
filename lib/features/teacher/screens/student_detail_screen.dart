@@ -1,7 +1,3 @@
-import 'package:attedance__/models/student_model.dart';
-import 'package:attedance__/common/utils/constants/colors.dart';
-import 'package:attedance__/common/utils/constants/sized.dart';
-import 'package:attedance__/common/utils/helpers/helper_function.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,6 +5,10 @@ import 'package:iconsax/iconsax.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import '../../../common/utils/constants/colors.dart';
+import '../../../common/utils/constants/sized.dart';
+import '../../../common/utils/helpers/helper_function.dart';
+import '../../../models/student_model.dart';
 import '../controllers/student_detail_controller.dart';
 
 class StudentDetailScreen extends StatelessWidget {

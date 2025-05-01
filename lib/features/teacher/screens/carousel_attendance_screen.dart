@@ -1,16 +1,16 @@
-import 'package:attedance__/common/utils/device/device_utility.dart';
-import 'package:attedance__/features/teacher/screens/class_list_screen.dart';
-import 'package:attedance__/features/teacher/widgets/session_timer_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import '../../../common/utils/device/device_utility.dart';
 import '../controllers/carousel_attendance_controller.dart';
+import '../widgets/session_timer_widget.dart';
 import '../widgets/swipeable_student_card.dart';
 import '../widgets/attendance_action_buttons.dart';
 import '../../../common/utils/constants/colors.dart';
 import '../../../common/utils/constants/sized.dart';
 import '../../../common/utils/helpers/helper_function.dart';
+import 'class_list_screen.dart';
 
 class CarouselAttendanceScreen extends StatelessWidget {
   // Use Get.find instead of Get.put to avoid recreating the controller

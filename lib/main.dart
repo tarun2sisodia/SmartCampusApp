@@ -1,12 +1,12 @@
-import 'package:attedance__/app/bindings/app_bindings.dart';
-import 'package:attedance__/common/utils/local_storage/storage_utility.dart';
-import 'package:attedance__/myapp.dart';
-import 'package:attedance__/services/feedback_service.dart';
-import 'package:attedance__/services/storage_service.dart';
+import '../../services/feedback_service.dart';
+import '../../services/storage_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:get_storage/get_storage.dart';
+import 'app/bindings/app_bindings.dart';
+import 'common/utils/local_storage/storage_utility.dart';
+import 'myapp.dart';
 import 'services/language_service.dart';
 
 /// The main entry point of the app.

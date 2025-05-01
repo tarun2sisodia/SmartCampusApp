@@ -1,11 +1,11 @@
-import 'package:attedance__/app/bindings/app_bindings.dart';
-import 'package:attedance__/common/utils/helpers/snackbar_helper.dart';
-import 'package:attedance__/features/teacher/controllers/attendance_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:intl/intl.dart';
+import '../../../app/bindings/app_bindings.dart';
+import '../../../common/utils/helpers/snackbar_helper.dart';
 import '../controllers/all_sessions_controller.dart';
+import '../controllers/attendance_controller.dart';
 import '../screens/mark_attendance_screen.dart';
 import '../screens/carousel_attendance_screen.dart';
 import '../../../common/utils/constants/colors.dart';
