@@ -575,6 +575,7 @@ class AttendanceService {
       throw 'Failed to submit bulk attendance: $e';
     }
   }
+  
 
   /// Fetches all attendance sessions from the database
   Future<List<AttendanceSessionModel>> getAllAttendanceSessions() async {

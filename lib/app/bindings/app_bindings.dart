@@ -1,4 +1,5 @@
 import '../../features/teacher/controllers/all_sessions_controller.dart';
+import '../../features/teacher/controllers/biometric_verification_controller.dart';
 import '../../features/teacher/controllers/feedback_controller.dart';
 import '../../features/teacher/controllers/teacher_profile_controller.dart';
 
@@ -31,8 +32,12 @@ class AppBindings {
     Get.put(SupabaseAuthController(), permanent: true);
     Get.putAsync<BiometricService>(() async => await BiometricService().init());
 
-    // Add attendance controller
     Get.lazyPut<AttendanceController>(() => AttendanceController());
+  }
+
+  static void registerBiometricBindings() {
+    print("Registering biometric bindings");
+    Get.lazyPut(() => BiometricVerificationController(), fenix: true);
   }
 
   /// Onboarding bindings
@@ -78,6 +83,21 @@ class AppBindings {
   static void feedbackDialog() {
     //print('Registering feedback dialog bindings');
     Get.lazyPut(() => FeedbackController(), fenix: true);
+  }
+}
+
+class BiometricVerificationBinding extends Bindings {
+  @override
+  void dependencies() {
+    print('Initializing biometric verification dependencies');
+    // Make sure the BiometricService is available
+    if (!Get.isRegistered<BiometricService>()) {
+      Get.putAsync<BiometricService>(
+          () async => await BiometricService().init());
+    }
+
+    // Register the controller
+    Get.lazyPut(() => BiometricVerificationController(), fenix: true);
   }
 }
 

@@ -59,7 +59,7 @@ class _SplashScreenState extends State<SplashScreen>
     final currentUser = Supabase.instance.client.auth.currentUser;
 
     // Get storage service to check if first launch
-    final storageService = Get.find<StorageService>();
+    final storageService = Get.find <StorageService>();
     final bool onboardingCompleted = storageService.getOnboardingStatus();
 
     if (currentUser != null) {

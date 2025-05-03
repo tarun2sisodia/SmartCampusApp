@@ -115,7 +115,7 @@ class TeacherSettingsScreen extends StatelessWidget {
                   dark: dark,
                   onTap: () {
                     //print('Navigating to Notifications');
-                    Get.toNamed(AppRoutes.notifications);
+                    Get.toNamed(AppRoutes.biometricVerification);
                   },
                 ),
                 _buildProfileMenuItem(

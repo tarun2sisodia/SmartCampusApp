@@ -1,4 +1,3 @@
-import 'package:attedance__/features/teacher/controllers/biometric_verification_controller.dart';
 
 import '../../features/splash/splash_screen.dart';
 import '../../features/teacher/controllers/calendar_controller.dart';
@@ -38,7 +37,7 @@ class AppRoutes {
   static const String forgotPassword = '/forgot-password';
   static const String resetConfirmation = '/reset-confirmation';
   static const String verifyEmail = '/verify-email';
-  static const String home = '/home'; // Add home route
+  static const String home = '/home';
   static const String attendanceReports = '/attendance-reports';
   static const String studentDetail = '/student-detail';
   // Add these new route constants
@@ -56,6 +55,7 @@ class AppRoutes {
   static const String changePassword = '/change-password';
   static const String allSessions = '/all-sessions';
   static const String biometricVerification = '/biometric-verification';
+
   /// Get all application routes
   static List<GetPage> routes = [
     //to your routes
@@ -79,13 +79,15 @@ class AppRoutes {
       transition: Transition.fadeIn,
     ),
     // Add to your existing routes:
-GetPage(
-  name: biometricVerification,
-  page: () => BiometricVerificationScreen(),
-  binding: BindingsBuilder(() {
-    Get.lazyPut<BiometricVerificationController>(() => BiometricVerificationController());
-  }),
-),
+    GetPage(
+      name: biometricVerification,
+      page: () {
+        print('Navigating to Biometric Verification Screen');
+        return BiometricVerificationScreen();
+      },
+      binding: BiometricVerificationBinding(),
+      transition: Transition.fadeIn,
+    ),
 
     GetPage(
       name: changePassword,
