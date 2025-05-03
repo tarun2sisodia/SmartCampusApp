@@ -17,17 +17,17 @@ if (keystorePropertiesFile.exists()) {
 android {
     namespace = "com.example.attedance__"
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion  // Use Flutter's default NDK version
-    
+    ndkVersion = "27.0.12077973"  // Use Flutter's default NDK version
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-    
+
     kotlinOptions {
         jvmTarget = "17"
     }
-    
+
     defaultConfig {
         applicationId = "com.example.attedance__"
         minSdk = flutter.minSdkVersion
@@ -35,7 +35,7 @@ android {
         versionCode = flutter.versionCode
         versionName = flutter.versionName
     }
-    
+
     signingConfigs {
         create("release") {
             try {
@@ -48,7 +48,7 @@ android {
             }
         }
     }
-    
+
     buildTypes {
         release {
             isMinifyEnabled = true
