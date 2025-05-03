@@ -1369,3 +1369,44 @@ $$ LANGUAGE plpgsql;
 -- STEP 12: Commit all changes
 -- =============================================
 COMMIT;
+
+-- -- Execute this in your Supabase SQL editor
+-- CREATE TABLE teacher_attendance (
+--   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+--   teacher_id UUID REFERENCES auth.users(id) NOT NULL,
+--   date DATE NOT NULL,
+--   time TIMESTAMPTZ NOT NULL,
+--   status TEXT NOT NULL,
+--   verification_method TEXT NOT NULL,
+--   device_info JSONB,
+--   created_at TIMESTAMPTZ DEFAULT NOW(),
+  
+--   -- Ensure a teacher can only have one attendance record per day
+--   UNIQUE(teacher_id, date)
+-- );
+
+-- -- Add RLS policies
+-- ALTER TABLE teacher_attendance ENABLE ROW LEVEL SECURITY;
+
+-- -- Allow teachers to insert their own attendance
+-- CREATE POLICY "Teachers can insert their own attendance"
+-- ON teacher_attendance FOR INSERT
+-- TO authenticated
+-- WITH CHECK (auth.uid() = teacher_id);
+
+-- -- Allow teachers to view their own attendance
+-- CREATE POLICY "Teachers can view their own attendance"
+-- ON teacher_attendance FOR SELECT
+-- TO authenticated
+-- USING (auth.uid() = teacher_id);
+
+-- -- Allow admins to view all attendance
+-- CREATE POLICY "Admins can view all attendance"
+-- ON teacher_attendance FOR SELECT
+-- TO authenticated
+-- USING (
+--   EXISTS (
+--     SELECT 1 FROM users
+--     WHERE users.id = auth.uid() AND users.role = 'admin'
+--   )
+-- );
