@@ -18,7 +18,6 @@ import 'package:get/get.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../navigation_menu.dart';
-import '../../services/biometric_service.dart';
 import '../../services/storage_service.dart';
 
 /// A class that manages all controller bindings for the app
@@ -29,7 +28,6 @@ class AppBindings {
     //print('Initializing global bindings by AppBindings');
     // Auth controllers with permanent: true will persist throughout the app lifecycle
     Get.put(SupabaseAuthController(), permanent: true);
-    Get.putAsync<BiometricService>(() async => await BiometricService().init());
 
     // Add attendance controller
     Get.lazyPut<AttendanceController>(() => AttendanceController());

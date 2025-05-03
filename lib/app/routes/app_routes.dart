@@ -1,4 +1,3 @@
-import 'package:attedance__/features/teacher/controllers/biometric_verification_controller.dart';
 
 import '../../features/splash/splash_screen.dart';
 import '../../features/teacher/controllers/calendar_controller.dart';
@@ -26,7 +25,6 @@ import '../../features/teacher/screens/teacher_settings_screen.dart';
 import '../../navigation_menu.dart';
 import 'package:get/get.dart';
 
-import '../../features/teacher/screens/biometric_verification_screen.dart';
 
 /// A class that manages all routes for the app
 class AppRoutes {
@@ -78,14 +76,6 @@ class AppRoutes {
       binding: OnboardingBinding(),
       transition: Transition.fadeIn,
     ),
-    // Add to your existing routes:
-GetPage(
-  name: biometricVerification,
-  page: () => BiometricVerificationScreen(),
-  binding: BindingsBuilder(() {
-    Get.lazyPut<BiometricVerificationController>(() => BiometricVerificationController());
-  }),
-),
 
     GetPage(
       name: changePassword,
