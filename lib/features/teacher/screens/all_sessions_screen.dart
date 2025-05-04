@@ -98,8 +98,8 @@ class AllSessionsScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(TSizes.defaultSpace),
               child: Shimmer.fromColors(
-                baseColor: dark ? TColors.darkerGrey : Colors.grey[300]!,
-                highlightColor: dark ? TColors.grey : Colors.grey[100]!,
+                baseColor: dark ? TColors.darkerGrey : Colors.grey.shade300,
+                  highlightColor: dark ? TColors.yellow : TColors.primary,
                 child: Container(
                   height: 48,
                   decoration: BoxDecoration(
@@ -120,8 +120,8 @@ class AllSessionsScreen extends StatelessWidget {
                       vertical: TSizes.spaceBtwItems / 2,
                     ),
                     child: Shimmer.fromColors(
-                      baseColor: dark ? TColors.darkerGrey : Colors.grey[300]!,
-                      highlightColor: dark ? TColors.grey : Colors.grey[100]!,
+                       baseColor: dark ? TColors.darkerGrey : Colors.grey.shade300,
+                  highlightColor: dark ? TColors.yellow : TColors.primary,
                       child: Card(
                         elevation: 2,
                         shape: RoundedRectangleBorder(

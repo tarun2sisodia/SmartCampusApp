@@ -48,7 +48,6 @@ class MarkAttendanceScreen extends StatelessWidget {
 
     final screenSize = MediaQuery.of(context).size;
     //print('Screen size: $screenSize');
-    final isTablet = screenSize.width < 1024 && screenSize.width > 500;
     final isMobile = screenSize.width <= 500;
     final isLandscape = DeviceUtility.isLandscapeOrientation(context);
     //print(
@@ -58,10 +57,6 @@ class MarkAttendanceScreen extends StatelessWidget {
         ? (isLandscape ? TSizes.xs : TSizes.sm)
         : (isLandscape ? TSizes.sm : TSizes.md);
     //print('Card padding: $cardPadding');
-
-    final avatarSize =
-        isTablet ? (isLandscape ? 18.0 : 22.0) : (isLandscape ? 16.0 : 20.0);
-    //print('Avatar size: $avatarSize');
 
     // Check if session is running
     final isSessionRunning =
@@ -142,35 +137,40 @@ class MarkAttendanceScreen extends StatelessWidget {
                   width: 100,
                   height: 100,
                   child: Shimmer.fromColors(
-                    baseColor: dark ? Colors.grey[700]! : Colors.grey[300]!,
-                    highlightColor:
-                        dark ? Colors.grey[500]! : Colors.grey[100]!,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(50),
-                      ),
+                    baseColor: dark ? TColors.darkerGrey : Colors.grey.shade300,
+                    highlightColor: dark ? TColors.yellow : TColors.primary,
+                    child: const Icon(
+                      Iconsax.user,
+                      size: 100,
+                      color: TColors.primary,
                     ),
                   ),
                 ),
                 const SizedBox(height: TSizes.spaceBtwItems),
                 Shimmer.fromColors(
-                  baseColor: dark ? Colors.grey[700]! : Colors.grey[300]!,
-                  highlightColor: dark ? Colors.grey[500]! : Colors.grey[100]!,
+                  baseColor:
+                      dark ? Colors.blueGrey[800]! : Colors.blueGrey[300]!,
+                  highlightColor: dark ? TColors.turquoise : TColors.twitter,
                   child: Container(
-                    width: 200,
+                    width: 180,
                     height: 20,
-                    color: Colors.white,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                   ),
                 ),
                 const SizedBox(height: TSizes.spaceBtwItems / 2),
                 Shimmer.fromColors(
-                  baseColor: dark ? Colors.grey[700]! : Colors.grey[300]!,
-                  highlightColor: dark ? Colors.grey[500]! : Colors.grey[100]!,
+                  baseColor: dark ? Colors.teal[800]! : Colors.teal[300]!,
+                  highlightColor: dark ? Colors.teal[600]! : Colors.teal[100]!,
                   child: Container(
-                    width: 150,
+                    width: 120,
                     height: 15,
-                    color: Colors.white,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                   ),
                 ),
               ],

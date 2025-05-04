@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../app/routes/app_routes.dart';
+import '../../../common/utils/constants/image_strings.dart';
 import '../controllers/teacher_profile_controller.dart';
 import '../../../common/utils/constants/colors.dart';
 import '../../../common/utils/constants/sized.dart';
@@ -21,7 +22,7 @@ class TeacherProfileScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Teacher Profile',
+          'My Profile',
           style: Theme.of(context).textTheme.headlineSmall,
         ),
         actions: [
@@ -259,7 +260,7 @@ class TeacherProfileScreen extends StatelessWidget {
                             },
                           )
                         : const DecorationImage(
-                            image: AssetImage('assets/logos/smartcampus.png'),
+                            image: AssetImage(TImageStrings.appLogo),
                             fit: BoxFit.cover,
                           ),
                   ),
@@ -463,7 +464,7 @@ class TeacherProfileScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: TSizes.md),
         margin: const EdgeInsets.symmetric(horizontal: 4),
         decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey.withOpacity(0.2)),
+          border: Border.all(color: TColors.linkedin),
           borderRadius: BorderRadius.circular(TSizes.cardRadiusMd),
         ),
         child: Column(
@@ -478,65 +479,6 @@ class TeacherProfileScreen extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-
-  Widget _buildSection({
-    required BuildContext context,
-    required String title,
-    required List<Widget> items,
-  }) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          title,
-          style: Theme.of(
-            context,
-          ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
-        ),
-        const SizedBox(height: TSizes.spaceBtwItems / 2),
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(TSizes.cardRadiusMd),
-            color: Theme.of(context).cardColor,
-            border: Border.all(color: Colors.grey.withOpacity(0.1)),
-          ),
-          child: ListView.separated(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: items.length,
-            separatorBuilder: (_, __) => Divider(
-              height: 1,
-              color: Colors.grey.withOpacity(0.1),
-              indent: 70,
-            ),
-            itemBuilder: (_, index) => items[index],
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildProfileMenuItem({
-    required String title,
-    required IconData icon,
-    Widget? trailing,
-    VoidCallback? onTap,
-    required bool dark,
-  }) {
-    return ListTile(
-      onTap: onTap,
-      leading: Container(
-        padding: const EdgeInsets.all(8),
-        decoration: BoxDecoration(
-          color: (dark ? TColors.yellow : TColors.primary).withOpacity(0.1),
-          shape: BoxShape.circle,
-        ),
-        child: Icon(icon, color: dark ? TColors.yellow : TColors.primary),
-      ),
-      title: Text(title),
-      trailing: trailing ?? const Icon(Iconsax.arrow_right_3, size: 18),
     );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:attedance__/common/utils/helpers/helper_function.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
@@ -26,6 +27,7 @@ class StudentAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dark = THelperFunction.isDarkMode(context);
     final hasImage = imageUrl != null && imageUrl!.isNotEmpty;
 
     return GestureDetector(
@@ -49,8 +51,9 @@ class StudentAvatar extends StatelessWidget {
                       imageUrl: imageUrl!,
                       fit: BoxFit.cover,
                       placeholder: (context, url) => Shimmer.fromColors(
-                        baseColor: Colors.grey[300]!,
-                        highlightColor: Colors.grey[100]!,
+                        baseColor:
+                            dark ? TColors.darkerGrey : Colors.grey.shade300,
+                        highlightColor: dark ? TColors.yellow : TColors.primary,
                         child: Container(
                           color: Colors.grey,
                           width: size,
@@ -100,11 +103,15 @@ class StudentAvatar extends StatelessWidget {
                 ),
                 child: Center(
                   child: Shimmer.fromColors(
-                    baseColor: Colors.grey[300]!,
-                    highlightColor: Colors.grey[100]!,
-                    child: CircularProgressIndicator(
-                      color: Colors.white,
-                      strokeWidth: 2,
+                    baseColor: dark ? TColors.darkerGrey : Colors.grey.shade300,
+                    highlightColor: dark ? TColors.yellow : TColors.primary,
+                    child: FadeTransition(
+                      opacity: AlwaysStoppedAnimation(0.5),
+                      child: Icon(
+                        Icons.cloud_upload,
+                        color: Colors.white,
+                        size: 24,
+                      ),
                     ),
                   ),
                 ),

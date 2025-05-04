@@ -129,7 +129,7 @@ class DashboardScreen extends StatelessWidget {
               Positioned.fill(
                 child: Shimmer.fromColors(
                   baseColor: dark ? TColors.darkerGrey : Colors.grey.shade300,
-                  highlightColor: dark ? TColors.dark : Colors.grey.shade100,
+                  highlightColor: dark ? TColors.yellow : TColors.primary,
                   period: const Duration(seconds: 2),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

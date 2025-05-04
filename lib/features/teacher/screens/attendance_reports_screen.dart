@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:intl/intl.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
@@ -46,8 +47,8 @@ class AttendanceReportsScreen extends StatelessWidget {
               children: [
                 // Shimmer for Class selection card
                 Shimmer.fromColors(
-                  baseColor: Colors.grey.shade300,
-                  highlightColor: Colors.grey.shade100,
+                 baseColor: dark ? TColors.darkerGrey : Colors.grey.shade300,
+                  highlightColor: dark ? TColors.yellow : TColors.primary,
                   child: Card(
                     elevation: 2,
                     shape: RoundedRectangleBorder(
@@ -78,8 +79,8 @@ class AttendanceReportsScreen extends StatelessWidget {
 
                 // Shimmer for Date range card
                 Shimmer.fromColors(
-                  baseColor: Colors.grey.shade300,
-                  highlightColor: Colors.grey.shade100,
+                 baseColor: dark ? TColors.darkerGrey : Colors.grey.shade300,
+                  highlightColor: dark ? TColors.yellow : TColors.primary,
                   child: Card(
                     elevation: 2,
                     shape: RoundedRectangleBorder(
@@ -122,8 +123,8 @@ class AttendanceReportsScreen extends StatelessWidget {
 
                 // Shimmer for Attendance summary
                 Shimmer.fromColors(
-                  baseColor: Colors.grey.shade300,
-                  highlightColor: Colors.grey.shade100,
+baseColor: dark ? TColors.darkerGrey : Colors.grey.shade300,
+                  highlightColor: dark ? TColors.yellow : TColors.primary,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -208,8 +209,8 @@ class AttendanceReportsScreen extends StatelessWidget {
 
                 // Shimmer for Student attendance table
                 Shimmer.fromColors(
-                  baseColor: Colors.grey.shade300,
-                  highlightColor: Colors.grey.shade100,
+                  baseColor: dark ? TColors.darkerGrey : Colors.grey.shade300,
+                  highlightColor: dark ? TColors.yellow : TColors.primary,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

@@ -24,21 +24,20 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         brightness: Brightness.light,
         scaffoldBackgroundColor:
-            TColors.light, // Use our defined light background
+            TColors.backgroundLight, // Use our defined light background
         inputDecorationTheme: TTextFieldTheme.lightInputDecoration,
         // Add border theme for better visibility
         dividerTheme: DividerThemeData(
           color: TColors.borderPrimary,
           thickness: 1.0,
         ),
-        
       ),
       // Dark theme design for UI in Dark Theme
       darkTheme: ThemeData(
         primarySwatch: Colors.blue,
         brightness: Brightness.dark,
         scaffoldBackgroundColor:
-            TColors.dark, // Use our defined dark background
+            TColors.backgroundDark, // Use our defined dark background
         inputDecorationTheme: TTextFieldTheme.darkInputDecoration,
         // Add border theme for better visibility
         dividerTheme: DividerThemeData(

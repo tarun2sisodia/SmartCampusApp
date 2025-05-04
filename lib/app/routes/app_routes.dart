@@ -1,4 +1,3 @@
-
 import '../../features/splash/splash_screen.dart';
 import '../../features/teacher/controllers/calendar_controller.dart';
 
@@ -24,7 +23,6 @@ import '../../features/teacher/screens/teacher_messages_screen.dart';
 import '../../features/teacher/screens/teacher_settings_screen.dart';
 import '../../navigation_menu.dart';
 import 'package:get/get.dart';
-
 
 /// A class that manages all routes for the app
 class AppRoutes {
@@ -54,6 +52,8 @@ class AppRoutes {
   static const String changePassword = '/change-password';
   static const String allSessions = '/all-sessions';
   static const String biometricVerification = '/biometric-verification';
+  static const String createClass = '/create-class';
+
   /// Get all application routes
   static List<GetPage> routes = [
     //to your routes
@@ -189,6 +189,7 @@ class AppRoutes {
       binding: HomeBinding(),
       transition: Transition.rightToLeft,
     ),
+   
     GetPage(
       name: feedback,
       page: () {

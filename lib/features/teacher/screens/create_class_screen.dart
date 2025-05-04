@@ -140,6 +140,10 @@ class CreateClassScreen extends StatelessWidget {
                               ),
                             ),
                           ),
+                          inputFormatters: [
+                            FilteringTextInputFormatter.allow(
+                                RegExp(r'^[A-Z]$')),
+                          ],
                           onChanged: (value) {
                             //print('Section input: $value');
                           },

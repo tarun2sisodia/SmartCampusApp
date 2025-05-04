@@ -79,16 +79,16 @@ class ClassListScreen extends StatelessWidget {
         ),
         floatingActionButton: classController.isSelectionMode.value
             ? null // Hide FAB in selection mode
-            : FloatingActionButton(
+            : FloatingActionButton.extended(
                 onPressed: () {
                   ////print('Opening create class screen');
                   Get.to(() => CreateClassScreen());
                 },
                 backgroundColor: dark ? TColors.blue : TColors.yellow,
-                child: const Icon(Iconsax.add),
+                icon: const Icon(Iconsax.book_square),
+                label: const Text('Create Class'),
               ),
         body: _buildBody(context, dark),
-        // Add bottom action bar when in selection mode
         bottomNavigationBar: classController.isSelectionMode.value
             ? _buildSelectionActionBar(context, dark)
             : null,
@@ -108,8 +108,8 @@ class ClassListScreen extends StatelessWidget {
               vertical: TSizes.spaceBtwItems / 2,
             ),
             child: Shimmer.fromColors(
-              baseColor: dark ? Colors.grey[800]! : Colors.grey[300]!,
-              highlightColor: dark ? Colors.grey[700]! : Colors.grey[100]!,
+               baseColor: dark ? TColors.darkerGrey : Colors.grey.shade300,
+                  highlightColor: dark ? TColors.yellow : TColors.primary,
               child: Card(
                 elevation: 2,
                 shape: RoundedRectangleBorder(

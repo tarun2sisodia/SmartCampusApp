@@ -67,6 +67,7 @@ dependencies:
   url_launcher: ^6.3.1
   local_auth: ^2.3.0
   shimmer: ^3.0.0
+  smooth_scroll_multiplatform: ^1.0.8
   
 
 dependency_overrides:
@@ -98,6 +99,7 @@ flutter:
     - assets/images/
     - assets/icons/
     - assets/logos/
+    - assets/icons/github.png
     - assets/animations/
     - assets/images/onboarding_images/
     - shorebird.yaml

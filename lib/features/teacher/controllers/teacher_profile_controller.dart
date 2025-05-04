@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart' as path;
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -286,15 +287,46 @@ class TeacherProfileController extends GetxController {
             children: <Widget>[
               SimpleDialogOption(
                 onPressed: () => Navigator.pop(context, ImageSource.camera),
-                child: const Text('Take a photo'),
+                child: Row(
+                  children: [
+                    const Icon(Iconsax.camera, color: Colors.blue),
+                    const SizedBox(width: 8),
+                    const Text('Take a photo'),
+                  ],
+                ),
               ),
               SimpleDialogOption(
                 onPressed: () => Navigator.pop(context, ImageSource.gallery),
-                child: const Text('Choose from gallery'),
+                child: Row(
+                  children: [
+                    const Icon(Iconsax.gallery, color: Colors.green),
+                    const SizedBox(width: 8),
+                    const Text('Choose from gallery'),
+                  ],
+                ),
               ),
               SimpleDialogOption(
                 onPressed: () => Navigator.pop(context),
-                child: const Text('Cancel'),
+              ),
+              SimpleDialogOption(
+                onPressed: () {
+                  Get.back();
+                },
+                child: ElevatedButton(
+                  onPressed: () {
+                    //print('Add student dialog cancelled');
+                    Get.back();
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.red,
+                    foregroundColor: Colors.white,
+                    // side: BorderSide(
+                    //   color: Colors.grey,
+                    //   width: 1,
+                    // ),
+                  ),
+                  child: const Text('Cancel'),
+                ),
               ),
             ],
           );
