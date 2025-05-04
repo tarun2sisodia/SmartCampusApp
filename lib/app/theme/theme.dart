@@ -51,7 +51,6 @@ class TAppTheme {
       primary: TColors.blue,
       secondary: TColors.blue.withOpacity(0.8),
       surface: TColors.white,
-      background: TColors.white,
       error: Colors.red.shade700,
     ),
   );
@@ -83,7 +82,6 @@ class TAppTheme {
       primary: Colors.blue,
       secondary: Colors.blue.shade300,
       surface: Colors.grey.shade900,
-      background: TColors.dark,
       error: Colors.red.shade300,
     ),
   );

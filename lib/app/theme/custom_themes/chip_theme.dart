@@ -40,7 +40,7 @@ class TChipTheme {
 
     // Shape and border
     shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(TSizes.cardRadiusSm ?? TSizes.sm),
+      borderRadius: BorderRadius.circular(TSizes.cardRadiusSm),
       side: BorderSide(color: TColors.grey.withOpacity(0.3)),
     ),
 
@@ -71,7 +71,7 @@ class TChipTheme {
       vertical: TSizes.xs,
     ),
     shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(TSizes.cardRadiusSm ?? TSizes.sm),
+      borderRadius: BorderRadius.circular(TSizes.cardRadiusSm),
       side: BorderSide(color: TColors.darkGrey),
     ),
     backgroundColor: TColors.darkerGrey,

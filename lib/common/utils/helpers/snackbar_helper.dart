@@ -116,6 +116,14 @@ class TSnackBar {
     );
   }
 
+  /// Convenience method to check if there is an error message
+  static bool hasError(String message, {bool handle = false}) {
+    bool containsError = message.toLowerCase().contains('error') ||
+        message.toLowerCase().contains('failed') ||
+        message.toLowerCase().contains('exception');
+    return handle ? containsError : false;
+  }
+
   /// Convenience method for showing warning messages
   static void showWarning({
     required String message,

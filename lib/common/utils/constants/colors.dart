@@ -123,7 +123,6 @@ class TColors {
   static const Color darkSurface = Color(0xFF121212);
   static const Color darkBackground = Color(0xFF1E1E1E);
   static Color darkElevated = Colors.white.withOpacity(0.05);
-  // Update these color definitions in TColors class:
-
-
+  static const Color backgroundLight = Color(0xFFF8F8F8); // Same as light
+  static const Color backgroundDark = Color(0xFF121212); // Same as dark
 }

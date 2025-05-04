@@ -84,16 +84,16 @@ class TTextFieldTheme {
     ),
     hintStyle: TextStyle().copyWith(
       fontSize: 14,
-      color: TColors.white.withOpacity(0.7),
+      color: TColors.white.withAlpha(179), // 0.7 * 255 = 179
       fontWeight: FontWeight.normal,
     ),
     errorStyle: TextStyle().copyWith(
       fontWeight: FontWeight.normal,
-      color: TColors.error.withOpacity(0.9),
+      color: TColors.error.withAlpha(230), // 0.9 * 255 = 230
       fontSize: 12,
     ),
     floatingLabelStyle: TextStyle().copyWith(
-      color: TColors.primary.withOpacity(0.9),
+      color: TColors.primary.withAlpha(230), // 0.9 * 255 = 230
       fontSize: 14,
       fontWeight: FontWeight.w500,
     ),

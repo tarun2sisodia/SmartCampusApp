@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'app/routes/app_routes.dart';
-import 'app/theme/theme.dart';
+import 'app/theme/custom_themes/text_field_theme.dart';
 import 'common/translations/app_translations.dart';
+import 'common/utils/constants/colors.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -19,10 +20,32 @@ class MyApp extends StatelessWidget {
       locale: languageService.currentLocale.value,
       fallbackLocale: const Locale('en', 'US'),
       // Theme Data is for the UI in Light theme
-      // Use your enhanced theme from TAppTheme
-      theme: TAppTheme.lightTheme,
-      darkTheme: TAppTheme.darkTheme,
-
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        brightness: Brightness.light,
+        scaffoldBackgroundColor:
+            TColors.light, // Use our defined light background
+        inputDecorationTheme: TTextFieldTheme.lightInputDecoration,
+        // Add border theme for better visibility
+        dividerTheme: DividerThemeData(
+          color: TColors.borderPrimary,
+          thickness: 1.0,
+        ),
+        
+      ),
+      // Dark theme design for UI in Dark Theme
+      darkTheme: ThemeData(
+        primarySwatch: Colors.blue,
+        brightness: Brightness.dark,
+        scaffoldBackgroundColor:
+            TColors.dark, // Use our defined dark background
+        inputDecorationTheme: TTextFieldTheme.darkInputDecoration,
+        // Add border theme for better visibility
+        dividerTheme: DividerThemeData(
+          color: Colors.white24,
+          thickness: 1.0,
+        ),
+      ),
       themeMode: ThemeMode.system, // Respects system theme setting
       debugShowCheckedModeBanner: false, // Remove debug banner from UI
       // Set the splash screen as the initial route

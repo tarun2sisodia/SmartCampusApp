@@ -93,6 +93,13 @@ class DashboardController extends GetxController {
     });
   }
 
+  bool hasError() {
+    return TSnackBar.hasError(
+      greeting.value,
+      handle: true,
+    );
+  }
+
   Future<void> loadDashboardData() async {
     try {
       //print('Loading dashboard data...');

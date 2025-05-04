@@ -333,10 +333,10 @@ class AddStudentScreen extends StatelessWidget {
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.red,
               foregroundColor: Colors.white,
-              side: BorderSide(
-                color: Colors.grey,
-                width: 1,
-              ),
+              // side: BorderSide(
+              //   color: Colors.grey,
+              //   width: 1,
+              // ),
             ),
             child: const Text('Cancel'),
           ),

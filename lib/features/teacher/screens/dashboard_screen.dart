@@ -60,71 +60,77 @@ class DashboardScreen extends StatelessWidget {
           return Stack(
             children: [
               // Real UI widgets with rounded edges
-              Opacity(
-                opacity: 0.3,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      height: 50,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: dark ? TColors.darkerGrey : Colors.grey.shade300,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  AnimatedContainer(
+                    duration: const Duration(milliseconds: 800),
+                    curve: Curves.easeInOut,
+                    height: 50,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: dark ? TColors.darkerGrey : Colors.grey.shade300,
+                      borderRadius: BorderRadius.circular(8),
                     ),
-                    const SizedBox(height: TSizes.spaceBtwSections),
-                    Row(
-                      children: [
-                        Container(
-                          height: 100,
-                          width: MediaQuery.of(context).size.width * 0.45,
-                          decoration: BoxDecoration(
-                            color: dark
-                                ? TColors.darkerGrey
-                                : Colors.grey.shade300,
-                            borderRadius: BorderRadius.circular(8),
-                          ),
+                  ),
+                  const SizedBox(height: TSizes.spaceBtwSections),
+                  Row(
+                    children: [
+                      AnimatedContainer(
+                        duration: const Duration(milliseconds: 800),
+                        curve: Curves.easeInOut,
+                        height: 100,
+                        width: MediaQuery.of(context).size.width * 0.45,
+                        decoration: BoxDecoration(
+                          color:
+                              dark ? TColors.darkerGrey : Colors.grey.shade300,
+                          borderRadius: BorderRadius.circular(8),
                         ),
-                        const SizedBox(width: TSizes.spaceBtwItems),
-                        Container(
-                          height: 100,
-                          width: MediaQuery.of(context).size.width * 0.45,
-                          decoration: BoxDecoration(
-                            color: dark
-                                ? TColors.darkerGrey
-                                : Colors.grey.shade300,
-                            borderRadius: BorderRadius.circular(8),
-                          ),
+                      ),
+                      const SizedBox(width: TSizes.spaceBtwItems),
+                      AnimatedContainer(
+                        duration: const Duration(milliseconds: 800),
+                        curve: Curves.easeInOut,
+                        height: 100,
+                        width: MediaQuery.of(context).size.width * 0.45,
+                        decoration: BoxDecoration(
+                          color:
+                              dark ? TColors.darkerGrey : Colors.grey.shade300,
+                          borderRadius: BorderRadius.circular(8),
                         ),
-                      ],
-                    ),
-                    const SizedBox(height: TSizes.spaceBtwSections),
-                    Container(
-                      height: 200,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: dark ? TColors.darkerGrey : Colors.grey.shade300,
-                        borderRadius: BorderRadius.circular(8),
                       ),
+                    ],
+                  ),
+                  const SizedBox(height: TSizes.spaceBtwSections),
+                  AnimatedContainer(
+                    duration: const Duration(milliseconds: 800),
+                    curve: Curves.easeInOut,
+                    height: 200,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: dark ? TColors.darkerGrey : Colors.grey.shade300,
+                      borderRadius: BorderRadius.circular(8),
                     ),
-                    const SizedBox(height: TSizes.spaceBtwSections),
-                    Container(
-                      height: 50,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: dark ? TColors.darkerGrey : Colors.grey.shade300,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
+                  ),
+                  const SizedBox(height: TSizes.spaceBtwSections),
+                  AnimatedContainer(
+                    duration: const Duration(milliseconds: 800),
+                    curve: Curves.easeInOut,
+                    height: 50,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: dark ? TColors.darkerGrey : Colors.grey.shade300,
+                      borderRadius: BorderRadius.circular(8),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              // Shimmer effect with proper alignment and spacing
+              // Enhanced Shimmer effect with animations
               Positioned.fill(
                 child: Shimmer.fromColors(
                   baseColor: dark ? TColors.darkerGrey : Colors.grey.shade300,
                   highlightColor: dark ? TColors.dark : Colors.grey.shade100,
+                  period: const Duration(seconds: 2),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -180,6 +186,34 @@ class DashboardScreen extends StatelessWidget {
                   ),
                 ),
               ),
+              // Error handling overlay
+              Obx(() {
+                if (dashboardController.hasError()) {
+                  return Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.error_outline,
+                            size: 48,
+                            color: dark ? TColors.yellow : TColors.primary),
+                        const SizedBox(height: TSizes.spaceBtwItems),
+                        Text(
+                          'An error occurred. Please try again.',
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
+                        const SizedBox(height: TSizes.spaceBtwItems),
+                        ElevatedButton(
+                          onPressed: () {
+                            dashboardController.loadDashboardData();
+                          },
+                          child: const Text('Retry'),
+                        ),
+                      ],
+                    ),
+                  );
+                }
+                return const SizedBox.shrink();
+              }),
             ],
           );
         }
