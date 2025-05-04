@@ -74,7 +74,11 @@ class CalendarScreen extends StatelessWidget {
       child: Container(
         height: 80.0,
         decoration: BoxDecoration(
-          color: Colors.grey[600],
+          gradient: LinearGradient(
+            colors: [Colors.grey[600]!, Colors.grey[500]!],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
           borderRadius: BorderRadius.circular(8.0),
         ),
       ),

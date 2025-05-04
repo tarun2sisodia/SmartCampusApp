@@ -19,6 +19,7 @@ class TeacherProfileController extends GetxController {
   // Add these at the top of your TeacherProfileController class
   final classService = ClassService();
   final attendanceService = AttendanceService();
+   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   // Add these observable properties to store statistics
   final classCount = 0.obs;
