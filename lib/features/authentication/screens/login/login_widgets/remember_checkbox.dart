@@ -41,7 +41,7 @@ class _RememberAndForgetState extends State<RememberAndForget> {
           children: [
             Checkbox(
               value: _isChecked,
-              activeColor: dark ? TColors.buttonPrimary : TColors.deepPurple,
+              activeColor: dark ? TColors.buttonPrimary : TColors.primary,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(4),
               ),

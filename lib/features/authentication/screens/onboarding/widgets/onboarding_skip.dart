@@ -20,7 +20,7 @@ class OnboardingSkip extends StatelessWidget {
         onPressed: () => OnboardingController.instance.skipPage(),
         style: ElevatedButton.styleFrom(
           backgroundColor: dark ? Colors.black54 : Colors.white,
-          foregroundColor: dark ? TColors.white : TColors.deepPurple,
+          foregroundColor: dark ? TColors.white : TColors.primary,
           elevation: 1,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(TSizes.buttonRadius),
@@ -37,9 +37,9 @@ class OnboardingSkip extends StatelessWidget {
         child: Text(
           'Skip',
           style: Theme.of(context).textTheme.labelLarge?.copyWith(
-            fontWeight: FontWeight.w600,
-            color: dark ? TColors.white : TColors.deepPurple,
-          ),
+                fontWeight: FontWeight.w600,
+                color: dark ? TColors.white : TColors.primary,
+              ),
         ),
       ),
     );

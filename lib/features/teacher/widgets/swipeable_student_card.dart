@@ -206,7 +206,7 @@ class SwipeableStudentCard extends StatelessWidget {
       case 'excused':
         return Colors.blue;
       default:
-        return dark ? TColors.yellow : TColors.deepPurple;
+        return dark ? TColors.yellow : TColors.primary;
     }
   }
 }

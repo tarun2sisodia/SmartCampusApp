@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:get_storage/get_storage.dart';
 import 'app/bindings/app_bindings.dart';
+import 'common/utils/constants/colors.dart';
 import 'common/utils/local_storage/storage_utility.dart';
 import 'myapp.dart';
 import 'services/language_service.dart';
@@ -94,7 +95,7 @@ class FallbackErrorApp extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(Icons.error_outline, color: Colors.red, size: 60),
+                const Icon(Icons.error_outline, color: TColors.red, size: 60),
                 const SizedBox(height: 20),
                 const Text('App Initialization Error',
                     style:

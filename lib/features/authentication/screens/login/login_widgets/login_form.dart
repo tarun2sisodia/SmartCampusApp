@@ -34,7 +34,7 @@ class LoginForm extends StatelessWidget {
             // Email field
             Textfields(
               controller: controller.emailController,
-              iconColor: dark ? TColors.yellow : TColors.deepPurple,
+              iconColor: dark ? TColors.yellow : TColors.primary,
               prefixIcon: const Icon(Iconsax.direct_right),
               labelText: TTexts.email,
               keyboardType: TextInputType.emailAddress,
@@ -54,7 +54,7 @@ class LoginForm extends StatelessWidget {
             Obx(
               () => Textfields(
                 controller: controller.passwordController,
-                iconColor: dark ? TColors.yellow : TColors.deepPurple,
+                iconColor: dark ? TColors.yellow : TColors.primary,
                 prefixIcon: const Icon(Iconsax.password_check),
                 labelText: TTexts.password,
                 obscureText: !_passwordVisible.value,
@@ -62,8 +62,8 @@ class LoginForm extends StatelessWidget {
                   icon: Icon(
                     _passwordVisible.value ? Iconsax.eye : Iconsax.eye_slash,
                   ),
-                  onPressed:
-                      () => _passwordVisible.value = !_passwordVisible.value,
+                  onPressed: () =>
+                      _passwordVisible.value = !_passwordVisible.value,
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -92,38 +92,33 @@ class LoginForm extends StatelessWidget {
                 height: TSizes.appBarHeight,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: dark ? TColors.yellow : TColors.deepPurple,
+                    backgroundColor: dark ? TColors.yellow : TColors.primary,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(
                         TSizes.borderRadiusMd,
                       ),
                     ),
                   ),
-                  onPressed:
-                      controller.isLoading.value
-                          ? null
-                          : () {
-                            if (_formKey.currentState!.validate()) {
-                              if (controller.emailController.text.isNotEmpty &&
-                                  controller
-                                      .passwordController
-                                      .text
-                                      .isNotEmpty) {
-                                controller.signInWithEmail();
-                              }
+                  onPressed: controller.isLoading.value
+                      ? null
+                      : () {
+                          if (_formKey.currentState!.validate()) {
+                            if (controller.emailController.text.isNotEmpty &&
+                                controller.passwordController.text.isNotEmpty) {
+                              controller.signInWithEmail();
                             }
-                          },
-                  child:
-                      controller.isLoading.value
-                          ? const CircularProgressIndicator()
-                          : Text(
-                            TTexts.signIn,
-                            style: TextStyle(
-                              color: dark ? TColors.deepPurple : Colors.white,
-                              fontSize: TSizes.fontSizeMd,
-                              fontWeight: FontWeight.bold,
-                            ),
+                          }
+                        },
+                  child: controller.isLoading.value
+                      ? const CircularProgressIndicator()
+                      : Text(
+                          TTexts.signIn,
+                          style: TextStyle(
+                            color: dark ? TColors.primary : Colors.white,
+                            fontSize: TSizes.fontSizeMd,
+                            fontWeight: FontWeight.bold,
                           ),
+                        ),
                 ),
               ),
             ),
@@ -149,7 +144,7 @@ class LoginForm extends StatelessWidget {
                 child: Text(
                   TTexts.createAccount,
                   style: TextStyle(
-                    color: dark ? TColors.yellow : TColors.deepPurple,
+                    color: dark ? TColors.yellow : TColors.primary,
                     fontSize: TSizes.fontSizeMd,
                     fontWeight: FontWeight.bold,
                   ),

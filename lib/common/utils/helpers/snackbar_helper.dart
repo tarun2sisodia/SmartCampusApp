@@ -14,8 +14,7 @@ enum MessageSource {
 
 /// A utility class for showing consistent, styled snackbars throughout the app
 class TSnackBar {
-  TSnackBar._()
-  {
+  TSnackBar._() {
     //printnt('TSnackBar initialized');
   } // Private constructor to prevent instantiation
 
@@ -50,7 +49,7 @@ class TSnackBar {
         break;
       case MessageType.info:
         icon = Iconsax.information;
-        backgroundColor = TColors.deepPurple;
+        backgroundColor = TColors.primary;
         break;
     }
 
@@ -84,7 +83,7 @@ class TSnackBar {
       forwardAnimationCurve: Curves.easeOutCirc,
       reverseAnimationCurve: Curves.easeInCirc,
       overlayBlur: 0,
-      overlayColor: Colors.black.withAlpha(20),
+      overlayColor: TColors.dark.withAlpha(20),
     );
   }
 

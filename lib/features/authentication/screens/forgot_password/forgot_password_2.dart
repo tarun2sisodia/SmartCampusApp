@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
-
 class ForgotPasswordScreen extends StatelessWidget {
   const ForgotPasswordScreen({super.key});
 
@@ -66,7 +65,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                     // Email field
                     Textfields(
                       controller: controller.emailController,
-                      iconColor: dark ? TColors.yellow : TColors.deepPurple,
+                      iconColor: dark ? TColors.yellow : TColors.primary,
                       prefixIcon: const Icon(Iconsax.direct_right),
                       labelText: TTexts.email,
                       keyboardType: TextInputType.emailAddress,
@@ -83,18 +82,17 @@ class ForgotPasswordScreen extends StatelessWidget {
 
                     // Error message
                     Obx(
-                      () =>
-                          controller.errorMessage.value.isNotEmpty
-                              ? Padding(
-                                padding: const EdgeInsets.only(
-                                  top: TSizes.spaceBtwItems,
-                                ),
-                                child: Text(
-                                  controller.errorMessage.value,
-                                  style: const TextStyle(color: Colors.red),
-                                ),
-                              )
-                              : const SizedBox.shrink(),
+                      () => controller.errorMessage.value.isNotEmpty
+                          ? Padding(
+                              padding: const EdgeInsets.only(
+                                top: TSizes.spaceBtwItems,
+                              ),
+                              child: Text(
+                                controller.errorMessage.value,
+                                style: const TextStyle(color: Colors.red),
+                              ),
+                            )
+                          : const SizedBox.shrink(),
                     ),
 
                     const SizedBox(height: TSizes.spaceBtwSections),
@@ -105,29 +103,27 @@ class ForgotPasswordScreen extends StatelessWidget {
                         width: double.infinity,
                         height: TSizes.appBarHeight,
                         child: ElevatedButton(
-                          onPressed:
-                              controller.isLoading.value
-                                  ? null
-                                  : () async {
-                                    if (formKey.currentState!.validate()) {
-                                      try {
-                                        await controller.resetPassword();
-                                        // Navigate using named route and pass the email
-                                        Get.toNamed(
-                                          AppRoutes.resetConfirmation,
-                                          arguments:
-                                              controller.emailController.text
-                                                  .trim(),
-                                        );
-                                      } catch (e) {
-                                        // Error is already handled in the controller
-                                      }
+                          onPressed: controller.isLoading.value
+                              ? null
+                              : () async {
+                                  if (formKey.currentState!.validate()) {
+                                    try {
+                                      await controller.resetPassword();
+                                      // Navigate using named route and pass the email
+                                      Get.toNamed(
+                                        AppRoutes.resetConfirmation,
+                                        arguments: controller
+                                            .emailController.text
+                                            .trim(),
+                                      );
+                                    } catch (e) {
+                                      // Error is already handled in the controller
                                     }
-                                  },
-                          child:
-                              controller.isLoading.value
-                                  ? const CircularProgressIndicator()
-                                  : Text('Reset Password'),
+                                  }
+                                },
+                          child: controller.isLoading.value
+                              ? const CircularProgressIndicator()
+                              : Text('Reset Password'),
                         ),
                       ),
                     ),

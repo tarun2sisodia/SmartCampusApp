@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../../common/utils/constants/image_strings.dart';
 import '../controllers/dashboard_controller.dart';
@@ -26,7 +27,7 @@ class DashboardScreen extends StatelessWidget {
 
   final String userName =
       Supabase.instance.client.auth.currentUser?.userMetadata?['name'] ??
-      'Teacher';
+          'Teacher';
 
   @override
   Widget build(BuildContext context) {
@@ -46,10 +47,9 @@ class DashboardScreen extends StatelessWidget {
             duration: const Duration(milliseconds: 800),
             firstChild: _buildGreetingAppBar(context, dark),
             secondChild: _buildRegularAppBar(context, dark),
-            crossFadeState:
-                dashboardController.showGreetingAnimation.value
-                    ? CrossFadeState.showFirst
-                    : CrossFadeState.showSecond,
+            crossFadeState: dashboardController.showGreetingAnimation.value
+                ? CrossFadeState.showFirst
+                : CrossFadeState.showSecond,
           );
         }),
       ),
@@ -57,7 +57,131 @@ class DashboardScreen extends StatelessWidget {
         //print('Dashboard state updated');
         if (dashboardController.isLoading.value) {
           //print('Dashboard is loading');
-          return const Center(child: CircularProgressIndicator());
+          return Stack(
+            children: [
+              // Real UI widgets with rounded edges
+              Opacity(
+                opacity: 0.3,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: 50,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: dark ? TColors.darkerGrey : Colors.grey.shade300,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                    const SizedBox(height: TSizes.spaceBtwSections),
+                    Row(
+                      children: [
+                        Container(
+                          height: 100,
+                          width: MediaQuery.of(context).size.width * 0.45,
+                          decoration: BoxDecoration(
+                            color: dark
+                                ? TColors.darkerGrey
+                                : Colors.grey.shade300,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                        const SizedBox(width: TSizes.spaceBtwItems),
+                        Container(
+                          height: 100,
+                          width: MediaQuery.of(context).size.width * 0.45,
+                          decoration: BoxDecoration(
+                            color: dark
+                                ? TColors.darkerGrey
+                                : Colors.grey.shade300,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: TSizes.spaceBtwSections),
+                    Container(
+                      height: 200,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: dark ? TColors.darkerGrey : Colors.grey.shade300,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                    const SizedBox(height: TSizes.spaceBtwSections),
+                    Container(
+                      height: 50,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: dark ? TColors.darkerGrey : Colors.grey.shade300,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              // Shimmer effect with proper alignment and spacing
+              Positioned.fill(
+                child: Shimmer.fromColors(
+                  baseColor: dark ? TColors.darkerGrey : Colors.grey.shade300,
+                  highlightColor: dark ? TColors.dark : Colors.grey.shade100,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        height: 50,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                      const SizedBox(height: TSizes.spaceBtwSections),
+                      Row(
+                        children: [
+                          Container(
+                            height: 100,
+                            width: MediaQuery.of(context).size.width * 0.45,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                          const SizedBox(width: TSizes.spaceBtwItems),
+                          Container(
+                            height: 100,
+                            width: MediaQuery.of(context).size.width * 0.45,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: TSizes.spaceBtwSections),
+                      Container(
+                        height: 200,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                      const SizedBox(height: TSizes.spaceBtwSections),
+                      Container(
+                        height: 50,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          );
         }
 
         if (dashboardController.classes.isEmpty) {
@@ -88,7 +212,7 @@ class DashboardScreen extends StatelessWidget {
             //print('Refreshing dashboard data');
             await dashboardController.loadDashboardData();
           },
-          color: dark ? TColors.yellow : TColors.deepPurple,
+          color: dark ? TColors.yellow : TColors.primary,
           backgroundColor: dark ? TColors.darkerGrey : Colors.white,
           child: SingleChildScrollView(
             physics: const AlwaysScrollableScrollPhysics(),
@@ -104,10 +228,8 @@ class DashboardScreen extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: TSizes.md),
                   child: Row(
                     children: [
-                      Icon(
-                        Iconsax.search_normal,
-                        color: dark ? TColors.yellow : TColors.deepPurple,
-                      ),
+                      Icon(Iconsax.search_normal,
+                          color: dark ? TColors.yellow : TColors.primary),
                       const SizedBox(width: TSizes.spaceBtwItems),
                       Expanded(
                         child: TextField(
@@ -130,18 +252,17 @@ class DashboardScreen extends StatelessWidget {
                         ),
                       ),
                       Obx(
-                        () =>
-                            isSearching.value
-                                ? IconButton(
-                                  icon: const Icon(Icons.clear),
-                                  onPressed: () {
-                                    //print('Clearing search');
-                                    searchController.clear();
-                                    isSearching.value = false;
-                                    dashboardController.searchClasses('');
-                                  },
-                                )
-                                : const SizedBox.shrink(),
+                        () => isSearching.value
+                            ? IconButton(
+                                icon: const Icon(Icons.clear),
+                                onPressed: () {
+                                  //print('Clearing search');
+                                  searchController.clear();
+                                  isSearching.value = false;
+                                  dashboardController.searchClasses('');
+                                },
+                              )
+                            : const SizedBox.shrink(),
                       ),
                     ],
                   ),
@@ -149,23 +270,19 @@ class DashboardScreen extends StatelessWidget {
                 SizedBox(height: TSizes.spaceBtwSections),
                 Row(
                   children: [
-                    _buildStatCard(
-                      context,
-                      dark,
-                      title: 'Classes',
-                      value: dashboardController.totalClasses.value.toString(),
-                      icon: Iconsax.book_1,
-                      color: dark ? TColors.yellow : TColors.deepPurple,
-                    ),
+                    _buildStatCard(context, dark,
+                        title: 'Classes',
+                        value:
+                            dashboardController.totalClasses.value.toString(),
+                        icon: Iconsax.book_1,
+                        color: dark ? TColors.yellow : TColors.primary),
                     const SizedBox(width: TSizes.spaceBtwItems),
-                    _buildStatCard(
-                      context,
-                      dark,
-                      title: 'Students',
-                      value: dashboardController.totalStudents.value.toString(),
-                      icon: Iconsax.people,
-                      color: dark ? TColors.yellow : TColors.deepPurple,
-                    ),
+                    _buildStatCard(context, dark,
+                        title: 'Students',
+                        value:
+                            dashboardController.totalStudents.value.toString(),
+                        icon: Iconsax.people,
+                        color: dark ? TColors.yellow : TColors.primary),
                   ],
                 ),
                 const SizedBox(height: TSizes.spaceBtwItems),
@@ -188,7 +305,9 @@ class DashboardScreen extends StatelessWidget {
                     children: [
                       Text(
                         'Average Attendance',
-                        style: Theme.of(context).textTheme.titleMedium
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleMedium
                             ?.copyWith(fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(height: TSizes.spaceBtwItems),
@@ -200,12 +319,13 @@ class DashboardScreen extends StatelessWidget {
                             dashboardController.averageAttendance.value / 100,
                         center: Text(
                           '${dashboardController.averageAttendance.value.toStringAsFixed(1)}%',
-                          style: Theme.of(context).textTheme.titleLarge
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleLarge
                               ?.copyWith(fontWeight: FontWeight.bold),
                         ),
                         circularStrokeCap: CircularStrokeCap.round,
-                        progressColor:
-                            dark ? TColors.yellow : TColors.deepPurple,
+                        progressColor: dark ? TColors.yellow : TColors.primary,
                         backgroundColor:
                             dark ? Colors.grey.shade800 : Colors.grey.shade200,
                       ),
@@ -225,8 +345,8 @@ class DashboardScreen extends StatelessWidget {
                     Text(
                       'Recent Classes',
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
+                            fontWeight: FontWeight.bold,
+                          ),
                     ),
                     TextButton(
                       onPressed: () {
@@ -236,8 +356,7 @@ class DashboardScreen extends StatelessWidget {
                       child: Text(
                         'View All',
                         style: TextStyle(
-                          color: dark ? TColors.yellow : TColors.deepPurple,
-                        ),
+                            color: dark ? TColors.yellow : TColors.primary),
                       ),
                     ),
                   ],
@@ -245,105 +364,106 @@ class DashboardScreen extends StatelessWidget {
                 const SizedBox(height: TSizes.spaceBtwItems),
                 dashboardController.classes.isEmpty
                     ? Center(
-                      child: Column(
-                        children: [
-                          Icon(
-                            Iconsax.book_1,
-                            size: 48,
-                            color: dark ? TColors.yellow : TColors.deepPurple,
-                          ),
-                          const SizedBox(height: TSizes.spaceBtwItems / 2),
-                          Text(
-                            'No Classes Yet',
-                            style: Theme.of(context).textTheme.titleMedium,
-                          ),
-                          const SizedBox(height: TSizes.spaceBtwItems / 2),
-                          ElevatedButton(
-                            onPressed: () {
-                              //print('Navigating to create class');
-                              Get.to(() => ClassListScreen());
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor:
-                                  dark ? TColors.yellow : TColors.deepPurple,
-                              foregroundColor:
-                                  dark ? Colors.black : Colors.white,
+                        child: Column(
+                          children: [
+                            Icon(Iconsax.book_1,
+                                size: 48,
+                                color: dark ? TColors.yellow : TColors.primary),
+                            const SizedBox(height: TSizes.spaceBtwItems / 2),
+                            Text(
+                              'No Classes Yet',
+                              style: Theme.of(context).textTheme.titleMedium,
                             ),
-                            child: const Text('Create Class'),
-                          ),
-                        ],
-                      ),
-                    )
+                            const SizedBox(height: TSizes.spaceBtwItems / 2),
+                            ElevatedButton(
+                              onPressed: () {
+                                //print('Navigating to create class');
+                                Get.to(() => ClassListScreen());
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor:
+                                    dark ? TColors.yellow : TColors.primary,
+                                foregroundColor:
+                                    dark ? TColors.dark : Colors.white,
+                              ),
+                              child: const Text('Create Class'),
+                            ),
+                          ],
+                        ),
+                      )
                     : ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount:
-                          dashboardController.filteredClasses.length > 3
-                              ? 3
-                              : dashboardController.filteredClasses.length,
-                      itemBuilder: (context, index) {
-                        final classItem =
-                            dashboardController.filteredClasses[index];
-                        final stats =
-                            dashboardController.classStats[classItem.id];
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount:
+                            dashboardController.filteredClasses.length > 3
+                                ? 3
+                                : dashboardController.filteredClasses.length,
+                        itemBuilder: (context, index) {
+                          final classItem =
+                              dashboardController.filteredClasses[index];
+                          final stats =
+                              dashboardController.classStats[classItem.id];
 
-                        //print('Rendering class: ${classItem.subjectName}');
-                        return Card(
-                          margin: const EdgeInsets.only(
-                            bottom: TSizes.spaceBtwItems,
-                          ),
-                          elevation: 2,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(
-                              TSizes.cardRadiusMd,
+                          //print('Rendering class: ${classItem.subjectName}');
+                          return Card(
+                            margin: const EdgeInsets.only(
+                              bottom: TSizes.spaceBtwItems,
                             ),
-                          ),
-                          child: ListTile(
-                            contentPadding: const EdgeInsets.all(TSizes.md),
-                            leading: CircleAvatar(
-                              backgroundColor:
-                                  dark ? TColors.yellow : TColors.deepPurple,
-                              child: Text(
-                                classItem.subjectName?.substring(0, 1) ?? 'C',
-                                style: TextStyle(
-                                  color: dark ? Colors.black : Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                            elevation: 2,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                TSizes.cardRadiusMd,
                               ),
                             ),
-                            title: Text(
-                              classItem.subjectName ?? 'Unknown Subject',
-                              style: Theme.of(context).textTheme.titleMedium
-                                  ?.copyWith(fontWeight: FontWeight.bold),
-                            ),
-                            subtitle: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const SizedBox(
-                                  height: TSizes.spaceBtwItems / 2,
-                                ),
-                                Text(
-                                  '${classItem.courseName} - Semester ${classItem.semester}',
-                                  style: Theme.of(context).textTheme.bodyMedium,
-                                ),
-                                if (stats != null)
-                                  Text(
-                                    'Attendance: ${(stats['averageAttendance'] as double).toStringAsFixed(1)}% (${stats['totalSessions']} sessions)',
-                                    style:
-                                        Theme.of(context).textTheme.bodySmall,
+                            child: ListTile(
+                              contentPadding: const EdgeInsets.all(TSizes.md),
+                              leading: CircleAvatar(
+                                backgroundColor:
+                                    dark ? TColors.yellow : TColors.primary,
+                                child: Text(
+                                  classItem.subjectName?.substring(0, 1) ?? 'C',
+                                  style: TextStyle(
+                                    color: dark ? TColors.dark : Colors.white,
+                                    fontWeight: FontWeight.bold,
                                   ),
-                              ],
+                                ),
+                              ),
+                              title: Text(
+                                classItem.subjectName ?? 'Unknown Subject',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleMedium
+                                    ?.copyWith(fontWeight: FontWeight.bold),
+                              ),
+                              subtitle: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const SizedBox(
+                                    height: TSizes.spaceBtwItems / 2,
+                                  ),
+                                  Text(
+                                    '${classItem.courseName} - Semester ${classItem.semester}',
+                                    style:
+                                        Theme.of(context).textTheme.bodyMedium,
+                                  ),
+                                  if (stats != null)
+                                    Text(
+                                      'Attendance: ${(stats['averageAttendance'] as double).toStringAsFixed(1)}% (${stats['totalSessions']} sessions)',
+                                      style:
+                                          Theme.of(context).textTheme.bodySmall,
+                                    ),
+                                ],
+                              ),
+                              trailing: const Icon(Iconsax.arrow_right_3),
+                              onTap: () {
+                                //print(
+                                // 'Navigating to class details: ${classItem.subjectName}');
+                                Get.to(() => ClassListScreen());
+                              },
                             ),
-                            trailing: const Icon(Iconsax.arrow_right_3),
-                            onTap: () {
-                              //print(
-                              // 'Navigating to class details: ${classItem.subjectName}');
-                              Get.to(() => ClassListScreen());
-                            },
-                          ),
-                        );
-                      },
-                    ),
+                          );
+                        },
+                      ),
               ],
             ),
           ),
@@ -380,34 +500,28 @@ class DashboardScreen extends StatelessWidget {
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         border: Border.all(
-                          color: dark ? TColors.yellow : TColors.deepPurple,
+                          color: dark ? TColors.yellow : TColors.primary,
                           width: 2,
                         ),
-                        image:
-                            profileController.user.value?.profileImageUrl !=
-                                        null &&
-                                    profileController
-                                        .user
-                                        .value!
-                                        .profileImageUrl!
-                                        .isNotEmpty
-                                ? DecorationImage(
-                                  image: NetworkImage(
-                                    profileController
-                                        .user
-                                        .value!
-                                        .profileImageUrl!,
-                                  ),
-                                  fit: BoxFit.cover,
-                                  onError: (exception, stackTrace) {
-                                    //print(
-                                    // 'Error loading profile image: $exception');
-                                  },
-                                )
-                                : const DecorationImage(
-                                  image: AssetImage(TImageStrings.appLogo),
-                                  fit: BoxFit.contain,
+                        image: profileController.user.value?.profileImageUrl !=
+                                    null &&
+                                profileController
+                                    .user.value!.profileImageUrl!.isNotEmpty
+                            ? DecorationImage(
+                                image: NetworkImage(
+                                  profileController
+                                      .user.value!.profileImageUrl!,
                                 ),
+                                fit: BoxFit.cover,
+                                onError: (exception, stackTrace) {
+                                  //print(
+                                  // 'Error loading profile image: $exception');
+                                },
+                              )
+                            : const DecorationImage(
+                                image: AssetImage(TImageStrings.appLogo),
+                                fit: BoxFit.contain,
+                              ),
                       ),
                     ),
                   ),
@@ -430,8 +544,8 @@ class DashboardScreen extends StatelessWidget {
                     child: Text(
                       dashboardController.greeting.value,
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
+                            fontWeight: FontWeight.bold,
+                          ),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -483,29 +597,26 @@ class DashboardScreen extends StatelessWidget {
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   border: Border.all(
-                    color: dark ? TColors.yellow : TColors.deepPurple,
+                    color: dark ? TColors.yellow : TColors.primary,
                     width: 2,
                   ),
                   image:
                       profileController.user.value?.profileImageUrl != null &&
                               profileController
-                                  .user
-                                  .value!
-                                  .profileImageUrl!
-                                  .isNotEmpty
+                                  .user.value!.profileImageUrl!.isNotEmpty
                           ? DecorationImage(
-                            image: NetworkImage(
-                              profileController.user.value!.profileImageUrl!,
-                            ),
-                            fit: BoxFit.cover,
-                            onError: (exception, stackTrace) {
-                              //print('Error loading profile image: $exception');
-                            },
-                          )
+                              image: NetworkImage(
+                                profileController.user.value!.profileImageUrl!,
+                              ),
+                              fit: BoxFit.cover,
+                              onError: (exception, stackTrace) {
+                                //print('Error loading profile image: $exception');
+                              },
+                            )
                           : const DecorationImage(
-                            image: AssetImage(TImageStrings.appLogo),
-                            fit: BoxFit.contain,
-                          ),
+                              image: AssetImage(TImageStrings.appLogo),
+                              fit: BoxFit.contain,
+                            ),
                 ),
               );
             }),

@@ -85,7 +85,7 @@ class AddStudentScreen extends StatelessWidget {
                 _showAddStudentDialog(context);
               },
               backgroundColor: dark ? TColors.blue : TColors.yellow,
-              child: const Icon(Iconsax.add),
+              child: const Icon(Iconsax.user_add),
             )),
       body: Obx(() {
         //print('Building Obx body');
@@ -103,7 +103,7 @@ class AddStudentScreen extends StatelessWidget {
                 Icon(
                   Iconsax.people,
                   size: 64,
-                  color: dark ? TColors.yellow : TColors.deepPurple,
+                  color: dark ? TColors.yellow : TColors.primary,
                 ),
                 const SizedBox(height: TSizes.spaceBtwItems),
                 Text(
@@ -125,8 +125,8 @@ class AddStudentScreen extends StatelessWidget {
                   icon: const Icon(Iconsax.add),
                   label: const Text('Add Student'),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: dark ? TColors.yellow : TColors.deepPurple,
-                    foregroundColor: dark ? Colors.black : Colors.white,
+                    backgroundColor: dark ? TColors.yellow : TColors.primary,
+                    foregroundColor: dark ? TColors.dark : Colors.white,
                   ),
                 ),
               ],
@@ -135,7 +135,7 @@ class AddStudentScreen extends StatelessWidget {
         }
 
         //print(
-            // 'Building student list with ${studentController.students.length} students');
+        // 'Building student list with ${studentController.students.length} students');
         return ListView.builder(
           padding: const EdgeInsets.all(TSizes.defaultSpace),
           itemCount: studentController.students.length,
@@ -153,7 +153,7 @@ class AddStudentScreen extends StatelessWidget {
                   side:
                       studentController.selectedStudentIds.contains(student.id)
                           ? BorderSide(
-                              color: dark ? TColors.yellow : TColors.deepPurple,
+                              color: dark ? TColors.yellow : TColors.primary,
                               width: 2.5,
                             )
                           : BorderSide.none,
@@ -187,11 +187,10 @@ class AddStudentScreen extends StatelessWidget {
                               shape: BoxShape.circle,
                               color: studentController.selectedStudentIds
                                       .contains(student.id)
-                                  ? (dark ? TColors.yellow : TColors.deepPurple)
+                                  ? (dark ? TColors.yellow : TColors.primary)
                                   : Colors.transparent,
                               border: Border.all(
-                                color:
-                                    dark ? TColors.yellow : TColors.deepPurple,
+                                color: dark ? TColors.yellow : TColors.primary,
                                 width: 2,
                               ),
                             ),
@@ -200,7 +199,7 @@ class AddStudentScreen extends StatelessWidget {
                                 ? Icon(
                                     Icons.check,
                                     size: 16,
-                                    color: dark ? Colors.black : Colors.white,
+                                    color: dark ? TColors.dark : Colors.white,
                                   )
                                 : null,
                           )
@@ -234,7 +233,7 @@ class AddStudentScreen extends StatelessWidget {
                             color: Colors.red,
                             onPressed: () {
                               //print(
-                                  // 'Delete button pressed for student: ${student.name}');
+                              // 'Delete button pressed for student: ${student.name}');
                               _showDeleteConfirmation(
                                   context, student.id, student.name);
                             },
@@ -276,7 +275,7 @@ class AddStudentScreen extends StatelessWidget {
                         color: dark ? TColors.darkerGrey : Colors.grey[200],
                         shape: BoxShape.circle,
                         border: Border.all(
-                          color: dark ? TColors.yellow : TColors.deepPurple,
+                          color: dark ? TColors.yellow : TColors.primary,
                           width: 2,
                         ),
                       ),
@@ -289,8 +288,7 @@ class AddStudentScreen extends StatelessWidget {
                             : Icon(
                                 Iconsax.camera,
                                 size: 40,
-                                color:
-                                    dark ? TColors.yellow : TColors.deepPurple,
+                                color: dark ? TColors.yellow : TColors.primary,
                               ),
                       ),
                     ),
@@ -327,12 +325,21 @@ class AddStudentScreen extends StatelessWidget {
           ),
         ),
         actions: [
-          TextButton(
-              onPressed: () {
-                //print('Add student dialog cancelled');
-                Get.back();
-              },
-              child: const Text('Cancel')),
+          ElevatedButton(
+            onPressed: () {
+              //print('Add student dialog cancelled');
+              Get.back();
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.red,
+              foregroundColor: Colors.white,
+              side: BorderSide(
+                color: Colors.grey,
+                width: 1,
+              ),
+            ),
+            child: const Text('Cancel'),
+          ),
           ElevatedButton(
             onPressed: () {
               //print('Attempting to add student');
@@ -354,8 +361,8 @@ class AddStudentScreen extends StatelessWidget {
               Get.back();
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: dark ? TColors.yellow : TColors.deepPurple,
-              foregroundColor: dark ? Colors.black : Colors.white,
+              backgroundColor: dark ? TColors.yellow : TColors.primary,
+              foregroundColor: dark ? TColors.dark : Colors.white,
             ),
             child: const Text('Add'),
           ),
@@ -388,7 +395,7 @@ class AddStudentScreen extends StatelessWidget {
               ListTile(
                 leading: Icon(
                   Iconsax.camera,
-                  color: dark ? TColors.yellow : TColors.deepPurple,
+                  color: dark ? TColors.yellow : TColors.primary,
                 ),
                 title: const Text('Take a Photo'),
                 onTap: () {
@@ -399,7 +406,7 @@ class AddStudentScreen extends StatelessWidget {
               ListTile(
                 leading: Icon(
                   Iconsax.gallery,
-                  color: dark ? TColors.yellow : TColors.deepPurple,
+                  color: dark ? TColors.yellow : TColors.primary,
                 ),
                 title: const Text('Choose from Gallery'),
                 onTap: () {
@@ -426,7 +433,7 @@ class AddStudentScreen extends StatelessWidget {
                   onPressed: () => Navigator.pop(context),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: dark ? Colors.grey[800] : Colors.grey[200],
-                    foregroundColor: dark ? Colors.white : Colors.black,
+                    foregroundColor: dark ? Colors.white : TColors.dark,
                   ),
                   child: const Text('Cancel'),
                 ),
@@ -457,15 +464,15 @@ class AddStudentScreen extends StatelessWidget {
                   height: 50,
                   fit: BoxFit.cover,
                   placeholder: (context, url) => CircleAvatar(
-                    backgroundColor: dark ? TColors.yellow : TColors.deepPurple,
+                    backgroundColor: dark ? TColors.yellow : TColors.primary,
                     child: const CircularProgressIndicator(color: Colors.white),
                   ),
                   errorWidget: (context, url, error) => CircleAvatar(
-                    backgroundColor: dark ? TColors.yellow : TColors.deepPurple,
+                    backgroundColor: dark ? TColors.yellow : TColors.primary,
                     child: Text(
                       student.name.substring(0, 1),
                       style: TextStyle(
-                        color: dark ? Colors.black : Colors.white,
+                        color: dark ? TColors.dark : Colors.white,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -473,11 +480,11 @@ class AddStudentScreen extends StatelessWidget {
                 ),
               )
             : CircleAvatar(
-                backgroundColor: dark ? TColors.yellow : TColors.deepPurple,
+                backgroundColor: dark ? TColors.yellow : TColors.primary,
                 child: Text(
                   student.name.substring(0, 1),
                   style: TextStyle(
-                    color: dark ? Colors.black : Colors.white,
+                    color: dark ? TColors.dark : Colors.white,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -561,7 +568,7 @@ class AddStudentScreen extends StatelessWidget {
             }).toList();
 
             //print(
-                // 'Building available students list with ${filteredStudents.length} filtered students');
+            // 'Building available students list with ${filteredStudents.length} filtered students');
             return Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -685,7 +692,7 @@ class AddStudentScreen extends StatelessWidget {
                           itemBuilder: (context, index) {
                             final student = filteredStudents[index];
                             //print(
-                                // 'Building checkbox for student: ${student.name}');
+                            // 'Building checkbox for student: ${student.name}');
 
                             // Get semester from roll number for display
                             final semester =
@@ -698,7 +705,7 @@ class AddStudentScreen extends StatelessWidget {
                                       .any((s) => s.id == student.id),
                                   onChanged: (isSelected) {
                                     //print(
-                                        // 'Student selection changed: ${student.name}, selected: $isSelected');
+                                    // 'Student selection changed: ${student.name}, selected: $isSelected');
                                     if (isSelected == true) {
                                       studentController.selectStudent(student);
                                     } else {
@@ -719,21 +726,20 @@ class AddStudentScreen extends StatelessWidget {
                                           style: TextStyle(
                                             color: dark
                                                 ? TColors.yellow
-                                                : TColors.deepPurple,
+                                                : TColors.primary,
                                             fontWeight: FontWeight.bold,
                                           ),
                                         ),
                                     ],
                                   ),
                                   secondary: CircleAvatar(
-                                    backgroundColor: dark
-                                        ? TColors.yellow
-                                        : TColors.deepPurple,
+                                    backgroundColor:
+                                        dark ? TColors.yellow : TColors.primary,
                                     child: Text(
                                       student.name.substring(0, 1),
                                       style: TextStyle(
                                         color:
-                                            dark ? Colors.black : Colors.white,
+                                            dark ? TColors.dark : Colors.white,
                                       ),
                                     ),
                                   ),
@@ -758,13 +764,13 @@ class AddStudentScreen extends StatelessWidget {
                     ? null
                     : () {
                         //print(
-                            // 'Importing ${studentController.selectedStudents.length} students');
+                        // 'Importing ${studentController.selectedStudents.length} students');
                         studentController.importSelectedStudents();
                         Get.back();
                       },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: dark ? TColors.yellow : TColors.deepPurple,
-                  foregroundColor: dark ? Colors.black : Colors.white,
+                  backgroundColor: dark ? TColors.yellow : TColors.primary,
+                  foregroundColor: dark ? TColors.dark : Colors.white,
                 ),
                 child: Text(
                     'Import (${studentController.selectedStudents.length})'),

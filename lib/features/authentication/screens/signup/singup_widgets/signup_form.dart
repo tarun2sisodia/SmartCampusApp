@@ -34,7 +34,7 @@ class SignupForm extends StatelessWidget {
             // Name field
             Textfields(
               controller: controller.nameController,
-              iconColor: dark ? TColors.yellow : TColors.deepPurple,
+              iconColor: dark ? TColors.yellow : TColors.primary,
               prefixIcon: const Icon(Iconsax.user),
               labelText: TTexts.firstName,
               validator: (value) {
@@ -53,7 +53,7 @@ class SignupForm extends StatelessWidget {
                 labelText: 'Phone',
                 prefixIcon: Icon(
                   Iconsax.call,
-                  color: dark ? TColors.yellow : TColors.deepPurple,
+                  color: dark ? TColors.yellow : TColors.primary,
                 ),
               ),
               keyboardType: TextInputType.phone,
@@ -77,7 +77,7 @@ class SignupForm extends StatelessWidget {
             // Email field
             Textfields(
               controller: controller.emailController,
-              iconColor: dark ? TColors.yellow : TColors.deepPurple,
+              iconColor: dark ? TColors.yellow : TColors.primary,
               prefixIcon: const Icon(Iconsax.direct_right),
               labelText: TTexts.email,
               keyboardType: TextInputType.emailAddress,
@@ -97,7 +97,7 @@ class SignupForm extends StatelessWidget {
             Obx(
               () => Textfields(
                 controller: controller.passwordController,
-                iconColor: dark ? TColors.yellow : TColors.deepPurple,
+                iconColor: dark ? TColors.yellow : TColors.primary,
                 prefixIcon: const Icon(Iconsax.password_check),
                 labelText: TTexts.password,
                 obscureText: !controller.passwordVisible.value,
@@ -145,7 +145,7 @@ class SignupForm extends StatelessWidget {
                 height: TSizes.appBarHeight,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: dark ? TColors.yellow : TColors.deepPurple,
+                    backgroundColor: dark ? TColors.yellow : TColors.primary,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
@@ -178,7 +178,7 @@ class SignupForm extends StatelessWidget {
                       ? const CircularProgressIndicator()
                       : Text(TTexts.createAccount,
                           style: TextStyle(
-                            color: dark ? TColors.deepPurple : Colors.white,
+                            color: dark ? TColors.primary : Colors.white,
                             fontSize: TSizes.fontSizeMd,
                             fontWeight: FontWeight.bold,
                           )),

@@ -27,7 +27,7 @@ class AboutScreen extends StatelessWidget {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(
-                  color: dark ? TColors.yellow : TColors.deepPurple,
+                  color: dark ? TColors.yellow : TColors.purple,
                   width: 2,
                 ),
                 image: const DecorationImage(
@@ -81,13 +81,13 @@ class AboutScreen extends StatelessWidget {
               leading: Container(
                 padding: const EdgeInsets.all(TSizes.sm),
                 decoration: BoxDecoration(
-                  color: (dark ? TColors.yellow : TColors.deepPurple)
+                  color: (dark ? TColors.yellow : TColors.primary)
                       .withOpacity(0.1),
                   shape: BoxShape.circle,
                 ),
                 child: Icon(
                   Iconsax.code,
-                  color: dark ? TColors.yellow : TColors.deepPurple,
+                  color: dark ? TColors.yellow : TColors.primary,
                 ),
               ),
               title: const Text('Tarun Sisodia'),
@@ -100,13 +100,13 @@ class AboutScreen extends StatelessWidget {
               leading: Container(
                 padding: const EdgeInsets.all(TSizes.sm),
                 decoration: BoxDecoration(
-                  color: (dark ? TColors.yellow : TColors.deepPurple)
+                  color: (dark ? TColors.yellow : TColors.primary)
                       .withOpacity(0.1),
                   shape: BoxShape.circle,
                 ),
                 child: Icon(
                   Iconsax.global,
-                  color: dark ? TColors.yellow : TColors.deepPurple,
+                  color: dark ? TColors.yellow : TColors.primary,
                 ),
               ),
               title: const Text('Website'),
@@ -116,13 +116,13 @@ class AboutScreen extends StatelessWidget {
               leading: Container(
                 padding: const EdgeInsets.all(TSizes.sm),
                 decoration: BoxDecoration(
-                  color: (dark ? TColors.yellow : TColors.deepPurple)
+                  color: (dark ? TColors.yellow : TColors.primary)
                       .withOpacity(0.1),
                   shape: BoxShape.circle,
                 ),
                 child: Icon(
                   Iconsax.message,
-                  color: dark ? TColors.yellow : TColors.deepPurple,
+                  color: dark ? TColors.yellow : TColors.primary,
                 ),
               ),
               title: const Text('Google Developer'),
@@ -146,7 +146,7 @@ class AboutScreen extends StatelessWidget {
               child: Text(
                 'Privacy Policy',
                 style: TextStyle(
-                  color: dark ? TColors.yellow : TColors.deepPurple,
+                  color: dark ? TColors.yellow : TColors.primary,
                 ),
               ),
             ),
@@ -157,7 +157,7 @@ class AboutScreen extends StatelessWidget {
               child: Text(
                 'Terms of Service',
                 style: TextStyle(
-                  color: dark ? TColors.yellow : TColors.deepPurple,
+                  color: dark ? TColors.yellow : TColors.primary,
                 ),
               ),
             ),
@@ -168,7 +168,7 @@ class AboutScreen extends StatelessWidget {
               child: Text(
                 'Open Source Licenses',
                 style: TextStyle(
-                  color: dark ? TColors.yellow : TColors.deepPurple,
+                  color: dark ? TColors.yellow : TColors.primary,
                 ),
               ),
             ),

@@ -41,7 +41,7 @@ class CarouselAttendanceScreen extends StatelessWidget {
           Obx(
             () {
               //print(
-                  // 'Timer running: ${carouselAttendanceController.isTimerRunning.value}');
+              // 'Timer running: ${carouselAttendanceController.isTimerRunning.value}');
               return carouselAttendanceController.isTimerRunning.value
                   ? Padding(
                       padding: const EdgeInsets.only(right: TSizes.sm),
@@ -100,7 +100,7 @@ class CarouselAttendanceScreen extends StatelessWidget {
                 Icon(
                   Iconsax.calendar_1,
                   size: 64,
-                  color: dark ? TColors.yellow : TColors.deepPurple,
+                  color: dark ? TColors.yellow : TColors.primary,
                 ),
                 const SizedBox(height: TSizes.spaceBtwItems),
                 Text(
@@ -122,8 +122,8 @@ class CarouselAttendanceScreen extends StatelessWidget {
                     Get.to(() => ClassListScreen());
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: dark ? TColors.yellow : TColors.deepPurple,
-                    foregroundColor: dark ? Colors.black : Colors.white,
+                    backgroundColor: dark ? TColors.yellow : TColors.primary,
+                    foregroundColor: dark ? TColors.dark : Colors.white,
                   ),
                   child: const Text('Select a Class'),
                 ),
@@ -141,7 +141,7 @@ class CarouselAttendanceScreen extends StatelessWidget {
                 Icon(
                   Iconsax.people,
                   size: 64,
-                  color: dark ? TColors.yellow : TColors.deepPurple,
+                  color: dark ? TColors.yellow : TColors.primary,
                 ),
                 const SizedBox(height: TSizes.spaceBtwItems),
                 Text(
@@ -160,7 +160,7 @@ class CarouselAttendanceScreen extends StatelessWidget {
         }
 
         //print(
-            // 'Building main content with ${attendanceController.students.length} students');
+        // 'Building main content with ${attendanceController.students.length} students');
         return Column(
           children: [
             Obx(
@@ -185,7 +185,7 @@ class CarouselAttendanceScreen extends StatelessWidget {
                           border: Border.all(
                             color: dark
                                 ? TColors.yellow.withOpacity(0.3)
-                                : TColors.deepPurple.withOpacity(0.3),
+                                : TColors.primary.withOpacity(0.3),
                           ),
                         ),
                         child: SessionTimerWidget(
@@ -274,7 +274,7 @@ class CarouselAttendanceScreen extends StatelessWidget {
                           ? Colors.grey
                           : dark
                               ? TColors.yellow
-                              : TColors.deepPurple,
+                              : TColors.primary,
                     ),
                   ),
                   Obx(
@@ -303,7 +303,7 @@ class CarouselAttendanceScreen extends StatelessWidget {
                           ? Colors.grey
                           : dark
                               ? TColors.yellow
-                              : TColors.deepPurple,
+                              : TColors.primary,
                     ),
                   ),
                 ],
@@ -338,7 +338,7 @@ class CarouselAttendanceScreen extends StatelessWidget {
               child: Obx(
                 () {
                   //print(
-                      // 'Students loaded: ${carouselAttendanceController.attendanceController.isStudentsLoaded.value}');
+                  // 'Students loaded: ${carouselAttendanceController.attendanceController.isStudentsLoaded.value}');
                   return carouselAttendanceController
                           .attendanceController.isStudentsLoaded.value
                       ? SizedBox(
@@ -352,7 +352,7 @@ class CarouselAttendanceScreen extends StatelessWidget {
                               backgroundColor:
                                   dark ? TColors.blue : TColors.yellow,
                               foregroundColor:
-                                  dark ? Colors.white : Colors.black,
+                                  dark ? Colors.white : TColors.dark,
                               padding: EdgeInsets.symmetric(
                                 vertical: isMobile ? TSizes.xs : TSizes.sm,
                               ),
@@ -398,8 +398,8 @@ class CarouselAttendanceScreen extends StatelessWidget {
               carouselAttendanceController.submitAttendance();
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: dark ? TColors.yellow : TColors.deepPurple,
-              foregroundColor: dark ? Colors.black : Colors.white,
+              backgroundColor: dark ? TColors.yellow : TColors.primary,
+              foregroundColor: dark ? TColors.dark : Colors.white,
             ),
             child: const Text('Submit'),
           ),

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'app/routes/app_routes.dart';
-import 'app/theme/custom_themes/text_field_theme.dart';
+import 'app/theme/theme.dart';
 import 'common/translations/app_translations.dart';
 
 class MyApp extends StatelessWidget {
@@ -19,17 +19,10 @@ class MyApp extends StatelessWidget {
       locale: languageService.currentLocale.value,
       fallbackLocale: const Locale('en', 'US'),
       // Theme Data is for the UI in Light theme
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        brightness: Brightness.light,
-        inputDecorationTheme: TTextFieldTheme.lightInputDecoration,
-      ),
-      // Dark theme design for UI in Dark Theme
-      darkTheme: ThemeData(
-        primarySwatch: Colors.blue,
-        brightness: Brightness.dark,
-        inputDecorationTheme: TTextFieldTheme.darkInputDecoration,
-      ),
+      // Use your enhanced theme from TAppTheme
+      theme: TAppTheme.lightTheme,
+      darkTheme: TAppTheme.darkTheme,
+
       themeMode: ThemeMode.system, // Respects system theme setting
       debugShowCheckedModeBanner: false, // Remove debug banner from UI
       // Set the splash screen as the initial route

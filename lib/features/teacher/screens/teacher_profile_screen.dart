@@ -26,16 +26,15 @@ class TeacherProfileScreen extends StatelessWidget {
         ),
         actions: [
           Obx(
-            () =>
-                controller.isEditMode.value
-                    ? IconButton(
-                      onPressed: () => controller.toggleEditMode(),
-                      icon: const Icon(Icons.close),
-                    )
-                    : IconButton(
-                      onPressed: () => controller.toggleEditMode(),
-                      icon: const Icon(Iconsax.edit),
-                    ),
+            () => controller.isEditMode.value
+                ? IconButton(
+                    onPressed: () => controller.toggleEditMode(),
+                    icon: const Icon(Icons.close),
+                  )
+                : IconButton(
+                    onPressed: () => controller.toggleEditMode(),
+                    icon: const Icon(Iconsax.edit),
+                  ),
           ),
           IconButton(
             onPressed: () => controller.logout(),
@@ -120,10 +119,9 @@ class TeacherProfileScreen extends StatelessWidget {
 
                 // User Info Form or Display
                 Obx(
-                  () =>
-                      controller.isEditMode.value
-                          ? _buildEditForm(context, controller, dark)
-                          : _buildProfileInfo(context, controller, dark),
+                  () => controller.isEditMode.value
+                      ? _buildEditForm(context, controller, dark)
+                      : _buildProfileInfo(context, controller, dark),
                 ),
 
                 const SizedBox(height: TSizes.spaceBtwSections),
@@ -133,23 +131,21 @@ class TeacherProfileScreen extends StatelessWidget {
                   width: double.infinity,
                   height: 55,
                   child: ElevatedButton.icon(
-                    onPressed:
-                        controller.isLoading.value
-                            ? null
-                            : () {
-                              Get.defaultDialog(
-                                title: 'Sign Out',
-                                middleText:
-                                    'Are you sure you want to sign out?',
-                                textConfirm: 'Yes',
-                                textCancel: 'No',
-                                confirmTextColor: Colors.white,
-                                onConfirm: () {
-                                  Get.back();
-                                  controller.logout();
-                                },
-                              );
-                            },
+                    onPressed: controller.isLoading.value
+                        ? null
+                        : () {
+                            Get.defaultDialog(
+                              title: 'Sign Out',
+                              middleText: 'Are you sure you want to sign out?',
+                              textConfirm: 'Yes',
+                              textCancel: 'No',
+                              confirmTextColor: Colors.white,
+                              onConfirm: () {
+                                Get.back();
+                                controller.logout();
+                              },
+                            );
+                          },
                     icon: const Icon(Iconsax.logout),
                     label: const Text('Sign Out'),
                     style: ElevatedButton.styleFrom(
@@ -170,7 +166,7 @@ class TeacherProfileScreen extends StatelessWidget {
                     label: const Text('Return to Login Page'),
                     style: OutlinedButton.styleFrom(
                       side: BorderSide(
-                        color: dark ? TColors.yellow : TColors.deepPurple,
+                        color: dark ? TColors.yellow : TColors.primary,
                       ),
                     ),
                   ),
@@ -181,24 +177,23 @@ class TeacherProfileScreen extends StatelessWidget {
                   width: double.infinity,
                   height: 55,
                   child: ElevatedButton.icon(
-                    onPressed:
-                        controller.isLoading.value
-                            ? null
-                            : () {
-                              Get.defaultDialog(
-                                title: 'Delete Account',
-                                middleText:
-                                    'This action cannot be undone. All your data will be permanently deleted. Are you sure?',
-                                textConfirm: 'Delete',
-                                textCancel: 'Cancel',
-                                confirmTextColor: Colors.white,
-                                buttonColor: Colors.red,
-                                onConfirm: () {
-                                  Get.back();
-                                  controller.deleteAccount();
-                                },
-                              );
-                            },
+                    onPressed: controller.isLoading.value
+                        ? null
+                        : () {
+                            Get.defaultDialog(
+                              title: 'Delete Account',
+                              middleText:
+                                  'This action cannot be undone. All your data will be permanently deleted. Are you sure?',
+                              textConfirm: 'Delete',
+                              textCancel: 'Cancel',
+                              confirmTextColor: Colors.white,
+                              buttonColor: Colors.red,
+                              onConfirm: () {
+                                Get.back();
+                                controller.deleteAccount();
+                              },
+                            );
+                          },
                     icon: const Icon(Iconsax.trash),
                     label: const Text('Delete Account'),
                     style: ElevatedButton.styleFrom(
@@ -249,29 +244,24 @@ class TeacherProfileScreen extends StatelessWidget {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     border: Border.all(
-                      color: dark ? TColors.yellow : TColors.deepPurple,
+                      color: dark ? TColors.yellow : TColors.primary,
                       width: 2,
                     ),
-                    image:
-                        controller.user.value?.profileImageUrl != null &&
-                                controller
-                                    .user
-                                    .value!
-                                    .profileImageUrl!
-                                    .isNotEmpty
-                            ? DecorationImage(
-                              image: NetworkImage(
-                                controller.user.value!.profileImageUrl!,
-                              ),
-                              fit: BoxFit.cover,
-                              onError: (exception, stackTrace) {
-                                //print('Error loading profile image: $exception');
-                              },
-                            )
-                            : const DecorationImage(
-                              image: AssetImage('assets/logos/smartcampus.png'),
-                              fit: BoxFit.cover,
+                    image: controller.user.value?.profileImageUrl != null &&
+                            controller.user.value!.profileImageUrl!.isNotEmpty
+                        ? DecorationImage(
+                            image: NetworkImage(
+                              controller.user.value!.profileImageUrl!,
                             ),
+                            fit: BoxFit.cover,
+                            onError: (exception, stackTrace) {
+                              //print('Error loading profile image: $exception');
+                            },
+                          )
+                        : const DecorationImage(
+                            image: AssetImage('assets/logos/smartcampus.png'),
+                            fit: BoxFit.cover,
+                          ),
                   ),
                 ),
               ),
@@ -285,7 +275,7 @@ class TeacherProfileScreen extends StatelessWidget {
                 child: Container(
                   padding: const EdgeInsets.all(4),
                   decoration: BoxDecoration(
-                    color: dark ? TColors.yellow : TColors.deepPurple,
+                    color: dark ? TColors.yellow : TColors.primary,
                     shape: BoxShape.circle,
                   ),
                   child: InkWell(
@@ -293,7 +283,7 @@ class TeacherProfileScreen extends StatelessWidget {
                     child: Icon(
                       Iconsax.camera,
                       size: 20,
-                      color: dark ? Colors.black : Colors.white,
+                      color: dark ? TColors.dark : Colors.white,
                     ),
                   ),
                 ),
@@ -335,7 +325,7 @@ class TeacherProfileScreen extends StatelessWidget {
         ListTile(
           leading: Icon(
             Iconsax.user,
-            color: dark ? TColors.yellow : TColors.deepPurple,
+            color: dark ? TColors.yellow : TColors.primary,
           ),
           title: Text('Name', style: Theme.of(context).textTheme.titleMedium),
           subtitle: Text(
@@ -349,7 +339,7 @@ class TeacherProfileScreen extends StatelessWidget {
         ListTile(
           leading: Icon(
             Iconsax.direct,
-            color: dark ? TColors.yellow : TColors.deepPurple,
+            color: dark ? TColors.yellow : TColors.primary,
           ),
           title: Text('Email', style: Theme.of(context).textTheme.titleMedium),
           subtitle: Text(
@@ -363,7 +353,7 @@ class TeacherProfileScreen extends StatelessWidget {
         ListTile(
           leading: Icon(
             Iconsax.call,
-            color: dark ? TColors.yellow : TColors.deepPurple,
+            color: dark ? TColors.yellow : TColors.primary,
           ),
           title: Text('Phone', style: Theme.of(context).textTheme.titleMedium),
           subtitle: Text(
@@ -377,7 +367,7 @@ class TeacherProfileScreen extends StatelessWidget {
         ListTile(
           leading: Icon(
             Iconsax.calendar,
-            color: dark ? TColors.yellow : TColors.deepPurple,
+            color: dark ? TColors.yellow : TColors.primary,
           ),
           title: Text(
             'Member Since',
@@ -409,7 +399,7 @@ class TeacherProfileScreen extends StatelessWidget {
               labelText: 'Name',
               prefixIcon: Icon(
                 Iconsax.user,
-                color: dark ? TColors.yellow : TColors.deepPurple,
+                color: dark ? TColors.yellow : TColors.primary,
               ),
             ),
             validator: (value) {
@@ -428,7 +418,7 @@ class TeacherProfileScreen extends StatelessWidget {
               labelText: 'Phone',
               prefixIcon: Icon(
                 Iconsax.call,
-                color: dark ? TColors.yellow : TColors.deepPurple,
+                color: dark ? TColors.yellow : TColors.primary,
               ),
             ),
             keyboardType: TextInputType.phone,
@@ -452,16 +442,14 @@ class TeacherProfileScreen extends StatelessWidget {
             width: double.infinity,
             height: 50,
             child: ElevatedButton(
-              onPressed:
-                  controller.isLoading.value
-                      ? null
-                      : () {
-                        controller.updateProfile();
-                      },
-              child:
-                  controller.isLoading.value
-                      ? const CircularProgressIndicator()
-                      : const Text('Update Profile'),
+              onPressed: controller.isLoading.value
+                  ? null
+                  : () {
+                      controller.updateProfile();
+                    },
+              child: controller.isLoading.value
+                  ? const CircularProgressIndicator()
+                  : const Text('Update Profile'),
             ),
           ),
         ],
@@ -518,12 +506,11 @@ class TeacherProfileScreen extends StatelessWidget {
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemCount: items.length,
-            separatorBuilder:
-                (_, __) => Divider(
-                  height: 1,
-                  color: Colors.grey.withOpacity(0.1),
-                  indent: 70,
-                ),
+            separatorBuilder: (_, __) => Divider(
+              height: 1,
+              color: Colors.grey.withOpacity(0.1),
+              indent: 70,
+            ),
             itemBuilder: (_, index) => items[index],
           ),
         ),
@@ -543,10 +530,10 @@ class TeacherProfileScreen extends StatelessWidget {
       leading: Container(
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
-          color: (dark ? TColors.yellow : TColors.deepPurple).withOpacity(0.1),
+          color: (dark ? TColors.yellow : TColors.primary).withOpacity(0.1),
           shape: BoxShape.circle,
         ),
-        child: Icon(icon, color: dark ? TColors.yellow : TColors.deepPurple),
+        child: Icon(icon, color: dark ? TColors.yellow : TColors.primary),
       ),
       title: Text(title),
       trailing: trailing ?? const Icon(Iconsax.arrow_right_3, size: 18),

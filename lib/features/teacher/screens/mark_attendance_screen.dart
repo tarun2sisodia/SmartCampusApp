@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:shimmer/shimmer.dart';
 import '../../../app/routes/app_routes.dart';
 import '../../../common/utils/device/device_utility.dart';
 import '../../../common/widgets/student_avatar.dart';
@@ -51,7 +52,7 @@ class MarkAttendanceScreen extends StatelessWidget {
     final isMobile = screenSize.width <= 500;
     final isLandscape = DeviceUtility.isLandscapeOrientation(context);
     //print(
-        // 'Device type - isTablet: $isTablet, isMobile: $isMobile, isLandscape: $isLandscape');
+    // 'Device type - isTablet: $isTablet, isMobile: $isMobile, isLandscape: $isLandscape');
 
     final cardPadding = isMobile
         ? (isLandscape ? TSizes.xs : TSizes.sm)
@@ -133,7 +134,48 @@ class MarkAttendanceScreen extends StatelessWidget {
         //print('Body state updated');
         if (attendanceController.isLoading.value) {
           //print('Loading students...');
-          return const Center(child: CircularProgressIndicator());
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: 100,
+                  height: 100,
+                  child: Shimmer.fromColors(
+                    baseColor: dark ? Colors.grey[700]! : Colors.grey[300]!,
+                    highlightColor:
+                        dark ? Colors.grey[500]! : Colors.grey[100]!,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: TSizes.spaceBtwItems),
+                Shimmer.fromColors(
+                  baseColor: dark ? Colors.grey[700]! : Colors.grey[300]!,
+                  highlightColor: dark ? Colors.grey[500]! : Colors.grey[100]!,
+                  child: Container(
+                    width: 200,
+                    height: 20,
+                    color: Colors.white,
+                  ),
+                ),
+                const SizedBox(height: TSizes.spaceBtwItems / 2),
+                Shimmer.fromColors(
+                  baseColor: dark ? Colors.grey[700]! : Colors.grey[300]!,
+                  highlightColor: dark ? Colors.grey[500]! : Colors.grey[100]!,
+                  child: Container(
+                    width: 150,
+                    height: 15,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+          );
         }
 
         if (attendanceController.currentSessionId.value.isEmpty) {
@@ -145,7 +187,7 @@ class MarkAttendanceScreen extends StatelessWidget {
                 Icon(
                   Iconsax.calendar_1,
                   size: 64,
-                  color: dark ? TColors.yellow : TColors.deepPurple,
+                  color: dark ? TColors.yellow : TColors.primary,
                 ),
                 const SizedBox(height: TSizes.spaceBtwItems),
                 Text(
@@ -172,7 +214,7 @@ class MarkAttendanceScreen extends StatelessWidget {
                 Icon(
                   Iconsax.people,
                   size: 64,
-                  color: dark ? TColors.yellow : TColors.deepPurple,
+                  color: dark ? TColors.yellow : TColors.primary,
                 ),
                 const SizedBox(height: TSizes.spaceBtwItems),
                 Text(
@@ -196,7 +238,7 @@ class MarkAttendanceScreen extends StatelessWidget {
             //print('Refreshing student list');
             await attendanceController.loadStudentsForSession();
           },
-          color: dark ? TColors.yellow : TColors.deepPurple,
+          color: dark ? TColors.yellow : TColors.primary,
           backgroundColor: dark ? TColors.darkerGrey : Colors.white,
           displacement: 40.0,
           strokeWidth: 3.0,
@@ -263,7 +305,7 @@ class MarkAttendanceScreen extends StatelessWidget {
                     onChanged: isSessionRunning
                         ? (value) {
                             //print(
-                                // 'Updating attendance status for ${student.name} to $value');
+                            // 'Updating attendance status for ${student.name} to $value');
                             attendanceController.updateStudentStatus(
                               student.id,
                               value!,
@@ -304,7 +346,7 @@ class MarkAttendanceScreen extends StatelessWidget {
       case 'excused':
         return Colors.blue;
       default:
-        return dark ? TColors.yellow : TColors.deepPurple;
+        return dark ? TColors.yellow : TColors.primary;
     }
   }
 
@@ -333,8 +375,8 @@ class MarkAttendanceScreen extends StatelessWidget {
               attendanceController.submitAttendance();
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: dark ? TColors.yellow : TColors.deepPurple,
-              foregroundColor: dark ? Colors.black : Colors.white,
+              backgroundColor: dark ? TColors.yellow : TColors.primary,
+              foregroundColor: dark ? TColors.dark : Colors.white,
             ),
             child: const Text('Submit'),
           ),

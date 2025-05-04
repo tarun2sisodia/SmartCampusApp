@@ -38,7 +38,7 @@ class NavigationMenu extends StatelessWidget {
               Icon(
                 Iconsax.user_minus,
                 size: 64,
-                color: dark ? TColors.yellow : TColors.deepPurple,
+                color: dark ? TColors.yellow : TColors.primary,
               ),
               const SizedBox(height: 16),
               Text(
@@ -75,13 +75,12 @@ class NavigationMenu extends StatelessWidget {
         return Container(
           height: 80,
           decoration: BoxDecoration(
-            color:
-                dark
-                    ? Theme.of(context).scaffoldBackgroundColor
-                    : Theme.of(context).scaffoldBackgroundColor,
+            color: dark
+                ? Theme.of(context).scaffoldBackgroundColor
+                : Theme.of(context).scaffoldBackgroundColor,
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withAlpha(13),
+                color: TColors.dark.withAlpha(13),
                 blurRadius: 10,
                 offset: const Offset(0, -5),
               ),
@@ -152,10 +151,9 @@ class NavigationMenu extends StatelessWidget {
           children: [
             Icon(
               icon,
-              color:
-                  isSelected
-                      ? (dark ? Colors.orange : Colors.deepPurpleAccent)
-                      : (dark ? Colors.grey : Colors.grey),
+              color: isSelected
+                  ? (dark ? Colors.orange : Colors.deepPurpleAccent)
+                  : (dark ? Colors.grey : Colors.grey),
               size: 28,
             ),
             const SizedBox(height: 4),
@@ -168,10 +166,9 @@ class NavigationMenu extends StatelessWidget {
                 child: Text(
                   label,
                   style: TextStyle(
-                    color:
-                        isSelected
-                            ? (dark ? Colors.orange : Colors.deepPurpleAccent)
-                            : Colors.grey,
+                    color: isSelected
+                        ? (dark ? Colors.orange : Colors.deepPurpleAccent)
+                        : Colors.grey,
                     fontSize: 12,
                     fontWeight:
                         isSelected ? FontWeight.bold : FontWeight.normal,

@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import '../../common/utils/constants/colors.dart';
-import '../../common/utils/constants/image_strings.dart';
-import '../../common/utils/helpers/helper_function.dart';
-import '../../app/routes/app_routes.dart';
-import '../../services/storage_service.dart';
+import '../../../common/utils/constants/colors.dart';
+import '../../../common/utils/constants/image_strings.dart';
+import '../../../common/utils/helpers/helper_function.dart';
+import '../../../app/routes/app_routes.dart';
+import '../../../services/storage_service.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -121,7 +121,7 @@ class _SplashScreenState extends State<SplashScreen>
                 'Smart Campus',
                 style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                       fontWeight: FontWeight.bold,
-                      color: dark ? TColors.yellow : TColors.primary,
+                      color: dark ? TColors.yellow : TColors.purple,
                     ),
               ),
             ),
@@ -137,7 +137,7 @@ class _SplashScreenState extends State<SplashScreen>
               child: Text(
                 'Track attendance with ease',
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      color: dark ? Colors.white70 : Colors.black54,
+                      color: dark ? Colors.white70 : TColors.dark54,
                     ),
               ),
             ),

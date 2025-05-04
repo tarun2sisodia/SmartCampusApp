@@ -30,7 +30,7 @@ class CreateClassScreen extends StatelessWidget {
       body: Obx(
         () {
           //print(
-              // 'classController.isLoading: ${classController.isLoading.value}');
+          // 'classController.isLoading: ${classController.isLoading.value}');
           return classController.isLoading.value
               ? const Center(child: CircularProgressIndicator())
               : Center(
@@ -157,9 +157,9 @@ class CreateClassScreen extends StatelessWidget {
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor:
-                                  dark ? TColors.yellow : TColors.deepPurple,
+                                  dark ? TColors.yellow : TColors.primary,
                               foregroundColor:
-                                  dark ? Colors.black : Colors.white,
+                                  dark ? TColors.dark : Colors.white,
                             ),
                             child: const Text('Create Class'),
                           ),

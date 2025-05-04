@@ -264,7 +264,7 @@ class AttendanceReportsScreen extends StatelessWidget {
                               ),
                               circularStrokeCap: CircularStrokeCap.round,
                               progressColor:
-                                  dark ? TColors.yellow : TColors.deepPurple,
+                                  dark ? TColors.yellow : TColors.primary,
                               backgroundColor: dark
                                   ? Colors.grey.shade800
                                   : Colors.grey.shade200,
@@ -276,7 +276,7 @@ class AttendanceReportsScreen extends StatelessWidget {
                                   'Sessions',
                                   reportsController.sessions.length.toString(),
                                   Iconsax.calendar_1,
-                                  dark ? TColors.yellow : TColors.deepPurple,
+                                  dark ? TColors.yellow : TColors.primary,
                                 ),
                                 const SizedBox(height: TSizes.spaceBtwItems),
                                 _buildSummaryItem(
@@ -284,7 +284,7 @@ class AttendanceReportsScreen extends StatelessWidget {
                                   'Students',
                                   reportsController.students.length.toString(),
                                   Iconsax.people,
-                                  dark ? TColors.yellow : TColors.deepPurple,
+                                  dark ? TColors.yellow : TColors.primary,
                                 ),
                               ],
                             ),
@@ -598,7 +598,7 @@ class AttendanceReportsScreen extends StatelessWidget {
                         Icon(
                           Iconsax.calendar_1,
                           size: 64,
-                          color: dark ? TColors.yellow : TColors.deepPurple,
+                          color: dark ? TColors.yellow : TColors.primary,
                         ),
                         const SizedBox(height: TSizes.spaceBtwItems),
                         Text(

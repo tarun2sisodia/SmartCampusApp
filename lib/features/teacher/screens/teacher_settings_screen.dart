@@ -69,7 +69,7 @@ class TeacherSettingsScreen extends StatelessWidget {
                     return Switch(
                       value: controller.emailNotifications.value,
                       onChanged: controller.toggleEmailNotifications,
-                      activeColor: dark ? TColors.yellow : TColors.deepPurple,
+                      activeColor: dark ? TColors.yellow : TColors.primary,
                     );
                   }),
                 ),
@@ -93,7 +93,7 @@ class TeacherSettingsScreen extends StatelessWidget {
                       //print('Dark Mode toggled');
                       controller.toggleTheme();
                     },
-                    activeColor: dark ? TColors.yellow : TColors.deepPurple,
+                    activeColor: dark ? TColors.yellow : TColors.primary,
                   ),
                 ),
                 _buildProfileMenuItem(
@@ -162,8 +162,7 @@ class TeacherSettingsScreen extends StatelessWidget {
                             ListTile(
                               leading: Icon(
                                 Iconsax.document_1,
-                                color:
-                                    dark ? TColors.yellow : TColors.deepPurple,
+                                color: dark ? TColors.yellow : TColors.primary,
                               ),
                               title: const Text('Cache Size'),
                               subtitle: Text(cacheSizeText),
@@ -234,8 +233,7 @@ class TeacherSettingsScreen extends StatelessWidget {
                             ListTile(
                               leading: Icon(
                                 Iconsax.trash,
-                                color:
-                                    dark ? TColors.yellow : TColors.deepPurple,
+                                color: dark ? TColors.yellow : TColors.primary,
                               ),
                               title: const Text('Clear All Data'),
                               subtitle: const Text(
@@ -315,8 +313,7 @@ class TeacherSettingsScreen extends StatelessWidget {
                             ListTile(
                               leading: Icon(
                                 Iconsax.export,
-                                color:
-                                    dark ? TColors.yellow : TColors.deepPurple,
+                                color: dark ? TColors.yellow : TColors.primary,
                               ),
                               title: const Text('Export Data'),
                               subtitle: const Text(
@@ -494,7 +491,7 @@ class TeacherSettingsScreen extends StatelessWidget {
                 trailing: isSelected
                     ? Icon(
                         Icons.check_circle,
-                        color: dark ? TColors.yellow : TColors.deepPurple,
+                        color: dark ? TColors.yellow : TColors.primary,
                       )
                     : null,
                 onTap: () {
@@ -565,10 +562,10 @@ class TeacherSettingsScreen extends StatelessWidget {
       leading: Container(
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
-          color: (dark ? TColors.yellow : TColors.deepPurple).withAlpha(26),
+          color: (dark ? TColors.yellow : TColors.primary).withAlpha(26),
           shape: BoxShape.circle,
         ),
-        child: Icon(icon, color: dark ? TColors.yellow : TColors.deepPurple),
+        child: Icon(icon, color: dark ? TColors.yellow : TColors.primary),
       ),
       title: Text(title),
       trailing: trailing ?? const Icon(Iconsax.arrow_right_3, size: 18),

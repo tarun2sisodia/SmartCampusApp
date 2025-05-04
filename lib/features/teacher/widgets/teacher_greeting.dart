@@ -48,7 +48,7 @@ class TeacherGreeting extends StatelessWidget {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
-                color: dark ? TColors.yellow : TColors.deepPurple,
+                color: dark ? TColors.yellow : TColors.primary,
                 width: 2,
               ),
               image: const DecorationImage(
@@ -70,8 +70,8 @@ class TeacherGreeting extends StatelessWidget {
                 Text(
                   greeting,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    color: dark ? TColors.yellow : TColors.deepPurple,
-                  ),
+                        color: dark ? TColors.yellow : TColors.primary,
+                      ),
                 ),
                 const SizedBox(height: TSizes.xs),
                 Obx(() {

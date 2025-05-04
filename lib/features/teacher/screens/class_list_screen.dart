@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:shimmer/shimmer.dart';
 import '../../../app/routes/app_routes.dart';
 import '../../../models/class_model.dart';
 import '../../../models/course_model.dart';
@@ -98,7 +99,79 @@ class ClassListScreen extends StatelessWidget {
   Widget _buildBody(BuildContext context, bool dark) {
     if (classController.isLoading.value) {
       ////print('Loading classes...');
-      return const Center(child: CircularProgressIndicator());
+      return ListView.builder(
+        itemCount: 6, // Number of shimmer items to display
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: TSizes.defaultSpace,
+              vertical: TSizes.spaceBtwItems / 2,
+            ),
+            child: Shimmer.fromColors(
+              baseColor: dark ? Colors.grey[800]! : Colors.grey[300]!,
+              highlightColor: dark ? Colors.grey[700]! : Colors.grey[100]!,
+              child: Card(
+                elevation: 2,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(TSizes.cardRadiusMd),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(TSizes.md),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          CircleAvatar(
+                            backgroundColor: Colors.grey,
+                            radius: 24,
+                          ),
+                          const SizedBox(width: TSizes.spaceBtwItems),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  height: 16,
+                                  width: double.infinity,
+                                  color: Colors.grey,
+                                ),
+                                const SizedBox(height: 8),
+                                Container(
+                                  height: 14,
+                                  width: 150,
+                                  color: Colors.grey,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: TSizes.spaceBtwItems),
+                      const Divider(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Container(
+                            height: 40,
+                            width: 80,
+                            color: Colors.grey,
+                          ),
+                          Container(
+                            height: 40,
+                            width: 80,
+                            color: Colors.grey,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          );
+        },
+      );
     }
 
     if (classController.classes.isEmpty) {
@@ -110,7 +183,7 @@ class ClassListScreen extends StatelessWidget {
             Icon(
               Iconsax.book_1,
               size: 64,
-              color: dark ? TColors.yellow : TColors.deepPurple,
+              color: dark ? TColors.yellow : TColors.primary,
             ),
             const SizedBox(height: TSizes.spaceBtwItems),
             Text(
@@ -132,8 +205,8 @@ class ClassListScreen extends StatelessWidget {
               icon: const Icon(Iconsax.add),
               label: const Text('Create Class'),
               style: ElevatedButton.styleFrom(
-                backgroundColor: dark ? TColors.yellow : TColors.deepPurple,
-                foregroundColor: dark ? Colors.black : Colors.white,
+                backgroundColor: dark ? TColors.yellow : TColors.primary,
+                foregroundColor: dark ? TColors.dark : Colors.white,
               ),
             ),
           ],
@@ -146,7 +219,7 @@ class ClassListScreen extends StatelessWidget {
         ////print('Refreshing classes via pull-to-refresh');
         return classController.loadClasses();
       },
-      color: dark ? TColors.yellow : TColors.deepPurple,
+      color: dark ? TColors.yellow : TColors.primary,
       backgroundColor: dark ? TColors.darkerGrey : Colors.white,
       child: ListView.builder(
         physics: const AlwaysScrollableScrollPhysics(),
@@ -175,7 +248,7 @@ class ClassListScreen extends StatelessWidget {
                 // Add border when selected
                 side: isSelected
                     ? BorderSide(
-                        color: dark ? TColors.yellow : TColors.deepPurple,
+                        color: dark ? TColors.yellow : TColors.primary,
                         width: 2,
                       )
                     : BorderSide.none,
@@ -197,11 +270,11 @@ class ClassListScreen extends StatelessWidget {
                         children: [
                           CircleAvatar(
                             backgroundColor:
-                                dark ? TColors.yellow : TColors.deepPurple,
+                                dark ? TColors.yellow : TColors.primary,
                             child: Text(
                               classItem.subjectName?.substring(0, 1) ?? 'C',
                               style: TextStyle(
-                                color: dark ? Colors.black : Colors.white,
+                                color: dark ? TColors.dark : Colors.white,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -231,7 +304,7 @@ class ClassListScreen extends StatelessWidget {
                               icon: const Icon(Iconsax.more),
                               onPressed: () {
                                 ////print(
-                                    // 'Opening options for class ${classItem.id}');
+                                // 'Opening options for class ${classItem.id}');
                                 _showClassOptions(context, classItem);
                               },
                             ),
@@ -250,7 +323,7 @@ class ClassListScreen extends StatelessWidget {
                               label: 'Students',
                               onTap: () {
                                 ////print(
-                                    // 'Opening students for class ${classItem.id}');
+                                // 'Opening students for class ${classItem.id}');
                                 Get.to(() =>
                                     AddStudentScreen(classModel: classItem));
                               },
@@ -262,7 +335,7 @@ class ClassListScreen extends StatelessWidget {
                               label: 'Attendance',
                               onTap: () {
                                 ////print(
-                                    // 'Opening attendance for class ${classItem.id}');
+                                // 'Opening attendance for class ${classItem.id}');
                                 Get.to(() =>
                                     AttendanceScreen(classModel: classItem));
                               },
@@ -334,7 +407,7 @@ class ClassListScreen extends StatelessWidget {
             Icon(
               icon,
               size: 24,
-              color: dark ? TColors.yellow : TColors.deepPurple,
+              color: dark ? TColors.yellow : TColors.primary,
             ),
             const SizedBox(height: 4),
             Text(label),
@@ -390,7 +463,7 @@ class ClassListScreen extends StatelessWidget {
                   onPressed: () => Navigator.pop(context),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: dark ? Colors.grey[800] : Colors.grey[200],
-                    foregroundColor: dark ? Colors.white : Colors.black,
+                    foregroundColor: dark ? Colors.white : TColors.dark,
                   ),
                   child: const Text('Cancel'),
                 ),
@@ -588,8 +661,8 @@ class ClassListScreen extends StatelessWidget {
                 Navigator.pop(context);
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: dark ? TColors.yellow : TColors.deepPurple,
-                foregroundColor: dark ? Colors.black : Colors.white,
+                backgroundColor: dark ? TColors.yellow : TColors.primary,
+                foregroundColor: dark ? TColors.dark : Colors.white,
               ),
               child: Text('Update Class'),
             ),

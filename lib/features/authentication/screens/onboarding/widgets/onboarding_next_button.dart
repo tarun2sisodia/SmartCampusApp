@@ -27,15 +27,14 @@ class OnboardingNextButton extends StatelessWidget {
           child: ElevatedButton(
             onPressed: () => controller.nextPage(),
             style: ElevatedButton.styleFrom(
-              backgroundColor:
-                  dark ? TColors.buttonPrimary : TColors.deepPurple,
+              backgroundColor: dark ? TColors.buttonPrimary : TColors.primary,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30),
               ),
               elevation: 5,
               shadowColor: dark
                   ? TColors.buttonPrimary.withOpacity(0.5)
-                  : TColors.deepPurple.withOpacity(0.5),
+                  : TColors.primary.withOpacity(0.5),
               padding: const EdgeInsets.all(0),
             ),
             child: FittedBox(
