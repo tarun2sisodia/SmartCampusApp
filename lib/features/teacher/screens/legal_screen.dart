@@ -1,7 +1,6 @@
 // filepath: /home/charon/Studio/smartcampusapp/SmartCampus/lib/features/teacher/screens/legal_screen.dart
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:smooth_scroll_multiplatform/smooth_scroll_multiplatform.dart';
 
 class LegalScreen extends StatefulWidget {
   final String initialSection;

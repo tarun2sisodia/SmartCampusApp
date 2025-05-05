@@ -16,8 +16,8 @@ class TCheckboxTheme {
     ),
 
     // Clear visual feedback (Doherty Threshold)
-    checkColor: MaterialStateProperty.resolveWith((states) {
-      if (states.contains(MaterialState.selected)) {
+    checkColor: WidgetStateProperty.resolveWith((states) {
+      if (states.contains(WidgetState.selected)) {
         return TColors.white;
       } else {
         return TColors.dark;
@@ -25,10 +25,10 @@ class TCheckboxTheme {
     }),
 
     // Fill color based on state
-    fillColor: MaterialStateProperty.resolveWith((states) {
-      if (states.contains(MaterialState.selected)) {
+    fillColor: WidgetStateProperty.resolveWith((states) {
+      if (states.contains(WidgetState.selected)) {
         return TColors.primary;
-      } else if (states.contains(MaterialState.disabled)) {
+      } else if (states.contains(WidgetState.disabled)) {
         return TColors.grey;
       } else {
         return Colors.transparent;
@@ -36,10 +36,10 @@ class TCheckboxTheme {
     }),
 
     // Border color based on state
-    overlayColor: MaterialStateProperty.resolveWith((states) {
-      if (states.contains(MaterialState.pressed)) {
+    overlayColor: WidgetStateProperty.resolveWith((states) {
+      if (states.contains(WidgetState.pressed)) {
         return TColors.primary.withOpacity(0.1);
-      } else if (states.contains(MaterialState.hovered)) {
+      } else if (states.contains(WidgetState.hovered)) {
         return TColors.primary.withOpacity(0.05);
       } else {
         return Colors.transparent;
@@ -63,26 +63,26 @@ class TCheckboxTheme {
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(TSizes.xs),
     ),
-    checkColor: MaterialStateProperty.resolveWith((states) {
-      if (states.contains(MaterialState.selected)) {
+    checkColor: WidgetStateProperty.resolveWith((states) {
+      if (states.contains(WidgetState.selected)) {
         return TColors.white;
       } else {
         return TColors.white;
       }
     }),
-    fillColor: MaterialStateProperty.resolveWith((states) {
-      if (states.contains(MaterialState.selected)) {
+    fillColor: WidgetStateProperty.resolveWith((states) {
+      if (states.contains(WidgetState.selected)) {
         return TColors.primary;
-      } else if (states.contains(MaterialState.disabled)) {
+      } else if (states.contains(WidgetState.disabled)) {
         return TColors.darkerGrey;
       } else {
         return Colors.transparent;
       }
     }),
-    overlayColor: MaterialStateProperty.resolveWith((states) {
-      if (states.contains(MaterialState.pressed)) {
+    overlayColor: WidgetStateProperty.resolveWith((states) {
+      if (states.contains(WidgetState.pressed)) {
         return TColors.primary.withOpacity(0.1);
-      } else if (states.contains(MaterialState.hovered)) {
+      } else if (states.contains(WidgetState.hovered)) {
         return TColors.primary.withOpacity(0.05);
       } else {
         return Colors.transparent;

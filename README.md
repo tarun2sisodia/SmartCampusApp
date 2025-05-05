@@ -234,4 +234,13 @@ SmartCampus is built using various open-source software components. Acknowledgme
 
 For more details, visit the respective project websites.
 github.com/tarun1sisodia/smartcampus
+
+
+flutter build apk --release --obfuscate --split-debug-info=build/app/outputs/symbols --split-per-abi
+
+
+
+flutter build apk --release --obfuscate --split-debug-info=build/app/outputs/symbols
+
+
 ```

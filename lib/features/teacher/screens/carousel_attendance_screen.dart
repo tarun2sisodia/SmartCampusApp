@@ -13,10 +13,8 @@ import '../../../common/utils/helpers/helper_function.dart';
 import 'class_list_screen.dart';
 
 class CarouselAttendanceScreen extends StatelessWidget {
-  // Use Get.find instead of Get.put to avoid recreating the controller
-  final carouselAttendanceController = Get.find<CarouselAttendanceController>();
-  final CarouselSliderController carouselController =
-      CarouselSliderController();
+  final carouselAttendanceController = Get.put(CarouselAttendanceController());
+  final CarouselSliderController carouselController =CarouselSliderController();
 
   CarouselAttendanceScreen({super.key});
 

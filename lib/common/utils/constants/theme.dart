@@ -171,8 +171,8 @@ final ThemeData appTheme = ThemeData(
 
   // Checkbox theme (Fitts's Law)
   checkboxTheme: CheckboxThemeData(
-    fillColor: MaterialStateProperty.resolveWith<Color>((states) {
-      if (states.contains(MaterialState.selected)) {
+    fillColor: WidgetStateProperty.resolveWith<Color>((states) {
+      if (states.contains(WidgetState.selected)) {
         return TColors.primary;
       }
       return Colors.transparent;
