@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../../common/utils/constants/image_strings.dart';
 import '../controllers/dashboard_controller.dart';
 import '../../../common/utils/constants/colors.dart';
@@ -33,447 +32,760 @@ class DashboardScreen extends StatelessWidget {
       profileController.loadUserData();
     }
 
-    return Scaffold(
-      // appBar: PreferredSize(
-      //   preferredSize: const Size.fromHeight(kToolbarHeight),
-      //   child: Obx(() {
-      //     // Animated app bar with greeting
-      //     return AnimatedCrossFade(
-      //       duration: const Duration(milliseconds: 800),
-      //       firstChild: _buildGreetingAppBar(context, dark),
-      //       secondChild: _buildRegularAppBar(context, dark),
-      //       crossFadeState: dashboardController.showGreetingAnimation.value
-      //           ? CrossFadeState.showFirst
-      //           : CrossFadeState.showSecond,
-      //     );
-      //   }),
-      // ),
-      body: Obx(() {
-        //print('Dashboard state updated');
-        if (dashboardController.isLoading.value) {
-          //print('Dashboard is loading');
-          return ListView.builder(
-            itemCount: 6, // Number of shimmer items to display
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: TSizes.defaultSpace,
-                  vertical: TSizes.spaceBtwItems / 2,
-                ),
-                child: Shimmer.fromColors(
-                  baseColor: dark ? TColors.darkerGrey : Colors.grey.shade300,
-                  highlightColor: dark ? TColors.yellow : TColors.primary,
-                  child: Card(
-                    elevation: 2,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(TSizes.cardRadiusMd),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(TSizes.md),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+    return SafeArea(
+      child: Scaffold(
+        // appBar: PreferredSize(
+        //   preferredSize: const Size.fromHeight(kToolbarHeight),
+        //   child: Obx(() {
+        //     // Animated app bar with greeting
+        //     return AnimatedCrossFade(
+        //       duration: const Duration(milliseconds: 800),
+        //       firstChild: _buildGreetingAppBar(context, dark),
+        //       secondChild: _buildRegularAppBar(context, dark),
+        //       crossFadeState: dashboardController.showGreetingAnimation.value
+        //           ? CrossFadeState.showFirst
+        //           : CrossFadeState.showSecond,
+        //     );
+        //   }),
+        // ),
+        body: Obx(() {
+          //print('Dashboard state updated');
+
+          if (dashboardController.isLoading.value) {
+            return SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.all(TSizes.defaultSpace),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // App Bar shimmer
+                    Shimmer.fromColors(
+                      baseColor:
+                          dark ? TColors.darkerGrey : Colors.grey.shade300,
+                      highlightColor: dark
+                          ? TColors.yellow.withOpacity(0.5)
+                          : TColors.primary.withOpacity(0.5),
+                      child: Row(
                         children: [
-                          Row(
-                            children: [
-                              CircleAvatar(
-                                backgroundColor: Colors.grey,
-                                radius: 24,
-                              ),
-                              const SizedBox(width: TSizes.spaceBtwItems),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                      height: 16,
-                                      width: double.infinity,
-                                      color: Colors.grey,
-                                    ),
-                                    const SizedBox(height: 8),
-                                    Container(
-                                      height: 14,
-                                      width: 150,
-                                      color: Colors.grey,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
+                          // Profile image shimmer
+                          Container(
+                            width: 40,
+                            height: 40,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              shape: BoxShape.circle,
+                            ),
                           ),
-                          const SizedBox(height: TSizes.spaceBtwItems),
-                          const Divider(),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Container(
-                                height: 40,
-                                width: 80,
-                                color: Colors.grey,
-                              ),
-                              Container(
-                                height: 40,
-                                width: 80,
-                                color: Colors.grey,
-                              ),
-                            ],
+                          const SizedBox(width: 12),
+                          // Title shimmer
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  height: 16,
+                                  width: 150,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(4),
+                                  ),
+                                ),
+                                const SizedBox(height: 4),
+                                Container(
+                                  height: 12,
+                                  width: 100,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(4),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          // Action buttons shimmer
+                          Container(
+                            width: 40,
+                            height: 40,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              shape: BoxShape.circle,
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Container(
+                            width: 40,
+                            height: 40,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              shape: BoxShape.circle,
+                            ),
                           ),
                         ],
                       ),
                     ),
+
+                    const SizedBox(height: TSizes.spaceBtwItems),
+
+                    // Search bar shimmer
+                    Shimmer.fromColors(
+                      baseColor:
+                          dark ? TColors.darkerGrey : Colors.grey.shade300,
+                      highlightColor: dark
+                          ? TColors.yellow.withOpacity(0.5)
+                          : TColors.primary.withOpacity(0.5),
+                      child: Container(
+                        height: 50,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius:
+                              BorderRadius.circular(TSizes.cardRadiusMd),
+                        ),
+                      ),
+                    ),
+
+                    const SizedBox(height: TSizes.spaceBtwSections),
+
+                    // Stats cards shimmer (2 cards in a row)
+                    Shimmer.fromColors(
+                      baseColor:
+                          dark ? TColors.darkerGrey : Colors.grey.shade300,
+                      highlightColor: dark
+                          ? TColors.yellow.withOpacity(0.5)
+                          : TColors.primary.withOpacity(0.5),
+                      child: Row(
+                        children: [
+                          // First stat card
+                          Expanded(
+                            child: Container(
+                              height: 120,
+                              padding: const EdgeInsets.all(TSizes.md),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius:
+                                    BorderRadius.circular(TSizes.cardRadiusMd),
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    width: 32,
+                                    height: 32,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white.withOpacity(0.5),
+                                      shape: BoxShape.circle,
+                                    ),
+                                  ),
+                                  const SizedBox(height: TSizes.spaceBtwItems),
+                                  Container(
+                                    height: 24,
+                                    width: 40,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white.withOpacity(0.5),
+                                      borderRadius: BorderRadius.circular(4),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                      height: TSizes.spaceBtwItems / 2),
+                                  Container(
+                                    height: 14,
+                                    width: 60,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white.withOpacity(0.5),
+                                      borderRadius: BorderRadius.circular(4),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: TSizes.spaceBtwItems),
+                          // Second stat card
+                          Expanded(
+                            child: Container(
+                              height: 120,
+                              padding: const EdgeInsets.all(TSizes.md),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius:
+                                    BorderRadius.circular(TSizes.cardRadiusMd),
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    width: 32,
+                                    height: 32,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white.withOpacity(0.5),
+                                      shape: BoxShape.circle,
+                                    ),
+                                  ),
+                                  const SizedBox(height: TSizes.spaceBtwItems),
+                                  Container(
+                                    height: 24,
+                                    width: 40,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white.withOpacity(0.5),
+                                      borderRadius: BorderRadius.circular(4),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                      height: TSizes.spaceBtwItems / 2),
+                                  Container(
+                                    height: 14,
+                                    width: 60,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white.withOpacity(0.5),
+                                      borderRadius: BorderRadius.circular(4),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    const SizedBox(height: TSizes.spaceBtwItems),
+
+                    // Attendance chart shimmer (big container)
+                    Shimmer.fromColors(
+                      baseColor:
+                          dark ? TColors.darkerGrey : Colors.grey.shade300,
+                      highlightColor: dark
+                          ? TColors.yellow.withOpacity(0.5)
+                          : TColors.primary.withOpacity(0.5),
+                      child: Container(
+                        height: 220,
+                        width: double.infinity,
+                        padding: const EdgeInsets.all(TSizes.md),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius:
+                              BorderRadius.circular(TSizes.cardRadiusMd),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              height: 20,
+                              width: 180,
+                              decoration: BoxDecoration(
+                                color: Colors.white.withOpacity(0.5),
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                            ),
+                            const SizedBox(height: TSizes.spaceBtwItems),
+                            Container(
+                              width: 160,
+                              height: 160,
+                              decoration: BoxDecoration(
+                                color: Colors.white.withOpacity(0.5),
+                                shape: BoxShape.circle,
+                              ),
+                            ),
+                            const SizedBox(height: TSizes.spaceBtwItems),
+                            Container(
+                              height: 12,
+                              width: 200,
+                              decoration: BoxDecoration(
+                                color: Colors.white.withOpacity(0.5),
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+
+                    const SizedBox(height: TSizes.spaceBtwSections),
+
+                    // Recent classes header shimmer
+                    Shimmer.fromColors(
+                      baseColor:
+                          dark ? TColors.darkerGrey : Colors.grey.shade300,
+                      highlightColor: dark
+                          ? TColors.yellow.withOpacity(0.5)
+                          : TColors.primary.withOpacity(0.5),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            height: 20,
+                            width: 120,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(4),
+                            ),
+                          ),
+                          Container(
+                            height: 20,
+                            width: 60,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(4),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    const SizedBox(height: TSizes.spaceBtwItems),
+
+                    // Recent classes list shimmer (multiple cards)
+                    Expanded(
+                      child: ListView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: 3,
+                        itemBuilder: (context, index) {
+                          return Shimmer.fromColors(
+                            baseColor: dark
+                                ? TColors.darkerGrey
+                                : Colors.grey.shade300,
+                            highlightColor: dark
+                                ? TColors.yellow.withOpacity(0.5)
+                                : TColors.primary.withOpacity(0.5),
+                            child: Container(
+                              height: 100,
+                              margin: const EdgeInsets.only(
+                                  bottom: TSizes.spaceBtwItems),
+                              padding: const EdgeInsets.all(TSizes.md),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius:
+                                    BorderRadius.circular(TSizes.cardRadiusMd),
+                              ),
+                              child: Row(
+                                children: [
+                                  // Leading circle avatar
+                                  Container(
+                                    width: 50,
+                                    height: 50,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white.withOpacity(0.5),
+                                      shape: BoxShape.circle,
+                                    ),
+                                  ),
+                                  const SizedBox(width: TSizes.spaceBtwItems),
+                                  // Title and subtitle
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Container(
+                                          height: 16,
+                                          width: 150,
+                                          decoration: BoxDecoration(
+                                            color:
+                                                Colors.white.withOpacity(0.5),
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                          ),
+                                        ),
+                                        const SizedBox(height: 8),
+                                        Container(
+                                          height: 12,
+                                          width: 200,
+                                          decoration: BoxDecoration(
+                                            color:
+                                                Colors.white.withOpacity(0.5),
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                          ),
+                                        ),
+                                        const SizedBox(height: 4),
+                                        Container(
+                                          height: 12,
+                                          width: 120,
+                                          decoration: BoxDecoration(
+                                            color:
+                                                Colors.white.withOpacity(0.5),
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  // Trailing icon
+                                  Container(
+                                    width: 24,
+                                    height: 24,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white.withOpacity(0.5),
+                                      shape: BoxShape.circle,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          }
+
+          if (dashboardController.classes.isEmpty) {
+            //print('No data available');
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'No data available',
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                  const SizedBox(height: TSizes.spaceBtwItems),
+                  ElevatedButton(
+                    onPressed: () {
+                      //print('Creating initial data');
+                      dashboardController.createInitialData();
+                    },
+                    child: const Text('Create Sample Data'),
+                  ),
+                ],
+              ),
+            );
+          }
+
+          return RefreshIndicator(
+            onRefresh: () async {
+              await dashboardController.loadDashboardData();
+            },
+            color: dark ? TColors.yellow : TColors.primary,
+            backgroundColor: dark ? TColors.darkerGrey : Colors.white,
+            child: CustomScrollView(
+              physics: const AlwaysScrollableScrollPhysics(),
+              slivers: [
+                // SliverAppBar that collapses on scroll
+                SliverAppBar(
+                  floating:
+                      true, // Makes the app bar visible as soon as you scroll up
+                  snap: true, // Makes the app bar snap into view
+                  pinned:
+                      false, // Allows the app bar to scroll completely out of view
+                  expandedHeight: kToolbarHeight,
+                  flexibleSpace: FlexibleSpaceBar(
+                    background: Obx(() {
+                      return AnimatedCrossFade(
+                        duration: const Duration(milliseconds: 800),
+                        firstChild: _buildGreetingAppBar(context, dark),
+                        secondChild: _buildRegularAppBar(context, dark),
+                        crossFadeState:
+                            dashboardController.showGreetingAnimation.value
+                                ? CrossFadeState.showFirst
+                                : CrossFadeState.showSecond,
+                      );
+                    }),
                   ),
                 ),
-              );
-            },
-          );
-        }
 
-        if (dashboardController.classes.isEmpty) {
-          //print('No data available');
-          return Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'No data available',
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
-                const SizedBox(height: TSizes.spaceBtwItems),
-                ElevatedButton(
-                  onPressed: () {
-                    //print('Creating initial data');
-                    dashboardController.createInitialData();
-                  },
-                  child: const Text('Create Sample Data'),
+                // Dashboard content
+                SliverPadding(
+                  padding: const EdgeInsets.all(TSizes.defaultSpace),
+                  sliver: SliverList(
+                    delegate: SliverChildListDelegate(
+                      [
+                        // Search container
+                        Container(
+                          decoration: BoxDecoration(
+                            color: dark ? TColors.dark : TColors.light,
+                            borderRadius:
+                                BorderRadius.circular(TSizes.cardRadiusMd),
+                          ),
+                          padding:
+                              const EdgeInsets.symmetric(horizontal: TSizes.md),
+                          child: Row(
+                            children: [
+                              Icon(Iconsax.search_normal,
+                                  color:
+                                      dark ? TColors.yellow : TColors.primary),
+                              const SizedBox(width: TSizes.spaceBtwItems),
+                              Expanded(
+                                child: TextField(
+                                  controller: searchController,
+                                  decoration: InputDecoration(
+                                    hintText: 'Search classes, students...',
+                                    border: InputBorder.none,
+                                    hintStyle: TextStyle(
+                                      color: dark
+                                          ? Colors.white70
+                                          : Colors.black54,
+                                    ),
+                                  ),
+                                  style: TextStyle(
+                                    color: dark ? Colors.white : Colors.black,
+                                  ),
+                                  onChanged: (value) {
+                                    isSearching.value = value.isNotEmpty;
+                                    dashboardController.searchClasses(value);
+                                  },
+                                ),
+                              ),
+                              Obx(
+                                () => isSearching.value
+                                    ? IconButton(
+                                        icon: const Icon(Icons.clear),
+                                        onPressed: () {
+                                          searchController.clear();
+                                          isSearching.value = false;
+                                          dashboardController.searchClasses('');
+                                        },
+                                      )
+                                    : const SizedBox.shrink(),
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        SizedBox(height: TSizes.spaceBtwSections),
+
+                        // Stats cards
+                        Row(
+                          children: [
+                            _buildStatCard(context, dark,
+                                title: 'Classes',
+                                value: dashboardController.totalClasses.value
+                                    .toString(),
+                                icon: Iconsax.book_1,
+                                color: dark ? TColors.yellow : TColors.primary),
+                            const SizedBox(width: TSizes.spaceBtwItems),
+                            _buildStatCard(context, dark,
+                                title: 'Students',
+                                value: dashboardController.totalStudents.value
+                                    .toString(),
+                                icon: Iconsax.people,
+                                color: dark ? TColors.yellow : TColors.primary),
+                          ],
+                        ),
+
+                        const SizedBox(height: TSizes.spaceBtwItems),
+
+                        // Attendance chart
+                        Container(
+                          width: double.infinity,
+                          padding: const EdgeInsets.all(TSizes.md),
+                          decoration: BoxDecoration(
+                            color: dark ? TColors.darkerGrey : Colors.white,
+                            borderRadius:
+                                BorderRadius.circular(TSizes.cardRadiusMd),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withAlpha(26),
+                                spreadRadius: 1,
+                                blurRadius: 5,
+                                offset: const Offset(0, 2),
+                              ),
+                            ],
+                          ),
+                          child: Column(
+                            children: [
+                              Text(
+                                'Average Attendance',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleMedium
+                                    ?.copyWith(fontWeight: FontWeight.bold),
+                              ),
+                              const SizedBox(height: TSizes.spaceBtwItems),
+                              CircularPercentIndicator(
+                                radius: 80.0,
+                                lineWidth: 12.0,
+                                animation: true,
+                                percent: dashboardController
+                                        .averageAttendance.value /
+                                    100,
+                                center: Text(
+                                  '${dashboardController.averageAttendance.value.toStringAsFixed(1)}%',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleLarge
+                                      ?.copyWith(fontWeight: FontWeight.bold),
+                                ),
+                                circularStrokeCap: CircularStrokeCap.round,
+                                progressColor:
+                                    dark ? TColors.yellow : TColors.primary,
+                                backgroundColor: dark
+                                    ? Colors.grey.shade800
+                                    : Colors.grey.shade200,
+                              ),
+                              const SizedBox(height: TSizes.spaceBtwItems),
+                              Text(
+                                'Overall attendance across all classes',
+                                style: Theme.of(context).textTheme.bodySmall,
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        const SizedBox(height: TSizes.spaceBtwSections),
+                        // Recent classes header
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Recent Classes',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium
+                                  ?.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                Get.to(() => ClassListScreen());
+                              },
+                              child: Text(
+                                'View All',
+                                style: TextStyle(
+                                    color: dark
+                                        ? TColors.yellow
+                                        : TColors.primary),
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        const SizedBox(height: TSizes.spaceBtwItems),
+
+                        // Recent classes list
+                        dashboardController.classes.isEmpty
+                            ? Center(
+                                child: Column(
+                                  children: [
+                                    Icon(Iconsax.book_1,
+                                        size: 48,
+                                        color: dark
+                                            ? TColors.yellow
+                                            : TColors.primary),
+                                    const SizedBox(
+                                        height: TSizes.spaceBtwItems / 2),
+                                    Text(
+                                      'No Classes Yet',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleMedium,
+                                    ),
+                                    const SizedBox(
+                                        height: TSizes.spaceBtwItems / 2),
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        Get.to(() => ClassListScreen());
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: dark
+                                            ? TColors.yellow
+                                            : TColors.primary,
+                                        foregroundColor:
+                                            dark ? TColors.dark : Colors.white,
+                                      ),
+                                      child: const Text('Create Class'),
+                                    ),
+                                  ],
+                                ),
+                              )
+                            : Column(
+                                children: List.generate(
+                                  dashboardController.filteredClasses.length > 3
+                                      ? 3
+                                      : dashboardController
+                                          .filteredClasses.length,
+                                  (index) {
+                                    final classItem = dashboardController
+                                        .filteredClasses[index];
+                                    final stats = dashboardController
+                                        .classStats[classItem.id];
+
+                                    return Card(
+                                      margin: const EdgeInsets.only(
+                                        bottom: TSizes.spaceBtwItems,
+                                      ),
+                                      elevation: 2,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                          TSizes.cardRadiusMd,
+                                        ),
+                                      ),
+                                      child: ListTile(
+                                        contentPadding:
+                                            const EdgeInsets.all(TSizes.md),
+                                        leading: CircleAvatar(
+                                          backgroundColor: dark
+                                              ? TColors.yellow
+                                              : TColors.primary,
+                                          child: Text(
+                                            classItem.subjectName
+                                                    ?.substring(0, 1) ??
+                                                'C',
+                                            style: TextStyle(
+                                              color: dark
+                                                  ? TColors.dark
+                                                  : Colors.white,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ),
+                                        title: Text(
+                                          classItem.subjectName ??
+                                              'Unknown Subject',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .titleMedium
+                                              ?.copyWith(
+                                                  fontWeight: FontWeight.bold),
+                                        ),
+                                        subtitle: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            const SizedBox(
+                                              height: TSizes.spaceBtwItems / 2,
+                                            ),
+                                            Text(
+                                              '${classItem.courseName} - Semester ${classItem.semester}',
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyMedium,
+                                            ),
+                                            if (stats != null)
+                                              Text(
+                                                'Attendance: ${(stats['averageAttendance'] as double).toStringAsFixed(1)}% (${stats['totalSessions']} sessions)',
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodySmall,
+                                              ),
+                                          ],
+                                        ),
+                                        trailing:
+                                            const Icon(Iconsax.arrow_right_3),
+                                        onTap: () {
+                                          Get.to(() => ClassListScreen());
+                                        },
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                      ],
+                    ),
+                  ),
                 ),
               ],
             ),
           );
-        }
-
-        return RefreshIndicator(
-          onRefresh: () async {
-            await dashboardController.loadDashboardData();
-          },
-          color: dark ? TColors.yellow : TColors.primary,
-          backgroundColor: dark ? TColors.darkerGrey : Colors.white,
-          child: CustomScrollView(
-            physics: const AlwaysScrollableScrollPhysics(),
-            slivers: [
-              // SliverAppBar that collapses on scroll
-              SliverAppBar(
-                floating:
-                    true, // Makes the app bar visible as soon as you scroll up
-                snap: true, // Makes the app bar snap into view
-                pinned:
-                    false, // Allows the app bar to scroll completely out of view
-                expandedHeight: kToolbarHeight,
-                flexibleSpace: FlexibleSpaceBar(
-                  background: Obx(() {
-                    return AnimatedCrossFade(
-                      duration: const Duration(milliseconds: 800),
-                      firstChild: _buildGreetingAppBar(context, dark),
-                      secondChild: _buildRegularAppBar(context, dark),
-                      crossFadeState:
-                          dashboardController.showGreetingAnimation.value
-                              ? CrossFadeState.showFirst
-                              : CrossFadeState.showSecond,
-                    );
-                  }),
-                ),
-              ),
-
-              // Dashboard content
-              SliverPadding(
-                padding: const EdgeInsets.all(TSizes.defaultSpace),
-                sliver: SliverList(
-                  delegate: SliverChildListDelegate(
-                    [
-                      // Search container
-                      Container(
-                        decoration: BoxDecoration(
-                          color: dark ? TColors.dark : TColors.light,
-                          borderRadius:
-                              BorderRadius.circular(TSizes.cardRadiusMd),
-                        ),
-                        padding:
-                            const EdgeInsets.symmetric(horizontal: TSizes.md),
-                        child: Row(
-                          children: [
-                            Icon(Iconsax.search_normal,
-                                color: dark ? TColors.yellow : TColors.primary),
-                            const SizedBox(width: TSizes.spaceBtwItems),
-                            Expanded(
-                              child: TextField(
-                                controller: searchController,
-                                decoration: InputDecoration(
-                                  hintText: 'Search classes, students...',
-                                  border: InputBorder.none,
-                                  hintStyle: TextStyle(
-                                    color:
-                                        dark ? Colors.white70 : Colors.black54,
-                                  ),
-                                ),
-                                style: TextStyle(
-                                  color: dark ? Colors.white : Colors.black,
-                                ),
-                                onChanged: (value) {
-                                  isSearching.value = value.isNotEmpty;
-                                  dashboardController.searchClasses(value);
-                                },
-                              ),
-                            ),
-                            Obx(
-                              () => isSearching.value
-                                  ? IconButton(
-                                      icon: const Icon(Icons.clear),
-                                      onPressed: () {
-                                        searchController.clear();
-                                        isSearching.value = false;
-                                        dashboardController.searchClasses('');
-                                      },
-                                    )
-                                  : const SizedBox.shrink(),
-                            ),
-                          ],
-                        ),
-                      ),
-
-                      SizedBox(height: TSizes.spaceBtwSections),
-
-                      // Stats cards
-                      Row(
-                        children: [
-                          _buildStatCard(context, dark,
-                              title: 'Classes',
-                              value: dashboardController.totalClasses.value
-                                  .toString(),
-                              icon: Iconsax.book_1,
-                              color: dark ? TColors.yellow : TColors.primary),
-                          const SizedBox(width: TSizes.spaceBtwItems),
-                          _buildStatCard(context, dark,
-                              title: 'Students',
-                              value: dashboardController.totalStudents.value
-                                  .toString(),
-                              icon: Iconsax.people,
-                              color: dark ? TColors.yellow : TColors.primary),
-                        ],
-                      ),
-
-                      const SizedBox(height: TSizes.spaceBtwItems),
-
-                      // Attendance chart
-                      Container(
-                        width: double.infinity,
-                        padding: const EdgeInsets.all(TSizes.md),
-                        decoration: BoxDecoration(
-                          color: dark ? TColors.darkerGrey : Colors.white,
-                          borderRadius:
-                              BorderRadius.circular(TSizes.cardRadiusMd),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withAlpha(26),
-                              spreadRadius: 1,
-                              blurRadius: 5,
-                              offset: const Offset(0, 2),
-                            ),
-                          ],
-                        ),
-                        child: Column(
-                          children: [
-                            Text(
-                              'Average Attendance',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleMedium
-                                  ?.copyWith(fontWeight: FontWeight.bold),
-                            ),
-                            const SizedBox(height: TSizes.spaceBtwItems),
-                            CircularPercentIndicator(
-                              radius: 80.0,
-                              lineWidth: 12.0,
-                              animation: true,
-                              percent:
-                                  dashboardController.averageAttendance.value /
-                                      100,
-                              center: Text(
-                                '${dashboardController.averageAttendance.value.toStringAsFixed(1)}%',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleLarge
-                                    ?.copyWith(fontWeight: FontWeight.bold),
-                              ),
-                              circularStrokeCap: CircularStrokeCap.round,
-                              progressColor:
-                                  dark ? TColors.yellow : TColors.primary,
-                              backgroundColor: dark
-                                  ? Colors.grey.shade800
-                                  : Colors.grey.shade200,
-                            ),
-                            const SizedBox(height: TSizes.spaceBtwItems),
-                            Text(
-                              'Overall attendance across all classes',
-                              style: Theme.of(context).textTheme.bodySmall,
-                              textAlign: TextAlign.center,
-                            ),
-                          ],
-                        ),
-                      ),
-
-                      const SizedBox(height: TSizes.spaceBtwSections),
-                      // Recent classes header
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Recent Classes',
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium
-                                ?.copyWith(
-                                  fontWeight: FontWeight.bold,
-                                ),
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              Get.to(() => ClassListScreen());
-                            },
-                            child: Text(
-                              'View All',
-                              style: TextStyle(
-                                  color:
-                                      dark ? TColors.yellow : TColors.primary),
-                            ),
-                          ),
-                        ],
-                      ),
-
-                      const SizedBox(height: TSizes.spaceBtwItems),
-
-                      // Recent classes list
-                      dashboardController.classes.isEmpty
-                          ? Center(
-                              child: Column(
-                                children: [
-                                  Icon(Iconsax.book_1,
-                                      size: 48,
-                                      color: dark
-                                          ? TColors.yellow
-                                          : TColors.primary),
-                                  const SizedBox(
-                                      height: TSizes.spaceBtwItems / 2),
-                                  Text(
-                                    'No Classes Yet',
-                                    style:
-                                        Theme.of(context).textTheme.titleMedium,
-                                  ),
-                                  const SizedBox(
-                                      height: TSizes.spaceBtwItems / 2),
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      Get.to(() => ClassListScreen());
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: dark
-                                          ? TColors.yellow
-                                          : TColors.primary,
-                                      foregroundColor:
-                                          dark ? TColors.dark : Colors.white,
-                                    ),
-                                    child: const Text('Create Class'),
-                                  ),
-                                ],
-                              ),
-                            )
-                          : Column(
-                              children: List.generate(
-                                dashboardController.filteredClasses.length > 3
-                                    ? 3
-                                    : dashboardController
-                                        .filteredClasses.length,
-                                (index) {
-                                  final classItem = dashboardController
-                                      .filteredClasses[index];
-                                  final stats = dashboardController
-                                      .classStats[classItem.id];
-
-                                  return Card(
-                                    margin: const EdgeInsets.only(
-                                      bottom: TSizes.spaceBtwItems,
-                                    ),
-                                    elevation: 2,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(
-                                        TSizes.cardRadiusMd,
-                                      ),
-                                    ),
-                                    child: ListTile(
-                                      contentPadding:
-                                          const EdgeInsets.all(TSizes.md),
-                                      leading: CircleAvatar(
-                                        backgroundColor: dark
-                                            ? TColors.yellow
-                                            : TColors.primary,
-                                        child: Text(
-                                          classItem.subjectName
-                                                  ?.substring(0, 1) ??
-                                              'C',
-                                          style: TextStyle(
-                                            color: dark
-                                                ? TColors.dark
-                                                : Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ),
-                                      title: Text(
-                                        classItem.subjectName ??
-                                            'Unknown Subject',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .titleMedium
-                                            ?.copyWith(
-                                                fontWeight: FontWeight.bold),
-                                      ),
-                                      subtitle: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          const SizedBox(
-                                            height: TSizes.spaceBtwItems / 2,
-                                          ),
-                                          Text(
-                                            '${classItem.courseName} - Semester ${classItem.semester}',
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodyMedium,
-                                          ),
-                                          if (stats != null)
-                                            Text(
-                                              'Attendance: ${(stats['averageAttendance'] as double).toStringAsFixed(1)}% (${stats['totalSessions']} sessions)',
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .bodySmall,
-                                            ),
-                                        ],
-                                      ),
-                                      trailing:
-                                          const Icon(Iconsax.arrow_right_3),
-                                      onTap: () {
-                                        Get.to(() => ClassListScreen());
-                                      },
-                                    ),
-                                  );
-                                },
-                              ),
-                            ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        );
-      }),
+        }),
+      ),
     );
   }
 

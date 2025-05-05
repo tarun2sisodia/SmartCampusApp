@@ -20,9 +20,9 @@ class ClassListScreen extends StatelessWidget {
 
   ClassListScreen({super.key});
 
+  // Modify your Scaffold in the build method to use a conditional FAB
   @override
   Widget build(BuildContext context) {
-    ////print('Building ClassListScreen');
     final dark = THelperFunction.isDarkMode(context);
 
     return Obx(() {
@@ -59,7 +59,6 @@ class ClassListScreen extends StatelessWidget {
             if (!classController.isSelectionMode.value) ...[
               IconButton(
                 onPressed: () {
-                  ////print('Refreshing classes');
                   classController.loadClasses();
                 },
                 icon: const Icon(Iconsax.refresh),
@@ -68,7 +67,6 @@ class ClassListScreen extends StatelessWidget {
               const SizedBox(width: TSizes.sm),
               IconButton(
                 onPressed: () {
-                  ////print('Navigating to reports');
                   Get.toNamed(AppRoutes.reports);
                 },
                 icon: const Icon(Iconsax.chart),
@@ -77,17 +75,22 @@ class ClassListScreen extends StatelessWidget {
             ],
           ],
         ),
-        floatingActionButton: classController.isSelectionMode.value
-            ? null // Hide FAB in selection mode
-            : FloatingActionButton.extended(
-                onPressed: () {
-                  ////print('Opening create class screen');
-                  Get.to(() => CreateClassScreen());
-                },
-                backgroundColor: dark ? TColors.blue : TColors.yellow,
-                icon: const Icon(Iconsax.book_square),
-                label: const Text('Create Class'),
-              ),
+        // Only show FAB when not in selection mode AND not loading
+        floatingActionButton: (!classController.isSelectionMode.value &&
+                !classController.isLoading.value)
+            ? AnimatedOpacity(
+                opacity: classController.isLoading.value ? 0.0 : 1.0,
+                duration: const Duration(milliseconds: 300),
+                child: FloatingActionButton.extended(
+                  onPressed: () {
+                    Get.to(() => CreateClassScreen());
+                  },
+                  backgroundColor: dark ? TColors.blue : TColors.yellow,
+                  icon: const Icon(Iconsax.book_square),
+                  label: const Text('Create Class'),
+                ),
+              )
+            : null,
         body: _buildBody(context, dark),
         bottomNavigationBar: classController.isSelectionMode.value
             ? _buildSelectionActionBar(context, dark)
@@ -96,81 +99,208 @@ class ClassListScreen extends StatelessWidget {
     });
   }
 
+  // Inside the _buildBody method, replace the existing loading UI with this enhanced version:
+
   Widget _buildBody(BuildContext context, bool dark) {
     if (classController.isLoading.value) {
-      ////print('Loading classes...');
-      return ListView.builder(
-        itemCount: 6, // Number of shimmer items to display
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: TSizes.defaultSpace,
-              vertical: TSizes.spaceBtwItems / 2,
-            ),
-            child: Shimmer.fromColors(
-               baseColor: dark ? TColors.darkerGrey : Colors.grey.shade300,
-                  highlightColor: dark ? TColors.yellow : TColors.primary,
-              child: Card(
-                elevation: 2,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(TSizes.cardRadiusMd),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(TSizes.md),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          CircleAvatar(
-                            backgroundColor: Colors.grey,
-                            radius: 24,
-                          ),
-                          const SizedBox(width: TSizes.spaceBtwItems),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+      return Column(
+        children: [
+          // // AppBar shimmer
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(
+          //     horizontal: TSizes.defaultSpace,
+          //     vertical: TSizes.sm,
+          //   ),
+          //   child: Shimmer.fromColors(
+          //     baseColor: dark ? TColors.darkerGrey : Colors.grey.shade300,
+          //     highlightColor: dark ? TColors.yellow : TColors.primary,
+          //     child: Row(
+          //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //       children: [
+          //         // Title shimmer
+          //         Container(
+          //           height: 24,
+          //           width: 120,
+          //           decoration: BoxDecoration(
+          //             color: Colors.white,
+          //             borderRadius: BorderRadius.circular(4),
+          //           ),
+          //         ),
+          //         // Action buttons shimmer
+          //         Row(
+          //           children: [
+          //             Container(
+          //               width: 40,
+          //               height: 40,
+          //               decoration: BoxDecoration(
+          //                 color: Colors.white,
+          //                 shape: BoxShape.circle,
+          //               ),
+          //             ),
+          //             const SizedBox(width: TSizes.sm),
+          //             Container(
+          //               width: 40,
+          //               height: 40,
+          //               decoration: BoxDecoration(
+          //                 color: Colors.white,
+          //                 shape: BoxShape.circle,
+          //               ),
+          //             ),
+          //           ],
+          //         ),
+          //       ],
+          //     ),
+          //   ),
+          // ),
+
+          // // Divider shimmer
+          // Shimmer.fromColors(
+          //   baseColor: dark ? TColors.darkerGrey : Colors.grey.shade300,
+          //   highlightColor: dark ? TColors.yellow : TColors.primary,
+          //   child: Container(
+          //     height: 1,
+          //     width: double.infinity,
+          //     color: Colors.white,
+          //   ),
+          // ),
+
+          // Class cards shimmer
+          Expanded(
+            child: ListView.builder(
+              itemCount: 6, // Number of shimmer items to display
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: TSizes.defaultSpace,
+                    vertical: TSizes.spaceBtwItems / 2,
+                  ),
+                  child: Shimmer.fromColors(
+                    baseColor: dark ? TColors.darkerGrey : Colors.grey.shade300,
+                    highlightColor: dark ? TColors.yellow : TColors.primary,
+                    child: Card(
+                      elevation: 2,
+                      shape: RoundedRectangleBorder(
+                        borderRadius:
+                            BorderRadius.circular(TSizes.cardRadiusMd),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(TSizes.md),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
                               children: [
+                                // Circle avatar shimmer
                                 Container(
-                                  height: 16,
-                                  width: double.infinity,
-                                  color: Colors.grey,
+                                  width: 48,
+                                  height: 48,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    shape: BoxShape.circle,
+                                  ),
                                 ),
-                                const SizedBox(height: 8),
+                                const SizedBox(width: TSizes.spaceBtwItems),
+                                // Class title and subtitle shimmer
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                        height: 16,
+                                        width: double.infinity,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(4),
+                                        ),
+                                      ),
+                                      const SizedBox(height: 8),
+                                      Container(
+                                        height: 14,
+                                        width: 150,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(4),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                // Options button shimmer
                                 Container(
-                                  height: 14,
-                                  width: 150,
-                                  color: Colors.grey,
+                                  width: 40,
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    shape: BoxShape.circle,
+                                  ),
                                 ),
                               ],
                             ),
-                          ),
-                        ],
+                            const SizedBox(height: TSizes.spaceBtwItems),
+                            // Divider shimmer
+                            Container(
+                              height: 1,
+                              width: double.infinity,
+                              color: Colors.white,
+                            ),
+                            const SizedBox(height: TSizes.spaceBtwItems),
+                            // Action buttons shimmer
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Container(
+                                  height: 40,
+                                  width: 80,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(
+                                        TSizes.buttonRadius),
+                                  ),
+                                ),
+                                Container(
+                                  height: 40,
+                                  width: 80,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(
+                                        TSizes.buttonRadius),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
-                      const SizedBox(height: TSizes.spaceBtwItems),
-                      const Divider(),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Container(
-                            height: 40,
-                            width: 80,
-                            color: Colors.grey,
-                          ),
-                          Container(
-                            height: 40,
-                            width: 80,
-                            color: Colors.grey,
-                          ),
-                        ],
-                      ),
-                    ],
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+
+          // Floating action button shimmer
+          Padding(
+            padding: const EdgeInsets.all(TSizes.defaultSpace),
+            child: Align(
+              alignment: Alignment.bottomRight,
+              child: Shimmer.fromColors(
+                baseColor: dark ? TColors.darkerGrey : Colors.grey.shade300,
+                highlightColor: dark ? TColors.yellow : TColors.primary,
+                child: Container(
+                  width: 180,
+                  height: 56,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(28),
                   ),
                 ),
               ),
             ),
-          );
-        },
+          ),
+        ],
       );
     }
 

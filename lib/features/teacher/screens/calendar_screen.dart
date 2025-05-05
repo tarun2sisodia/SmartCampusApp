@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:table_calendar/table_calendar.dart';
 import '../../../common/utils/constants/colors.dart';
+import '../../../common/utils/helpers/helper_function.dart';
 import '../controllers/calendar_controller.dart';
 import '../../../models/attendance_session_model.dart';
 
@@ -38,8 +40,10 @@ class CalendarScreen extends StatelessWidget {
       ),
       body: Obx(() {
         //printnt('Building body with Obx');
+        // In the build method, update the loading section:
+
         if (controller.isLoading.value) {
-          //printnt('Showing loading indicator');
+          final dark = THelperFunction.isDarkMode(context);
           return Column(
             children: [
               _buildShimmerActiveSessionsIndicator(),
@@ -69,58 +73,112 @@ class CalendarScreen extends StatelessWidget {
   }
 
   Widget _buildShimmerSessionCard() {
-    return Card(
-      margin: const EdgeInsets.symmetric(vertical: 4.0),
-      child: Container(
-        height: 80.0,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.grey[600]!, Colors.grey[500]!],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
+    final dark = THelperFunction.isDarkMode(Get.context!);
+
+    return Shimmer.fromColors(
+      baseColor: dark ? TColors.darkerGrey : Colors.grey.shade300,
+      highlightColor: dark
+          ? TColors.yellow.withOpacity(0.5)
+          : TColors.primary.withOpacity(0.5),
+      child: Card(
+        margin: const EdgeInsets.symmetric(vertical: 4.0),
+        child: Container(
+          height: 80.0,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(8.0),
           ),
-          borderRadius: BorderRadius.circular(8.0),
         ),
       ),
     );
   }
 
   Widget _buildShimmerActiveSessionsIndicator() {
-    return Container(
-      margin: const EdgeInsets.all(8.0),
-      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-      decoration: BoxDecoration(
-        color: Colors.grey[600],
-        borderRadius: BorderRadius.circular(8.0),
-      ),
-      child: Row(
-        children: [
-          Container(
-            width: 12,
-            height: 12,
-            decoration: BoxDecoration(
-              color: Colors.grey[600],
-              shape: BoxShape.circle,
+    final dark = THelperFunction.isDarkMode(Get.context!);
+
+    return Shimmer.fromColors(
+      baseColor: dark ? TColors.darkerGrey : Colors.grey.shade300,
+      highlightColor: dark
+          ? TColors.yellow.withOpacity(0.5)
+          : TColors.primary.withOpacity(0.5),
+      child: Container(
+        margin: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        child: Row(
+          children: [
+            Container(
+              width: 12,
+              height: 12,
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.5),
+                shape: BoxShape.circle,
+              ),
             ),
-          ),
-          const SizedBox(width: 8),
-          Container(
-            width: 150,
-            height: 12,
-            color: Colors.grey[600],
-          ),
-        ],
+            const SizedBox(width: 8),
+            Container(
+              width: 150,
+              height: 12,
+              color: Colors.white.withOpacity(0.5),
+            ),
+          ],
+        ),
       ),
     );
   }
 
   Widget _buildShimmerCalendar() {
-    return Container(
-      margin: const EdgeInsets.all(8.0),
-      height: 300.0,
-      decoration: BoxDecoration(
-        color: Colors.grey[600],
-        borderRadius: BorderRadius.circular(8.0),
+    final dark = THelperFunction.isDarkMode(Get.context!);
+
+    return Shimmer.fromColors(
+      baseColor: dark ? TColors.darkerGrey : Colors.grey.shade300,
+      highlightColor: dark
+          ? TColors.yellow.withOpacity(0.5)
+          : TColors.primary.withOpacity(0.5),
+      child: Container(
+        margin: const EdgeInsets.all(8.0),
+        height: 300.0,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        // Add some internal structure to make it look more like a calendar
+        child: Column(
+          children: [
+            // Calendar header
+            Container(
+              height: 50,
+              margin: const EdgeInsets.all(8.0),
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.5),
+                borderRadius: BorderRadius.circular(4.0),
+              ),
+            ),
+            // Calendar grid
+            Expanded(
+              child: GridView.builder(
+                physics: const NeverScrollableScrollPhysics(),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 7,
+                  childAspectRatio: 1.0,
+                ),
+                itemCount: 35, // 5 weeks of 7 days
+                itemBuilder: (context, index) {
+                  return Container(
+                    margin: const EdgeInsets.all(4.0),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.5),
+                      borderRadius: BorderRadius.circular(4.0),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
