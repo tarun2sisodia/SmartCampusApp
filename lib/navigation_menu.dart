@@ -152,8 +152,8 @@ class NavigationMenu extends StatelessWidget {
             Icon(
               icon,
               color: isSelected
-                  ? (dark ? Colors.orange : Colors.deepPurpleAccent)
-                  : (dark ? Colors.grey : Colors.grey),
+                  ? (dark ? TColors.orange : Colors.deepPurpleAccent)
+                  : (dark ? TColors.blue : TColors.black),
               size: 28,
             ),
             const SizedBox(height: 4),

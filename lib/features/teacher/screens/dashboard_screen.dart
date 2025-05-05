@@ -24,11 +24,6 @@ class DashboardScreen extends StatelessWidget {
   final profileController = Get.put(TeacherProfileController());
   final RxBool isLoading = RxBool(true);
   final RxBool isSearching = RxBool(false);
-
-  final String userName =
-      Supabase.instance.client.auth.currentUser?.userMetadata?['name'] ??
-          'Teacher';
-
   @override
   Widget build(BuildContext context) {
     //print('Building DashboardScreen');
@@ -39,182 +34,96 @@ class DashboardScreen extends StatelessWidget {
     }
 
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(kToolbarHeight),
-        child: Obx(() {
-          // Animated app bar with greeting
-          return AnimatedCrossFade(
-            duration: const Duration(milliseconds: 800),
-            firstChild: _buildGreetingAppBar(context, dark),
-            secondChild: _buildRegularAppBar(context, dark),
-            crossFadeState: dashboardController.showGreetingAnimation.value
-                ? CrossFadeState.showFirst
-                : CrossFadeState.showSecond,
-          );
-        }),
-      ),
+      // appBar: PreferredSize(
+      //   preferredSize: const Size.fromHeight(kToolbarHeight),
+      //   child: Obx(() {
+      //     // Animated app bar with greeting
+      //     return AnimatedCrossFade(
+      //       duration: const Duration(milliseconds: 800),
+      //       firstChild: _buildGreetingAppBar(context, dark),
+      //       secondChild: _buildRegularAppBar(context, dark),
+      //       crossFadeState: dashboardController.showGreetingAnimation.value
+      //           ? CrossFadeState.showFirst
+      //           : CrossFadeState.showSecond,
+      //     );
+      //   }),
+      // ),
       body: Obx(() {
         //print('Dashboard state updated');
         if (dashboardController.isLoading.value) {
           //print('Dashboard is loading');
-          return Stack(
-            children: [
-              // Real UI widgets with rounded edges
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  AnimatedContainer(
-                    duration: const Duration(milliseconds: 800),
-                    curve: Curves.easeInOut,
-                    height: 50,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: dark ? TColors.darkerGrey : Colors.grey.shade300,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
-                  const SizedBox(height: TSizes.spaceBtwSections),
-                  Row(
-                    children: [
-                      AnimatedContainer(
-                        duration: const Duration(milliseconds: 800),
-                        curve: Curves.easeInOut,
-                        height: 100,
-                        width: MediaQuery.of(context).size.width * 0.45,
-                        decoration: BoxDecoration(
-                          color:
-                              dark ? TColors.darkerGrey : Colors.grey.shade300,
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                      ),
-                      const SizedBox(width: TSizes.spaceBtwItems),
-                      AnimatedContainer(
-                        duration: const Duration(milliseconds: 800),
-                        curve: Curves.easeInOut,
-                        height: 100,
-                        width: MediaQuery.of(context).size.width * 0.45,
-                        decoration: BoxDecoration(
-                          color:
-                              dark ? TColors.darkerGrey : Colors.grey.shade300,
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: TSizes.spaceBtwSections),
-                  AnimatedContainer(
-                    duration: const Duration(milliseconds: 800),
-                    curve: Curves.easeInOut,
-                    height: 200,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: dark ? TColors.darkerGrey : Colors.grey.shade300,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
-                  const SizedBox(height: TSizes.spaceBtwSections),
-                  AnimatedContainer(
-                    duration: const Duration(milliseconds: 800),
-                    curve: Curves.easeInOut,
-                    height: 50,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: dark ? TColors.darkerGrey : Colors.grey.shade300,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
-                ],
-              ),
-              // Enhanced Shimmer effect with animations
-              Positioned.fill(
+          return ListView.builder(
+            itemCount: 6, // Number of shimmer items to display
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: TSizes.defaultSpace,
+                  vertical: TSizes.spaceBtwItems / 2,
+                ),
                 child: Shimmer.fromColors(
                   baseColor: dark ? TColors.darkerGrey : Colors.grey.shade300,
                   highlightColor: dark ? TColors.yellow : TColors.primary,
-                  period: const Duration(seconds: 2),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        height: 50,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                      ),
-                      const SizedBox(height: TSizes.spaceBtwSections),
-                      Row(
+                  child: Card(
+                    elevation: 2,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(TSizes.cardRadiusMd),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(TSizes.md),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(
-                            height: 100,
-                            width: MediaQuery.of(context).size.width * 0.45,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(8),
-                            ),
+                          Row(
+                            children: [
+                              CircleAvatar(
+                                backgroundColor: Colors.grey,
+                                radius: 24,
+                              ),
+                              const SizedBox(width: TSizes.spaceBtwItems),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      height: 16,
+                                      width: double.infinity,
+                                      color: Colors.grey,
+                                    ),
+                                    const SizedBox(height: 8),
+                                    Container(
+                                      height: 14,
+                                      width: 150,
+                                      color: Colors.grey,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
                           ),
-                          const SizedBox(width: TSizes.spaceBtwItems),
-                          Container(
-                            height: 100,
-                            width: MediaQuery.of(context).size.width * 0.45,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(8),
-                            ),
+                          const SizedBox(height: TSizes.spaceBtwItems),
+                          const Divider(),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Container(
+                                height: 40,
+                                width: 80,
+                                color: Colors.grey,
+                              ),
+                              Container(
+                                height: 40,
+                                width: 80,
+                                color: Colors.grey,
+                              ),
+                            ],
                           ),
                         ],
                       ),
-                      const SizedBox(height: TSizes.spaceBtwSections),
-                      Container(
-                        height: 200,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                      ),
-                      const SizedBox(height: TSizes.spaceBtwSections),
-                      Container(
-                        height: 50,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
                 ),
-              ),
-              // Error handling overlay
-              Obx(() {
-                if (dashboardController.hasError()) {
-                  return Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.error_outline,
-                            size: 48,
-                            color: dark ? TColors.yellow : TColors.primary),
-                        const SizedBox(height: TSizes.spaceBtwItems),
-                        Text(
-                          'An error occurred. Please try again.',
-                          style: Theme.of(context).textTheme.bodyMedium,
-                        ),
-                        const SizedBox(height: TSizes.spaceBtwItems),
-                        ElevatedButton(
-                          onPressed: () {
-                            dashboardController.loadDashboardData();
-                          },
-                          child: const Text('Retry'),
-                        ),
-                      ],
-                    ),
-                  );
-                }
-                return const SizedBox.shrink();
-              }),
-            ],
+              );
+            },
           );
         }
 
@@ -243,292 +152,471 @@ class DashboardScreen extends StatelessWidget {
 
         return RefreshIndicator(
           onRefresh: () async {
-            //print('Refreshing dashboard data');
             await dashboardController.loadDashboardData();
           },
           color: dark ? TColors.yellow : TColors.primary,
           backgroundColor: dark ? TColors.darkerGrey : Colors.white,
-          child: SingleChildScrollView(
+          child: CustomScrollView(
             physics: const AlwaysScrollableScrollPhysics(),
-            padding: const EdgeInsets.all(TSizes.defaultSpace),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    color: dark ? TColors.dark : TColors.light,
-                    borderRadius: BorderRadius.circular(TSizes.cardRadiusMd),
-                  ),
-                  padding: const EdgeInsets.symmetric(horizontal: TSizes.md),
-                  child: Row(
-                    children: [
-                      Icon(Iconsax.search_normal,
-                          color: dark ? TColors.yellow : TColors.primary),
-                      const SizedBox(width: TSizes.spaceBtwItems),
-                      Expanded(
-                        child: TextField(
-                          controller: searchController,
-                          decoration: InputDecoration(
-                            hintText: 'Search classes, students...',
-                            border: InputBorder.none,
-                            hintStyle: TextStyle(
-                              color: dark ? Colors.white70 : Colors.black54,
-                            ),
-                          ),
-                          style: TextStyle(
-                            color: dark ? Colors.white : Colors.black,
-                          ),
-                          onChanged: (value) {
-                            //print('Search query: $value');
-                            isSearching.value = value.isNotEmpty;
-                            dashboardController.searchClasses(value);
-                          },
+            slivers: [
+              // SliverAppBar that collapses on scroll
+              SliverAppBar(
+                floating:
+                    true, // Makes the app bar visible as soon as you scroll up
+                snap: true, // Makes the app bar snap into view
+                pinned:
+                    false, // Allows the app bar to scroll completely out of view
+                expandedHeight: kToolbarHeight,
+                flexibleSpace: FlexibleSpaceBar(
+                  background: Obx(() {
+                    return AnimatedCrossFade(
+                      duration: const Duration(milliseconds: 800),
+                      firstChild: _buildGreetingAppBar(context, dark),
+                      secondChild: _buildRegularAppBar(context, dark),
+                      crossFadeState:
+                          dashboardController.showGreetingAnimation.value
+                              ? CrossFadeState.showFirst
+                              : CrossFadeState.showSecond,
+                    );
+                  }),
+                ),
+              ),
+
+              // Dashboard content
+              SliverPadding(
+                padding: const EdgeInsets.all(TSizes.defaultSpace),
+                sliver: SliverList(
+                  delegate: SliverChildListDelegate(
+                    [
+                      // Search container
+                      Container(
+                        decoration: BoxDecoration(
+                          color: dark ? TColors.dark : TColors.light,
+                          borderRadius:
+                              BorderRadius.circular(TSizes.cardRadiusMd),
                         ),
-                      ),
-                      Obx(
-                        () => isSearching.value
-                            ? IconButton(
-                                icon: const Icon(Icons.clear),
-                                onPressed: () {
-                                  //print('Clearing search');
-                                  searchController.clear();
-                                  isSearching.value = false;
-                                  dashboardController.searchClasses('');
-                                },
-                              )
-                            : const SizedBox.shrink(),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: TSizes.spaceBtwSections),
-                Row(
-                  children: [
-                    _buildStatCard(context, dark,
-                        title: 'Classes',
-                        value:
-                            dashboardController.totalClasses.value.toString(),
-                        icon: Iconsax.book_1,
-                        color: dark ? TColors.yellow : TColors.primary),
-                    const SizedBox(width: TSizes.spaceBtwItems),
-                    _buildStatCard(context, dark,
-                        title: 'Students',
-                        value:
-                            dashboardController.totalStudents.value.toString(),
-                        icon: Iconsax.people,
-                        color: dark ? TColors.yellow : TColors.primary),
-                  ],
-                ),
-                const SizedBox(height: TSizes.spaceBtwItems),
-                Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.all(TSizes.md),
-                  decoration: BoxDecoration(
-                    color: dark ? TColors.darkerGrey : Colors.white,
-                    borderRadius: BorderRadius.circular(TSizes.cardRadiusMd),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withAlpha(26),
-                        spreadRadius: 1,
-                        blurRadius: 5,
-                        offset: const Offset(0, 2),
-                      ),
-                    ],
-                  ),
-                  child: Column(
-                    children: [
-                      Text(
-                        'Average Attendance',
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleMedium
-                            ?.copyWith(fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(height: TSizes.spaceBtwItems),
-                      CircularPercentIndicator(
-                        radius: 80.0,
-                        lineWidth: 12.0,
-                        animation: true,
-                        percent:
-                            dashboardController.averageAttendance.value / 100,
-                        center: Text(
-                          '${dashboardController.averageAttendance.value.toStringAsFixed(1)}%',
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleLarge
-                              ?.copyWith(fontWeight: FontWeight.bold),
-                        ),
-                        circularStrokeCap: CircularStrokeCap.round,
-                        progressColor: dark ? TColors.yellow : TColors.primary,
-                        backgroundColor:
-                            dark ? Colors.grey.shade800 : Colors.grey.shade200,
-                      ),
-                      const SizedBox(height: TSizes.spaceBtwItems),
-                      Text(
-                        'Overall attendance across all classes',
-                        style: Theme.of(context).textTheme.bodySmall,
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: TSizes.spaceBtwSections),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Recent Classes',
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        //print('Navigating to ClassListScreen');
-                        Get.to(() => ClassListScreen());
-                      },
-                      child: Text(
-                        'View All',
-                        style: TextStyle(
-                            color: dark ? TColors.yellow : TColors.primary),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: TSizes.spaceBtwItems),
-                dashboardController.classes.isEmpty
-                    ? Center(
-                        child: Column(
+                        padding:
+                            const EdgeInsets.symmetric(horizontal: TSizes.md),
+                        child: Row(
                           children: [
-                            Icon(Iconsax.book_1,
-                                size: 48,
+                            Icon(Iconsax.search_normal,
                                 color: dark ? TColors.yellow : TColors.primary),
-                            const SizedBox(height: TSizes.spaceBtwItems / 2),
-                            Text(
-                              'No Classes Yet',
-                              style: Theme.of(context).textTheme.titleMedium,
-                            ),
-                            const SizedBox(height: TSizes.spaceBtwItems / 2),
-                            ElevatedButton(
-                              onPressed: () {
-                                //print('Navigating to create class');
-                                Get.to(() => ClassListScreen());
-                              },
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor:
-                                    dark ? TColors.yellow : TColors.primary,
-                                foregroundColor:
-                                    dark ? TColors.dark : Colors.white,
+                            const SizedBox(width: TSizes.spaceBtwItems),
+                            Expanded(
+                              child: TextField(
+                                controller: searchController,
+                                decoration: InputDecoration(
+                                  hintText: 'Search classes, students...',
+                                  border: InputBorder.none,
+                                  hintStyle: TextStyle(
+                                    color:
+                                        dark ? Colors.white70 : Colors.black54,
+                                  ),
+                                ),
+                                style: TextStyle(
+                                  color: dark ? Colors.white : Colors.black,
+                                ),
+                                onChanged: (value) {
+                                  isSearching.value = value.isNotEmpty;
+                                  dashboardController.searchClasses(value);
+                                },
                               ),
-                              child: const Text('Create Class'),
+                            ),
+                            Obx(
+                              () => isSearching.value
+                                  ? IconButton(
+                                      icon: const Icon(Icons.clear),
+                                      onPressed: () {
+                                        searchController.clear();
+                                        isSearching.value = false;
+                                        dashboardController.searchClasses('');
+                                      },
+                                    )
+                                  : const SizedBox.shrink(),
                             ),
                           ],
                         ),
-                      )
-                    : ListView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount:
-                            dashboardController.filteredClasses.length > 3
-                                ? 3
-                                : dashboardController.filteredClasses.length,
-                        itemBuilder: (context, index) {
-                          final classItem =
-                              dashboardController.filteredClasses[index];
-                          final stats =
-                              dashboardController.classStats[classItem.id];
+                      ),
 
-                          //print('Rendering class: ${classItem.subjectName}');
-                          return Card(
-                            margin: const EdgeInsets.only(
-                              bottom: TSizes.spaceBtwItems,
+                      SizedBox(height: TSizes.spaceBtwSections),
+
+                      // Stats cards
+                      Row(
+                        children: [
+                          _buildStatCard(context, dark,
+                              title: 'Classes',
+                              value: dashboardController.totalClasses.value
+                                  .toString(),
+                              icon: Iconsax.book_1,
+                              color: dark ? TColors.yellow : TColors.primary),
+                          const SizedBox(width: TSizes.spaceBtwItems),
+                          _buildStatCard(context, dark,
+                              title: 'Students',
+                              value: dashboardController.totalStudents.value
+                                  .toString(),
+                              icon: Iconsax.people,
+                              color: dark ? TColors.yellow : TColors.primary),
+                        ],
+                      ),
+
+                      const SizedBox(height: TSizes.spaceBtwItems),
+
+                      // Attendance chart
+                      Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.all(TSizes.md),
+                        decoration: BoxDecoration(
+                          color: dark ? TColors.darkerGrey : Colors.white,
+                          borderRadius:
+                              BorderRadius.circular(TSizes.cardRadiusMd),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withAlpha(26),
+                              spreadRadius: 1,
+                              blurRadius: 5,
+                              offset: const Offset(0, 2),
                             ),
-                            elevation: 2,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                TSizes.cardRadiusMd,
-                              ),
+                          ],
+                        ),
+                        child: Column(
+                          children: [
+                            Text(
+                              'Average Attendance',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium
+                                  ?.copyWith(fontWeight: FontWeight.bold),
                             ),
-                            child: ListTile(
-                              contentPadding: const EdgeInsets.all(TSizes.md),
-                              leading: CircleAvatar(
-                                backgroundColor:
-                                    dark ? TColors.yellow : TColors.primary,
-                                child: Text(
-                                  classItem.subjectName?.substring(0, 1) ?? 'C',
-                                  style: TextStyle(
-                                    color: dark ? TColors.dark : Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                              title: Text(
-                                classItem.subjectName ?? 'Unknown Subject',
+                            const SizedBox(height: TSizes.spaceBtwItems),
+                            CircularPercentIndicator(
+                              radius: 80.0,
+                              lineWidth: 12.0,
+                              animation: true,
+                              percent:
+                                  dashboardController.averageAttendance.value /
+                                      100,
+                              center: Text(
+                                '${dashboardController.averageAttendance.value.toStringAsFixed(1)}%',
                                 style: Theme.of(context)
                                     .textTheme
-                                    .titleMedium
+                                    .titleLarge
                                     ?.copyWith(fontWeight: FontWeight.bold),
                               ),
-                              subtitle: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                              circularStrokeCap: CircularStrokeCap.round,
+                              progressColor:
+                                  dark ? TColors.yellow : TColors.primary,
+                              backgroundColor: dark
+                                  ? Colors.grey.shade800
+                                  : Colors.grey.shade200,
+                            ),
+                            const SizedBox(height: TSizes.spaceBtwItems),
+                            Text(
+                              'Overall attendance across all classes',
+                              style: Theme.of(context).textTheme.bodySmall,
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      const SizedBox(height: TSizes.spaceBtwSections),
+                      // Recent classes header
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Recent Classes',
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleMedium
+                                ?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              Get.to(() => ClassListScreen());
+                            },
+                            child: Text(
+                              'View All',
+                              style: TextStyle(
+                                  color:
+                                      dark ? TColors.yellow : TColors.primary),
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      const SizedBox(height: TSizes.spaceBtwItems),
+
+                      // Recent classes list
+                      dashboardController.classes.isEmpty
+                          ? Center(
+                              child: Column(
                                 children: [
+                                  Icon(Iconsax.book_1,
+                                      size: 48,
+                                      color: dark
+                                          ? TColors.yellow
+                                          : TColors.primary),
                                   const SizedBox(
-                                    height: TSizes.spaceBtwItems / 2,
-                                  ),
+                                      height: TSizes.spaceBtwItems / 2),
                                   Text(
-                                    '${classItem.courseName} - Semester ${classItem.semester}',
+                                    'No Classes Yet',
                                     style:
-                                        Theme.of(context).textTheme.bodyMedium,
+                                        Theme.of(context).textTheme.titleMedium,
                                   ),
-                                  if (stats != null)
-                                    Text(
-                                      'Attendance: ${(stats['averageAttendance'] as double).toStringAsFixed(1)}% (${stats['totalSessions']} sessions)',
-                                      style:
-                                          Theme.of(context).textTheme.bodySmall,
+                                  const SizedBox(
+                                      height: TSizes.spaceBtwItems / 2),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      Get.to(() => ClassListScreen());
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: dark
+                                          ? TColors.yellow
+                                          : TColors.primary,
+                                      foregroundColor:
+                                          dark ? TColors.dark : Colors.white,
                                     ),
+                                    child: const Text('Create Class'),
+                                  ),
                                 ],
                               ),
-                              trailing: const Icon(Iconsax.arrow_right_3),
-                              onTap: () {
-                                //print(
-                                // 'Navigating to class details: ${classItem.subjectName}');
-                                Get.to(() => ClassListScreen());
-                              },
+                            )
+                          : Column(
+                              children: List.generate(
+                                dashboardController.filteredClasses.length > 3
+                                    ? 3
+                                    : dashboardController
+                                        .filteredClasses.length,
+                                (index) {
+                                  final classItem = dashboardController
+                                      .filteredClasses[index];
+                                  final stats = dashboardController
+                                      .classStats[classItem.id];
+
+                                  return Card(
+                                    margin: const EdgeInsets.only(
+                                      bottom: TSizes.spaceBtwItems,
+                                    ),
+                                    elevation: 2,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(
+                                        TSizes.cardRadiusMd,
+                                      ),
+                                    ),
+                                    child: ListTile(
+                                      contentPadding:
+                                          const EdgeInsets.all(TSizes.md),
+                                      leading: CircleAvatar(
+                                        backgroundColor: dark
+                                            ? TColors.yellow
+                                            : TColors.primary,
+                                        child: Text(
+                                          classItem.subjectName
+                                                  ?.substring(0, 1) ??
+                                              'C',
+                                          style: TextStyle(
+                                            color: dark
+                                                ? TColors.dark
+                                                : Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                      title: Text(
+                                        classItem.subjectName ??
+                                            'Unknown Subject',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleMedium
+                                            ?.copyWith(
+                                                fontWeight: FontWeight.bold),
+                                      ),
+                                      subtitle: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          const SizedBox(
+                                            height: TSizes.spaceBtwItems / 2,
+                                          ),
+                                          Text(
+                                            '${classItem.courseName} - Semester ${classItem.semester}',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyMedium,
+                                          ),
+                                          if (stats != null)
+                                            Text(
+                                              'Attendance: ${(stats['averageAttendance'] as double).toStringAsFixed(1)}% (${stats['totalSessions']} sessions)',
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodySmall,
+                                            ),
+                                        ],
+                                      ),
+                                      trailing:
+                                          const Icon(Iconsax.arrow_right_3),
+                                      onTap: () {
+                                        Get.to(() => ClassListScreen());
+                                      },
+                                    ),
+                                  );
+                                },
+                              ),
                             ),
-                          );
-                        },
-                      ),
-              ],
-            ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
         );
       }),
     );
   }
 
-  // Add these new methods for the animated app bars
-  // Modify the _buildGreetingAppBar method to remove the name display
   Widget _buildGreetingAppBar(BuildContext context, bool dark) {
-    return AppBar(
-      automaticallyImplyLeading: false, // Remove back button during animation
-      title: Row(
-        children: [
-          // Animated profile image
-          TweenAnimationBuilder<double>(
-            tween: Tween(begin: 0.0, end: 1.0),
-            duration: const Duration(milliseconds: 800),
-            builder: (context, value, child) {
-              return Opacity(
-                opacity: value,
-                child: Transform.scale(
-                  scale:
-                      0.5 + (value * 0.5), // Start at 50% size and grow to 100%
-                  child: GestureDetector(
-                    onTap: () {
-                      //print('Navigating to TeacherProfileScreen');
-                      Get.to(() => TeacherProfileScreen());
-                    },
-                    child: Container(
+    return Container(
+      color: Theme.of(context).scaffoldBackgroundColor,
+      child: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Row(
+            children: [
+              // Animated profile image
+              TweenAnimationBuilder<double>(
+                tween: Tween(begin: 0.0, end: 1.0),
+                duration: const Duration(milliseconds: 800),
+                builder: (context, value, child) {
+                  return Opacity(
+                    opacity: value,
+                    child: Transform.scale(
+                      scale: 0.5 +
+                          (value * 0.5), // Start at 50% size and grow to 100%
+                      child: GestureDetector(
+                        onTap: () {
+                          Get.to(() => TeacherProfileScreen());
+                        },
+                        child: Container(
+                          width: 40,
+                          height: 40,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: dark ? TColors.yellow : TColors.primary,
+                              width: 2,
+                            ),
+                            image: profileController
+                                            .user.value?.profileImageUrl !=
+                                        null &&
+                                    profileController
+                                        .user.value!.profileImageUrl!.isNotEmpty
+                                ? DecorationImage(
+                                    image: NetworkImage(
+                                      profileController
+                                          .user.value!.profileImageUrl!,
+                                    ),
+                                    fit: BoxFit.cover,
+                                    onError: (exception, stackTrace) {},
+                                  )
+                                : const DecorationImage(
+                                    image: AssetImage(TImageStrings.appLogo),
+                                    fit: BoxFit.contain,
+                                  ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
+              const SizedBox(width: 12),
+
+              // Animated greeting text
+              Expanded(
+                child: TweenAnimationBuilder<double>(
+                  tween: Tween(begin: 0.0, end: 1.0),
+                  duration: const Duration(milliseconds: 1000),
+                  builder: (context, value, child) {
+                    return Opacity(
+                      opacity: value,
+                      child: Padding(
+                        padding: EdgeInsets.only(left: 20 * (1 - value)),
+                        child: Text(
+                          dashboardController.greeting.value,
+                          style:
+                              Theme.of(context).textTheme.titleMedium?.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+
+              // Animated settings icon
+              TweenAnimationBuilder<double>(
+                tween: Tween(begin: 0.0, end: 1.0),
+                duration: const Duration(milliseconds: 1200),
+                builder: (context, value, child) {
+                  return Opacity(
+                    opacity: value,
+                    child: IconButton(
+                      icon: const Icon(Iconsax.setting),
+                      onPressed: () {
+                        Get.to(() => const TeacherSettingsScreen());
+                      },
+                    ),
+                  );
+                },
+              ),
+
+              // Refresh button
+              TweenAnimationBuilder<double>(
+                tween: Tween(begin: 0.0, end: 1.0),
+                duration: const Duration(milliseconds: 1200),
+                builder: (context, value, child) {
+                  return Opacity(
+                    opacity: value,
+                    child: IconButton(
+                      onPressed: () {
+                        dashboardController.loadDashboardData();
+                      },
+                      icon: const Icon(Iconsax.refresh),
+                      tooltip: 'Refresh',
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildRegularAppBar(BuildContext context, bool dark) {
+    return Container(
+      color: Theme.of(context).scaffoldBackgroundColor,
+      child: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Row(
+            children: [
+              // Profile image
+              Hero(
+                tag: 'profileImage',
+                child: GestureDetector(
+                  onTap: () {
+                    Get.to(() => TeacherProfileScreen());
+                  },
+                  child: Obx(() {
+                    return Container(
                       width: 40,
                       height: 40,
                       decoration: BoxDecoration(
@@ -547,143 +635,53 @@ class DashboardScreen extends StatelessWidget {
                                       .user.value!.profileImageUrl!,
                                 ),
                                 fit: BoxFit.cover,
-                                onError: (exception, stackTrace) {
-                                  //print(
-                                  // 'Error loading profile image: $exception');
-                                },
+                                onError: (exception, stackTrace) {},
                               )
                             : const DecorationImage(
                                 image: AssetImage(TImageStrings.appLogo),
                                 fit: BoxFit.contain,
                               ),
                       ),
-                    ),
-                  ),
+                    );
+                  }),
                 ),
-              );
-            },
-          ),
-          const SizedBox(width: 12),
+              ),
+              const SizedBox(width: 12),
 
-          // Animated greeting text - REMOVE THE NAME PART
-          Expanded(
-            child: TweenAnimationBuilder<double>(
-              tween: Tween(begin: 0.0, end: 1.0),
-              duration: const Duration(milliseconds: 1000),
-              builder: (context, value, child) {
-                return Opacity(
-                  opacity: value,
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 20 * (1 - value)),
-                    child: Text(
-                      dashboardController.greeting.value,
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                );
-              },
-            ),
-          ),
-        ],
-      ),
-      actions: [
-        // Animated settings icon
-        TweenAnimationBuilder<double>(
-          tween: Tween(begin: 0.0, end: 1.0),
-          duration: const Duration(milliseconds: 1200),
-          builder: (context, value, child) {
-            return Opacity(
-              opacity: value,
-              child: IconButton(
+              // User greeting
+              Expanded(
+                child: Obx(() {
+                  return Text(
+                    'Hi, ${profileController.user.value?.name ?? 'Teacher'}',
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  );
+                }),
+              ),
+
+              // Settings button
+              IconButton(
                 icon: const Icon(Iconsax.setting),
                 onPressed: () {
-                  //print('Navigating to TeacherSettingsScreen');
                   Get.to(() => const TeacherSettingsScreen());
                 },
               ),
-            );
-          },
-        ),
-      ],
-    );
-  }
 
-  Widget _buildRegularAppBar(BuildContext context, bool dark) {
-    return AppBar(
-      leading: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Hero(
-          tag: 'profileImage',
-          child: GestureDetector(
-            onTap: () {
-              //print('Navigating to TeacherProfileScreen');
-              Get.to(() => TeacherProfileScreen());
-            },
-            child: Obx(() {
-              //print('Profile image updated');
-              return Container(
-                width: 40,
-                height: 40,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    color: dark ? TColors.yellow : TColors.primary,
-                    width: 2,
-                  ),
-                  image:
-                      profileController.user.value?.profileImageUrl != null &&
-                              profileController
-                                  .user.value!.profileImageUrl!.isNotEmpty
-                          ? DecorationImage(
-                              image: NetworkImage(
-                                profileController.user.value!.profileImageUrl!,
-                              ),
-                              fit: BoxFit.cover,
-                              onError: (exception, stackTrace) {
-                                //print('Error loading profile image: $exception');
-                              },
-                            )
-                          : const DecorationImage(
-                              image: AssetImage(TImageStrings.appLogo),
-                              fit: BoxFit.contain,
-                            ),
-                ),
-              );
-            }),
+              // Refresh button
+              IconButton(
+                onPressed: () {
+                  dashboardController.loadDashboardData();
+                },
+                icon: const Icon(Iconsax.refresh),
+                tooltip: 'Refresh',
+              ),
+            ],
           ),
         ),
       ),
-      title: Obx(() {
-        //print('User name updated: ${profileController.user.value?.name}');
-        return Text(
-          'Hi, ${profileController.user.value?.name ?? 'Teacher'}',
-          style: Theme.of(
-            context,
-          ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
-        );
-      }),
-      actions: [
-        IconButton(
-          icon: const Icon(Iconsax.setting),
-          onPressed: () {
-            //print('Navigating to TeacherSettingsScreen');
-            Get.to(() => const TeacherSettingsScreen());
-          },
-        ),
-        const SizedBox(width: TSizes.sm),
-        IconButton(
-          onPressed: () {
-            //print('Refreshing dashboard data');
-            dashboardController.loadDashboardData();
-          },
-          icon: const Icon(Iconsax.refresh),
-          tooltip: 'Refresh',
-        ),
-      ],
     );
   }
 
@@ -695,7 +693,6 @@ class DashboardScreen extends StatelessWidget {
     required IconData icon,
     required Color color,
   }) {
-    //print('Building stat card: $title');
     return Expanded(
       child: Container(
         padding: const EdgeInsets.all(TSizes.md),
@@ -718,9 +715,9 @@ class DashboardScreen extends StatelessWidget {
             const SizedBox(height: TSizes.spaceBtwItems),
             Text(
               value,
-              style: Theme.of(
-                context,
-              ).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold),
+              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
             ),
             const SizedBox(height: TSizes.spaceBtwItems / 2),
             Text(title, style: Theme.of(context).textTheme.bodyMedium),
