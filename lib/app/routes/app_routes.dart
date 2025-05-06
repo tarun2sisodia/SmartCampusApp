@@ -34,7 +34,7 @@ class AppRoutes {
   static const String forgotPassword = '/forgot-password';
   static const String resetConfirmation = '/reset-confirmation';
   static const String verifyEmail = '/verify-email';
-  static const String home = '/home'; // Add home route
+  static const String home = '/home'; 
   static const String attendanceReports = '/attendance-reports';
   static const String studentDetail = '/student-detail';
   // Add these new route constants

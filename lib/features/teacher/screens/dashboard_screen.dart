@@ -53,382 +53,389 @@ class DashboardScreen extends StatelessWidget {
 
           if (dashboardController.isLoading.value) {
             return SafeArea(
-              child: Padding(
-                padding: const EdgeInsets.all(TSizes.defaultSpace),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // App Bar shimmer
-                    Shimmer.fromColors(
-                      baseColor:
-                          dark ? TColors.darkerGrey : Colors.grey.shade300,
-                      highlightColor: dark
-                          ? TColors.yellow.withOpacity(0.5)
-                          : TColors.primary.withOpacity(0.5),
-                      child: Row(
-                        children: [
-                          // Profile image shimmer
-                          Container(
-                            width: 40,
-                            height: 40,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              shape: BoxShape.circle,
-                            ),
-                          ),
-                          const SizedBox(width: 12),
-                          // Title shimmer
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Container(
-                                  height: 16,
-                                  width: 150,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(4),
-                                  ),
-                                ),
-                                const SizedBox(height: 4),
-                                Container(
-                                  height: 12,
-                                  width: 100,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(4),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          // Action buttons shimmer
-                          Container(
-                            width: 40,
-                            height: 40,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              shape: BoxShape.circle,
-                            ),
-                          ),
-                          const SizedBox(width: 8),
-                          Container(
-                            width: 40,
-                            height: 40,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              shape: BoxShape.circle,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-
-                    const SizedBox(height: TSizes.spaceBtwItems),
-
-                    // Search bar shimmer
-                    Shimmer.fromColors(
-                      baseColor:
-                          dark ? TColors.darkerGrey : Colors.grey.shade300,
-                      highlightColor: dark
-                          ? TColors.yellow.withOpacity(0.5)
-                          : TColors.primary.withOpacity(0.5),
-                      child: Container(
-                        height: 50,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius:
-                              BorderRadius.circular(TSizes.cardRadiusMd),
-                        ),
-                      ),
-                    ),
-
-                    const SizedBox(height: TSizes.spaceBtwSections),
-
-                    // Stats cards shimmer (2 cards in a row)
-                    Shimmer.fromColors(
-                      baseColor:
-                          dark ? TColors.darkerGrey : Colors.grey.shade300,
-                      highlightColor: dark
-                          ? TColors.yellow.withOpacity(0.5)
-                          : TColors.primary.withOpacity(0.5),
-                      child: Row(
-                        children: [
-                          // First stat card
-                          Expanded(
-                            child: Container(
-                              height: 120,
-                              padding: const EdgeInsets.all(TSizes.md),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius:
-                                    BorderRadius.circular(TSizes.cardRadiusMd),
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    width: 32,
-                                    height: 32,
-                                    decoration: BoxDecoration(
-                                      color: Colors.white.withOpacity(0.5),
-                                      shape: BoxShape.circle,
-                                    ),
-                                  ),
-                                  const SizedBox(height: TSizes.spaceBtwItems),
-                                  Container(
-                                    height: 24,
-                                    width: 40,
-                                    decoration: BoxDecoration(
-                                      color: Colors.white.withOpacity(0.5),
-                                      borderRadius: BorderRadius.circular(4),
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                      height: TSizes.spaceBtwItems / 2),
-                                  Container(
-                                    height: 14,
-                                    width: 60,
-                                    decoration: BoxDecoration(
-                                      color: Colors.white.withOpacity(0.5),
-                                      borderRadius: BorderRadius.circular(4),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          const SizedBox(width: TSizes.spaceBtwItems),
-                          // Second stat card
-                          Expanded(
-                            child: Container(
-                              height: 120,
-                              padding: const EdgeInsets.all(TSizes.md),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius:
-                                    BorderRadius.circular(TSizes.cardRadiusMd),
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    width: 32,
-                                    height: 32,
-                                    decoration: BoxDecoration(
-                                      color: Colors.white.withOpacity(0.5),
-                                      shape: BoxShape.circle,
-                                    ),
-                                  ),
-                                  const SizedBox(height: TSizes.spaceBtwItems),
-                                  Container(
-                                    height: 24,
-                                    width: 40,
-                                    decoration: BoxDecoration(
-                                      color: Colors.white.withOpacity(0.5),
-                                      borderRadius: BorderRadius.circular(4),
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                      height: TSizes.spaceBtwItems / 2),
-                                  Container(
-                                    height: 14,
-                                    width: 60,
-                                    decoration: BoxDecoration(
-                                      color: Colors.white.withOpacity(0.5),
-                                      borderRadius: BorderRadius.circular(4),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-
-                    const SizedBox(height: TSizes.spaceBtwItems),
-
-                    // Attendance chart shimmer (big container)
-                    Shimmer.fromColors(
-                      baseColor:
-                          dark ? TColors.darkerGrey : Colors.grey.shade300,
-                      highlightColor: dark
-                          ? TColors.yellow.withOpacity(0.5)
-                          : TColors.primary.withOpacity(0.5),
-                      child: Container(
-                        height: 220,
-                        width: double.infinity,
-                        padding: const EdgeInsets.all(TSizes.md),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius:
-                              BorderRadius.circular(TSizes.cardRadiusMd),
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
+              child: SingleChildScrollView(
+                physics: const AlwaysScrollableScrollPhysics(),
+                child: Padding(
+                  padding: const EdgeInsets.all(TSizes.defaultSpace),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // App Bar shimmer
+                      Shimmer.fromColors(
+                        baseColor:
+                            dark ? TColors.darkerGrey : Colors.grey.shade300,
+                        highlightColor: dark
+                            ? TColors.yellow.withOpacity(0.5)
+                            : TColors.primary.withOpacity(0.5),
+                        child: Row(
                           children: [
+                            // Profile image shimmer
                             Container(
-                              height: 20,
-                              width: 180,
+                              width: 40,
+                              height: 40,
                               decoration: BoxDecoration(
-                                color: Colors.white.withOpacity(0.5),
-                                borderRadius: BorderRadius.circular(4),
-                              ),
-                            ),
-                            const SizedBox(height: TSizes.spaceBtwItems),
-                            Container(
-                              width: 160,
-                              height: 160,
-                              decoration: BoxDecoration(
-                                color: Colors.white.withOpacity(0.5),
+                                color: Colors.white,
                                 shape: BoxShape.circle,
                               ),
                             ),
-                            const SizedBox(height: TSizes.spaceBtwItems),
+                            const SizedBox(width: 12),
+                            // Title shimmer
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    height: 16,
+                                    width: 150,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(4),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 4),
+                                  Container(
+                                    height: 12,
+                                    width: 100,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(4),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            // Action buttons shimmer
                             Container(
-                              height: 12,
-                              width: 200,
+                              width: 40,
+                              height: 40,
                               decoration: BoxDecoration(
-                                color: Colors.white.withOpacity(0.5),
+                                color: Colors.white,
+                                shape: BoxShape.circle,
+                              ),
+                            ),
+                            const SizedBox(width: 8),
+                            Container(
+                              width: 40,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                shape: BoxShape.circle,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      const SizedBox(height: TSizes.spaceBtwItems),
+
+                      // Search bar shimmer
+                      Shimmer.fromColors(
+                        baseColor:
+                            dark ? TColors.darkerGrey : Colors.grey.shade300,
+                        highlightColor: dark
+                            ? TColors.yellow.withOpacity(0.5)
+                            : TColors.primary.withOpacity(0.5),
+                        child: Container(
+                          height: 50,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius:
+                                BorderRadius.circular(TSizes.cardRadiusMd),
+                          ),
+                        ),
+                      ),
+
+                      const SizedBox(height: TSizes.spaceBtwSections),
+
+                      // Stats cards shimmer (2 cards in a row)
+                      Shimmer.fromColors(
+                        baseColor:
+                            dark ? TColors.darkerGrey : Colors.grey.shade300,
+                        highlightColor: dark
+                            ? TColors.yellow.withOpacity(0.5)
+                            : TColors.primary.withOpacity(0.5),
+                        child: Row(
+                          children: [
+                            // First stat card
+                            Expanded(
+                              child: Container(
+                                height: 120,
+                                padding: const EdgeInsets.all(TSizes.md),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(
+                                      TSizes.cardRadiusMd),
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      width: 32,
+                                      height: 32,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white.withOpacity(0.5),
+                                        shape: BoxShape.circle,
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                        height: TSizes.spaceBtwItems),
+                                    Container(
+                                      height: 24,
+                                      width: 40,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white.withOpacity(0.5),
+                                        borderRadius: BorderRadius.circular(4),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                        height: TSizes.spaceBtwItems / 2),
+                                    Container(
+                                      height: 14,
+                                      width: 60,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white.withOpacity(0.5),
+                                        borderRadius: BorderRadius.circular(4),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: TSizes.spaceBtwItems),
+                            // Second stat card
+                            Expanded(
+                              child: Container(
+                                height: 120,
+                                padding: const EdgeInsets.all(TSizes.md),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(
+                                      TSizes.cardRadiusMd),
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      width: 32,
+                                      height: 32,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white.withOpacity(0.5),
+                                        shape: BoxShape.circle,
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                        height: TSizes.spaceBtwItems),
+                                    Container(
+                                      height: 24,
+                                      width: 40,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white.withOpacity(0.5),
+                                        borderRadius: BorderRadius.circular(4),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                        height: TSizes.spaceBtwItems / 2),
+                                    Container(
+                                      height: 14,
+                                      width: 60,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white.withOpacity(0.5),
+                                        borderRadius: BorderRadius.circular(4),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      const SizedBox(height: TSizes.spaceBtwItems),
+
+                      // Attendance chart shimmer (big container)
+                      Shimmer.fromColors(
+                        baseColor:
+                            dark ? TColors.darkerGrey : Colors.grey.shade300,
+                        highlightColor: dark
+                            ? TColors.yellow.withOpacity(0.5)
+                            : TColors.primary.withOpacity(0.5),
+                        child: Container(
+                          height: 220,
+                          width: double.infinity,
+                          padding: const EdgeInsets.all(TSizes.md),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius:
+                                BorderRadius.circular(TSizes.cardRadiusMd),
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                height: 20,
+                                width: 180,
+                                decoration: BoxDecoration(
+                                  color: Colors.white.withOpacity(0.5),
+                                  borderRadius: BorderRadius.circular(4),
+                                ),
+                              ),
+                              const SizedBox(height: TSizes.spaceBtwItems),
+                              Container(
+                                width: 160,
+                                height: 160,
+                                decoration: BoxDecoration(
+                                  color: Colors.white.withOpacity(0.5),
+                                  shape: BoxShape.circle,
+                                ),
+                              ),
+                              const SizedBox(height: TSizes.spaceBtwItems),
+                              Container(
+                                height: 12,
+                                width: 200,
+                                decoration: BoxDecoration(
+                                  color: Colors.white.withOpacity(0.5),
+                                  borderRadius: BorderRadius.circular(4),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+
+                      const SizedBox(height: TSizes.spaceBtwSections),
+
+                      // Recent classes header shimmer
+                      Shimmer.fromColors(
+                        baseColor:
+                            dark ? TColors.darkerGrey : Colors.grey.shade300,
+                        highlightColor: dark
+                            ? TColors.yellow.withOpacity(0.5)
+                            : TColors.primary.withOpacity(0.5),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              height: 20,
+                              width: 120,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                            ),
+                            Container(
+                              height: 20,
+                              width: 60,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
                                 borderRadius: BorderRadius.circular(4),
                               ),
                             ),
                           ],
                         ),
                       ),
-                    ),
 
-                    const SizedBox(height: TSizes.spaceBtwSections),
+                      const SizedBox(height: TSizes.spaceBtwItems),
 
-                    // Recent classes header shimmer
-                    Shimmer.fromColors(
-                      baseColor:
-                          dark ? TColors.darkerGrey : Colors.grey.shade300,
-                      highlightColor: dark
-                          ? TColors.yellow.withOpacity(0.5)
-                          : TColors.primary.withOpacity(0.5),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            height: 20,
-                            width: 120,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(4),
-                            ),
-                          ),
-                          Container(
-                            height: 20,
-                            width: 60,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(4),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-
-                    const SizedBox(height: TSizes.spaceBtwItems),
-
-                    // Recent classes list shimmer (multiple cards)
-                    Expanded(
-                      child: ListView.builder(
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: 3,
-                        itemBuilder: (context, index) {
-                          return Shimmer.fromColors(
-                            baseColor: dark
-                                ? TColors.darkerGrey
-                                : Colors.grey.shade300,
-                            highlightColor: dark
-                                ? TColors.yellow.withOpacity(0.5)
-                                : TColors.primary.withOpacity(0.5),
-                            child: Container(
-                              height: 100,
-                              margin: const EdgeInsets.only(
-                                  bottom: TSizes.spaceBtwItems),
-                              padding: const EdgeInsets.all(TSizes.md),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius:
-                                    BorderRadius.circular(TSizes.cardRadiusMd),
+                      // Recent classes list shimmer (multiple cards)
+                      // Using a fixed height container instead of Expanded to avoid overflow
+                      SizedBox(
+                        height: 300, // Fixed height for the list
+                        child: ListView.builder(
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: 3,
+                          itemBuilder: (context, index) {
+                            return Shimmer.fromColors(
+                              baseColor: dark
+                                  ? TColors.darkerGrey
+                                  : Colors.grey.shade300,
+                              highlightColor: dark
+                                  ? TColors.yellow.withOpacity(0.5)
+                                  : TColors.primary.withOpacity(0.5),
+                              child: Container(
+                                height: 100,
+                                margin: const EdgeInsets.only(
+                                    bottom: TSizes.spaceBtwItems),
+                                padding: const EdgeInsets.all(TSizes.md),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(
+                                      TSizes.cardRadiusMd),
+                                ),
+                                child: Row(
+                                  children: [
+                                    // Leading circle avatar
+                                    Container(
+                                      width: 50,
+                                      height: 50,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white.withOpacity(0.5),
+                                        shape: BoxShape.circle,
+                                      ),
+                                    ),
+                                    const SizedBox(width: TSizes.spaceBtwItems),
+                                    // Title and subtitle
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Container(
+                                            height: 16,
+                                            width: 150,
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  Colors.white.withOpacity(0.5),
+                                              borderRadius:
+                                                  BorderRadius.circular(4),
+                                            ),
+                                          ),
+                                          const SizedBox(height: 8),
+                                          Container(
+                                            height: 12,
+                                            width: 200,
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  Colors.white.withOpacity(0.5),
+                                              borderRadius:
+                                                  BorderRadius.circular(4),
+                                            ),
+                                          ),
+                                          const SizedBox(height: 4),
+                                          Container(
+                                            height: 12,
+                                            width: 120,
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  Colors.white.withOpacity(0.5),
+                                              borderRadius:
+                                                  BorderRadius.circular(4),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    // Trailing icon
+                                    Container(
+                                      width: 24,
+                                      height: 24,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white.withOpacity(0.5),
+                                        shape: BoxShape.circle,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                              child: Row(
-                                children: [
-                                  // Leading circle avatar
-                                  Container(
-                                    width: 50,
-                                    height: 50,
-                                    decoration: BoxDecoration(
-                                      color: Colors.white.withOpacity(0.5),
-                                      shape: BoxShape.circle,
-                                    ),
-                                  ),
-                                  const SizedBox(width: TSizes.spaceBtwItems),
-                                  // Title and subtitle
-                                  Expanded(
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Container(
-                                          height: 16,
-                                          width: 150,
-                                          decoration: BoxDecoration(
-                                            color:
-                                                Colors.white.withOpacity(0.5),
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                          ),
-                                        ),
-                                        const SizedBox(height: 8),
-                                        Container(
-                                          height: 12,
-                                          width: 200,
-                                          decoration: BoxDecoration(
-                                            color:
-                                                Colors.white.withOpacity(0.5),
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                          ),
-                                        ),
-                                        const SizedBox(height: 4),
-                                        Container(
-                                          height: 12,
-                                          width: 120,
-                                          decoration: BoxDecoration(
-                                            color:
-                                                Colors.white.withOpacity(0.5),
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  // Trailing icon
-                                  Container(
-                                    width: 24,
-                                    height: 24,
-                                    decoration: BoxDecoration(
-                                      color: Colors.white.withOpacity(0.5),
-                                      shape: BoxShape.circle,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          );
-                        },
+                            );
+                          },
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             );
@@ -448,14 +455,17 @@ class DashboardScreen extends StatelessWidget {
                   ElevatedButton(
                     onPressed: () {
                       //print('Creating initial data');
-                      dashboardController.createInitialData();
+                      // dashboardController.createInitialData();
+                      Get.snackbar('Info', 'Creating initial data...');
                     },
-                    child: const Text('Create Sample Data'),
+                    child: const Text('Create Class & Sessions'),
                   ),
                 ],
               ),
             );
           }
+
+          // In your build method, modify the RefreshIndicator's child:
 
           return RefreshIndicator(
             onRefresh: () async {
@@ -468,11 +478,9 @@ class DashboardScreen extends StatelessWidget {
               slivers: [
                 // SliverAppBar that collapses on scroll
                 SliverAppBar(
-                  floating:
-                      true, // Makes the app bar visible as soon as you scroll up
-                  snap: true, // Makes the app bar snap into view
-                  pinned:
-                      false, // Allows the app bar to scroll completely out of view
+                  floating: true,
+                  snap: true,
+                  pinned: false,
                   expandedHeight: kToolbarHeight,
                   flexibleSpace: FlexibleSpaceBar(
                     background: Obx(() {
@@ -549,86 +557,96 @@ class DashboardScreen extends StatelessWidget {
 
                         SizedBox(height: TSizes.spaceBtwSections),
 
-                        // Stats cards
-                        Row(
-                          children: [
-                            _buildStatCard(context, dark,
-                                title: 'Classes',
-                                value: dashboardController.totalClasses.value
-                                    .toString(),
-                                icon: Iconsax.book_1,
-                                color: dark ? TColors.yellow : TColors.primary),
-                            const SizedBox(width: TSizes.spaceBtwItems),
-                            _buildStatCard(context, dark,
-                                title: 'Students',
-                                value: dashboardController.totalStudents.value
-                                    .toString(),
-                                icon: Iconsax.people,
-                                color: dark ? TColors.yellow : TColors.primary),
-                          ],
+                        // Stats cards - with fixed height to prevent overflow
+                        SizedBox(
+                          height: 120, // Fixed height for stat cards
+                          child: Row(
+                            children: [
+                              _buildStatCard(context, dark,
+                                  title: 'Classes',
+                                  value: dashboardController.totalClasses.value
+                                      .toString(),
+                                  icon: Iconsax.book_1,
+                                  color:
+                                      dark ? TColors.yellow : TColors.primary),
+                              const SizedBox(width: TSizes.spaceBtwItems),
+                              _buildStatCard(context, dark,
+                                  title: 'Students',
+                                  value: dashboardController.totalStudents.value
+                                      .toString(),
+                                  icon: Iconsax.people,
+                                  color:
+                                      dark ? TColors.yellow : TColors.primary),
+                            ],
+                          ),
                         ),
 
                         const SizedBox(height: TSizes.spaceBtwItems),
 
-                        // Attendance chart
-                        Container(
-                          width: double.infinity,
-                          padding: const EdgeInsets.all(TSizes.md),
-                          decoration: BoxDecoration(
-                            color: dark ? TColors.darkerGrey : Colors.white,
-                            borderRadius:
-                                BorderRadius.circular(TSizes.cardRadiusMd),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withAlpha(26),
-                                spreadRadius: 1,
-                                blurRadius: 5,
-                                offset: const Offset(0, 2),
-                              ),
-                            ],
-                          ),
-                          child: Column(
-                            children: [
-                              Text(
-                                'Average Attendance',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleMedium
-                                    ?.copyWith(fontWeight: FontWeight.bold),
-                              ),
-                              const SizedBox(height: TSizes.spaceBtwItems),
-                              CircularPercentIndicator(
-                                radius: 80.0,
-                                lineWidth: 12.0,
-                                animation: true,
-                                percent: dashboardController
-                                        .averageAttendance.value /
-                                    100,
-                                center: Text(
-                                  '${dashboardController.averageAttendance.value.toStringAsFixed(1)}%',
+                        // Attendance chart - with fixed height
+                        SizedBox(
+                          height: 280, // Fixed height for attendance chart
+                          child: Container(
+                            width: double.infinity,
+                            padding: const EdgeInsets.all(TSizes.md),
+                            decoration: BoxDecoration(
+                              color: dark ? TColors.darkerGrey : Colors.white,
+                              borderRadius:
+                                  BorderRadius.circular(TSizes.cardRadiusMd),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withAlpha(26),
+                                  spreadRadius: 1,
+                                  blurRadius: 5,
+                                  offset: const Offset(0, 2),
+                                ),
+                              ],
+                            ),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min, // Minimize height
+                              children: [
+                                Text(
+                                  'Average Attendance',
                                   style: Theme.of(context)
                                       .textTheme
-                                      .titleLarge
+                                      .titleMedium
                                       ?.copyWith(fontWeight: FontWeight.bold),
                                 ),
-                                circularStrokeCap: CircularStrokeCap.round,
-                                progressColor:
-                                    dark ? TColors.yellow : TColors.primary,
-                                backgroundColor: dark
-                                    ? Colors.grey.shade800
-                                    : Colors.grey.shade200,
-                              ),
-                              const SizedBox(height: TSizes.spaceBtwItems),
-                              Text(
-                                'Overall attendance across all classes',
-                                style: Theme.of(context).textTheme.bodySmall,
-                                textAlign: TextAlign.center,
-                              ),
-                            ],
+                                const SizedBox(height: TSizes.spaceBtwItems),
+                                CircularPercentIndicator(
+                                  radius: 80.0,
+                                  lineWidth: 12.0,
+                                  animation: true,
+                                  percent: dashboardController
+                                          .averageAttendance.value /
+                                      100,
+                                  center: Text(
+                                    '${dashboardController.averageAttendance.value.toStringAsFixed(1)}%',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleLarge
+                                        ?.copyWith(fontWeight: FontWeight.bold),
+                                  ),
+                                  circularStrokeCap: CircularStrokeCap.round,
+                                  progressColor:
+                                      dark ? TColors.yellow : TColors.primary,
+                                  backgroundColor: dark
+                                      ? Colors.grey.shade800
+                                      : Colors.grey.shade200,
+                                ),
+                                const SizedBox(height: TSizes.spaceBtwItems),
+                                Text(
+                                  'Overall attendance across all classes',
+                                  style: Theme.of(context).textTheme.bodySmall,
+                                  textAlign: TextAlign.center,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
 
                         const SizedBox(height: TSizes.spaceBtwSections),
+
                         // Recent classes header
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -659,10 +677,11 @@ class DashboardScreen extends StatelessWidget {
 
                         const SizedBox(height: TSizes.spaceBtwItems),
 
-                        // Recent classes list
+                        // Recent classes list - with fixed height
                         dashboardController.classes.isEmpty
                             ? Center(
                                 child: Column(
+                                  mainAxisSize: MainAxisSize.min,
                                   children: [
                                     Icon(Iconsax.book_1,
                                         size: 48,
@@ -695,13 +714,18 @@ class DashboardScreen extends StatelessWidget {
                                   ],
                                 ),
                               )
-                            : Column(
-                                children: List.generate(
-                                  dashboardController.filteredClasses.length > 3
+                            : SizedBox(
+                                height: 350, // Fixed height for class list
+                                child: ListView.builder(
+                                  shrinkWrap: true,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  itemCount: dashboardController
+                                              .filteredClasses.length >
+                                          3
                                       ? 3
                                       : dashboardController
                                           .filteredClasses.length,
-                                  (index) {
+                                  itemBuilder: (context, index) {
                                     final classItem = dashboardController
                                         .filteredClasses[index];
                                     final stats = dashboardController
@@ -748,6 +772,8 @@ class DashboardScreen extends StatelessWidget {
                                         subtitle: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
+                                          mainAxisSize: MainAxisSize
+                                              .min, // Minimize height
                                           children: [
                                             const SizedBox(
                                               height: TSizes.spaceBtwItems / 2,
@@ -1022,14 +1048,18 @@ class DashboardScreen extends StatelessWidget {
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min, // Add this to minimize height
           children: [
             Icon(icon, color: color, size: 32),
             const SizedBox(height: TSizes.spaceBtwItems),
-            Text(
-              value,
-              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
+            FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Text(
+                value,
+                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+              ),
             ),
             const SizedBox(height: TSizes.spaceBtwItems / 2),
             Text(title, style: Theme.of(context).textTheme.bodyMedium),
